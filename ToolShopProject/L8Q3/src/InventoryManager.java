@@ -17,7 +17,7 @@ public class InventoryManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "Tools", dataFile = "C:\\Users\\Myles\\Documents\\Masters\\Fall term\\SoftwareDesign607\\Final\\Tool-Shop-Project\\ToolShopProject\\L8Q3\\Tools.txt";
+	public String databaseName = "toolshop", tableName = "Tools", dataFile = "C:\\Users\\Myles\\Documents\\Masters\\Fall term\\SoftwareDesign607\\Final\\Tool-Shop-Project\\ToolShopProject\\L8Q3\\items.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
