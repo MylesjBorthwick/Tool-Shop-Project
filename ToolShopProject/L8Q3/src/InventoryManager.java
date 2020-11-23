@@ -12,12 +12,12 @@ import java.util.Scanner;
 
 // This program allows you to create and manage a store inventory database.
 // It creates a database and datatable, then populates that table with tools from
-// items.txt.
+// Tools.txt.
 public class InventoryManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "Tools", dataFile = "C:\\Users\\Myles\\Documents\\ToolShopProject\\L8Q3\\items.txt";
+	public String databaseName = "toolshop", tableName = "Tools", dataFile = "C:\\Users\\Myles\\Documents\\Masters\\Fall term\\SoftwareDesign607\\Final\\Tool-Shop-Project\\ToolShopProject\\L8Q3\\Tools.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
@@ -94,7 +94,7 @@ public class InventoryManager {
 		}
 	}
 
-	// Fills the data table with all the tools from the text file 'items.txt' if found
+	// Fills the data table with all the tools from the text file 'Tools.txt' if found
 	public void fillTable()
 	{
 		try{
@@ -102,7 +102,7 @@ public class InventoryManager {
 			while(sc.hasNext())
 			{
 				String toolInfo[] = sc.nextLine().split(";");
-				addItem( new Tool( Integer.parseInt(toolInfo[0]),
+				addTool( new Tool( Integer.parseInt(toolInfo[0]),
 													toolInfo[1],
 													toolInfo[2],
 						           Integer.parseInt(toolInfo[3]),
@@ -122,14 +122,14 @@ public class InventoryManager {
 	}
 
 	// Add a tool to the database table
-	public void addItem(Tool tool)
+	public void addTool(Tool tool)
 	{
 		String sql = "INSERT INTO " + tableName +
-				" VALUES ( " + tool.getItemId() + ", '" + 
+				" VALUES ( " + tool.getToolId() + ", '" + 
 				tool.getType() + "', '" + 
-				tool.getItemName() + "', " + 
-				tool.getItemQuant() + ", " + 
-				tool.getItemPrice() + ", " + 
+				tool.getToolName() + "', " + 
+				tool.getToolQuant() + ", " + 
+				tool.getToolPrice() + ", " + 
 				tool.getSupplierId() + ");";
 		System.out.println(sql);
 		try{
@@ -166,7 +166,7 @@ public class InventoryManager {
 		return null;
 	}
 
-	// Prints all the items in the database to console
+	// Prints all the Tools in the database to console
 	public void printTable()
 	{
 		try {

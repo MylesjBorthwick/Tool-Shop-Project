@@ -1,19 +1,19 @@
 /**
- * Class representing item in inventory
+ * Class representing Tool in inventory
  * @author Myles Borthwick
  * @version 1.0
  */
 public class Tool {
     //Member variables
-    private int itemId;
-    private double itemPrice;
-    private int itemQuant;
-    private String itemName;
+    private int ToolId;
+    private double ToolPrice;
+    private int ToolQuant;
+    private String ToolName;
     private boolean alreadyOrdered;
     private int supplierId;
     private String type;
     /**
-     * Item Constructor
+     * Tool Constructor
      * @param id of tool
      * @param name of tool
      * @param quantity of tool
@@ -22,22 +22,22 @@ public class Tool {
      */
     public Tool (int id, String powertype, String name, int quantity, double price, int sup){
 
-        setItemId(id);
+        setToolId(id);
         setType(powertype);
-        setItemName(name);
-        setItemQuant(quantity);
-        setItemPrice(price);
+        setToolName(name);
+        setToolQuant(quantity);
+        setToolPrice(price);
         setSupplierId(sup);
         setAlreadyOrdered(false);
         
     }
     /**
-     * Decreases item quantity if quantity is positive
+     * Decreases Tool quantity if quantity is positive
      * @return true or false
      */
-    public boolean decreaseItemQuant(){
-        if(itemQuant>0){
-            itemQuant--;
+    public boolean decreaseToolQuant(){
+        if(ToolQuant>0){
+            ToolQuant--;
             return true;
         }
 
@@ -47,14 +47,14 @@ public class Tool {
     }
 
     /**
-     * Creates order line for item
+     * Creates order line for Tool
      * @return orderline
      */
     public OrderLine generateOrderLine(){
         OrderLine ol;
         //If quantity drops below 40 and hasnt been ordered
-        if(getItemQuant()<40 && alreadyOrdered ==false){
-            //Create orderline with 20 of this item
+        if(getToolQuant()<40 && alreadyOrdered ==false){
+            //Create orderline with 20 of this Tool
             ol = new OrderLine(this, 20);
             alreadyOrdered = true;
             return ol;
@@ -62,70 +62,70 @@ public class Tool {
         return null;
     }
     /**
-     * ToString method for formatting item 
+     * ToString method for formatting Tool 
      */
     @Override
     public String toString(){
-        String s = "ItemID:"+getItemId()+", "+ getItemName()+", Quantity:"+getItemQuant()+", Price:"+getItemPrice()+"\n";
-        //Optional addition of supplier info for item format
-        //+", SupplierInfo:["+getItemSupplier()+"]\n";
+        String s = "ToolID:"+getToolId()+", "+ getToolName()+", Quantity:"+getToolQuant()+", Price:"+getToolPrice()+"\n";
+        //Optional addition of supplier info for Tool format
+        //+", SupplierInfo:["+getToolSupplier()+"]\n";
         return s;
     }
 
     /**
-     * @return int return the itemId
+     * @return int return the ToolId
      */
-    public int getItemId() {
-        return itemId;
+    public int getToolId() {
+        return ToolId;
     }
 
     /**
-     * @param itemId the itemId to set
+     * @param ToolId the ToolId to set
      */
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setToolId(int ToolId) {
+        this.ToolId = ToolId;
     }
 
     /**
-     * @return double return the itemPrice
+     * @return double return the ToolPrice
      */
-    public double getItemPrice() {
-        return itemPrice;
+    public double getToolPrice() {
+        return ToolPrice;
     }
 
     /**
-     * @param itemPrice the itemPrice to set
+     * @param ToolPrice the ToolPrice to set
      */
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = itemPrice;
+    public void setToolPrice(double ToolPrice) {
+        this.ToolPrice = ToolPrice;
     }
 
     /**
-     * @return int return the itemQuant
+     * @return int return the ToolQuant
      */
-    public int getItemQuant() {
-        return itemQuant;
+    public int getToolQuant() {
+        return ToolQuant;
     }
 
     /**
-     * @param itemQuant the itemQuant to set
+     * @param ToolQuant the ToolQuant to set
      */
-    public void setItemQuant(int itemQuant) {
-        this.itemQuant = itemQuant;
+    public void setToolQuant(int ToolQuant) {
+        this.ToolQuant = ToolQuant;
     }
 
     /**
-     * @return String return the itemName
+     * @return String return the ToolName
      */
-    public String getItemName() {
-        return itemName;
+    public String getToolName() {
+        return ToolName;
     }
 
     /**
-     * @param itemName the itemName to set
+     * @param ToolName the ToolName to set
      */
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setToolName(String ToolName) {
+        this.ToolName = ToolName;
     }
 
     /**

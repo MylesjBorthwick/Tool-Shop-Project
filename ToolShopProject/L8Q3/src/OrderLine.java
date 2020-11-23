@@ -6,16 +6,16 @@
 public class OrderLine {
     //Member variables
     private int orderQuant;
-    //Item object to be included in order
-    private Tool orderItem;
+    //Tool object to be included in order
+    private Tool orderTool;
     
     /**
      * Constructor
-     * @param orderedItem
+     * @param orderedTool
      * @param orderQuantity
      */
-    public OrderLine(Tool orderedItem, int orderQuantity){
-        setOrderItem(orderedItem);
+    public OrderLine(Tool orderedTool, int orderQuantity){
+        setOrderTool(orderedTool);
         setOrderQuant(orderQuantity);
 
     }
@@ -24,9 +24,9 @@ public class OrderLine {
      */
     @Override
     public String toString(){
-        String s="\nItem description:    "+ orderItem.getItemName()+"\n"
+        String s="\nTool description:    "+ orderTool.getToolName()+"\n"
                 +"Amount Ordered:      "+ getOrderQuant()+"\n"
-                +"Supplier:            "+ orderItem.getSupplierId()+"\n"
+                +"Supplier:            "+ orderTool.getSupplierId()+"\n"
                 +"--------------------------------------------------------";
         return s;
     }
@@ -46,17 +46,17 @@ public class OrderLine {
     }
 
     /**
-     * @return Item return the orderItem
+     * @return Tool return the orderTool
      */
-    public Tool getOrderItem() {
-        return orderItem;
+    public Tool getOrderTool() {
+        return orderTool;
     }
 
     /**
-     * @param orderItem the orderItem to set
+     * @param orderTool the orderTool to set
      */
-    public void setOrderItem(Tool orderItem) {
-        this.orderItem = orderItem;
+    public void setOrderTool(Tool orderTool) {
+        this.orderTool = orderTool;
     }
 
 }
