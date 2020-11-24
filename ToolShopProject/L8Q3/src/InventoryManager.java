@@ -17,13 +17,13 @@ public class InventoryManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "Tools", dataFile = "C:\\Users\\Myles\\Documents\\Masters\\Fall term\\SoftwareDesign607\\Final\\Tool-Shop-Project\\ToolShopProject\\L8Q3\\items.txt";
+	public String databaseName = "toolshop", tableName = "Tools", dataFile = "items.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
-	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  
+	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  //"jdbc:mysql://localhost:3306/toolshop",
 				  login          = "root",
-				  password       = "2703961Five!";
+				  password       = "Engineering4Elohim";
 
 	public InventoryManager()
 	{
@@ -220,6 +220,38 @@ public class InventoryManager {
 		else
 			System.out.println("Search Result: " + searchResult.toString());
 		
+
+		//MANAGE THE ELECTRICALS
+
+		ElectricalManager electricalAddOns = new ElectricalManager();
+	
+		// You should comment this line out once the first database is created (either here or in MySQL workbench)
+		//inventory.createDB();
+
+		electricalAddOns.createTable();
+		
+		System.out.println("\nFilling the table with tools");
+		electricalAddOns.fillTable();
+
+		System.out.println("Reading all tools from the table:");
+		electricalAddOns.printTable();
+
+
+		System.out.println("\nTrying to remove the table");
+		electricalAddOns.removeTable();
+		
+		try {
+			electricalAddOns.statement.close();
+			electricalAddOns.jdbc_connection.close();
+		} 
+		catch (SQLException e) { e.printStackTrace(); }
+		finally
+		{
+			System.out.println("\nThe program is finished running");
+		}
+
+
+
 		System.out.println("\nTrying to remove the table");
 		inventory.removeTable();
 		
