@@ -1,7 +1,15 @@
+package controller;
+
+import model.Tool;
+import view.InventoryGUI;
+
+
 public class InventoryGUIController {
     
     private InventoryGUI gui;
     private InventoryModel model;
+
+
 
     public InventoryGUIController(){
         setGui(new InventoryGUI());

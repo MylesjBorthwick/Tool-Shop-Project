@@ -1,3 +1,5 @@
+package view;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -6,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
+
+import model.Client;
 
 public class CustomerGUI extends JFrame {
 

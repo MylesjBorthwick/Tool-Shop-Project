@@ -1,4 +1,14 @@
+package controller;
+
 import java.sql.SQLException;
+
+import managers.ElectricalManager;
+import managers.InventoryManager;
+import managers.SupplierManager;
+import model.Inventory;
+import model.Shop;
+import model.SupplierList;
+import model.Tool;
 
 public class InventoryMainController 
 {
