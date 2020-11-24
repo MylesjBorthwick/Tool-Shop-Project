@@ -12,15 +12,26 @@ public class InventoryGUIController {
 
 
     public Tool searchToolName(String name){
-
+        
+        
+        
+        
+        
+        return null;
     }
 
     public Tool searchToolId(int id){
 
+
+
+        return null;
     }
 
     public int checkToolQuant(String name){
 
+
+
+        return 0;
     }
 
     public void decreaseToolQuant(String name){

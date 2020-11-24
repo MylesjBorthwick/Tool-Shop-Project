@@ -15,7 +15,7 @@ public class ServerThread implements Runnable {
 
 	private ObjectOutputStream socketOut;
 	private ObjectInputStream socketIn;
-
+	private ServerMainController maincontroller;
 	/**
 	 * Constructor that receives two sockets, one for each player, and initiates the
 	 * player names from them to complete the player classes
@@ -23,8 +23,8 @@ public class ServerThread implements Runnable {
 	 * @param player1 the socket for the connections from the first player
 	 * @param player2 the socket for the connections from the second player
 	 */
-	public ServerThread(Socket theSocket) {
-
+	public ServerThread(Socket theSocket, ServerMainController maincontroller) {
+		this.maincontroller = maincontroller;
 		try {
 			socketOut = new ObjectOutputStream(theSocket.getOutputStream());
 			socketIn = new ObjectInputStream(theSocket.getInputStream());
