@@ -17,13 +17,13 @@ public class ClientManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "Clients", dataFile = "C:\\Users\\Myles\\Documents\\Masters\\Fall term\\SoftwareDesign607\\Final\\Tool-Shop-Project\\ToolShopProject\\L8Q3\\clients.txt";
+	public String databaseName = "toolshop", tableName = "Clients", dataFile = "clients.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
 	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  
 				  login          = "root",
-				  password       = "2703961Five!";
+				  password       = "Engineering4Elohim";
 
 	public ClientManager()
 	{
