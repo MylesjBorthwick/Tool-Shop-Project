@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Pre-Project Exercise 
@@ -166,6 +167,34 @@ public class InventoryManager {
 		return null;
 	}
 
+	// This method should search the database table for a tool matching the toolID parameter and return that tool.
+	// It should return null if no tools matching that ID are found.
+	public ArrayList<Tool> getAllTools()
+	{
+		ArrayList<Tool> array = new ArrayList<Tool>();
+		String sql = "SELECT * FROM " + tableName;
+		ResultSet tool;
+		try {
+			statement = jdbc_connection.createStatement();
+			tool = statement.executeQuery(sql);
+			while(tool.next())
+			{
+				array.add(new Tool(tool.getInt("ID"),
+								tool.getString("TYPE"),
+								tool.getString("TOOLNAME"), 
+								tool.getInt("QUANTITY"), 
+								tool.getDouble("PRICE"), 
+								tool.getInt("SUPPLIERID")));
+			}
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		return array;
+	}
+
+
+
+
 	// Prints all the Tools in the database to console
 	public void printTable()
 	{
@@ -250,7 +279,7 @@ public class InventoryManager {
 			System.out.println("\nThe program is finished running");
 		}
 
-
+		
 
 		System.out.println("\nTrying to remove the table");
 		inventory.removeTable();

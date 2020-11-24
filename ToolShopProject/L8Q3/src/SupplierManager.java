@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Pre-Project Exercise 
@@ -17,13 +18,13 @@ public class SupplierManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "suppliers", dataFile = "C:\\Users\\Myles\\Documents\\Masters\\Fall term\\SoftwareDesign607\\Final\\Tool-Shop-Project\\ToolShopProject\\L8Q3\\suppliers.txt";
+	public String databaseName = "toolshop", tableName = "suppliers", dataFile = "suppliers.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
 	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  
 				  login          = "root",
-				  password       = "2703961Five!";
+				  password       = "Engineering4Elohim";
 
 	public SupplierManager()
 	{
@@ -164,6 +165,30 @@ public class SupplierManager {
 		return null;
 	}
 
+
+	public ArrayList<Supplier> getAllSuppliers()
+	{
+		ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
+		String sql = "SELECT * FROM " + tableName;
+		ResultSet sup;
+		try {
+			statement = jdbc_connection.createStatement();
+			sup = statement.executeQuery(sql);
+			while(sup.next())
+			{
+				suppliers.add(new Supplier(sup.getInt("SUPPLIERID"),
+								sup.getString("TYPE"),
+								sup.getString("NAME"), 
+                                sup.getString("ADDRESS"),
+                                sup.getString("CONTACT")));
+			}
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		return suppliers;
+	}
+
+
 	// Prints all the Tools in the database to console
 	public void printTable()
 	{
@@ -193,7 +218,7 @@ public class SupplierManager {
 		SupplierManager suplist = new SupplierManager();
 		
 		// You should comment this line out once the first database is created (either here or in MySQL workbench)
-		//inventory.createDB();
+		//suplist.createDB();
 
 		suplist.createTable();
 		
@@ -219,6 +244,25 @@ public class SupplierManager {
 		// else
 		// 	System.out.println("Search Result: " + searchResult.toString());
 		
+		DBSupplierTypeManager supType = new DBSupplierTypeManager();
+		//supType.createDB();
+		supType.createTable();
+		supType.fillTable();
+		supType.printTable();
+
+		//System.out.println("\nTrying to remove the table");
+		//supType.removeTable();
+		
+		try {
+			supType.statement.close();
+			supType.jdbc_connection.close();
+		} 
+		catch (SQLException e) { e.printStackTrace(); }
+		finally
+		{
+			System.out.println("\nThe program is finished running");
+		}
+
 		//System.out.println("\nTrying to remove the table");
 		//suplist.removeTable();
 		

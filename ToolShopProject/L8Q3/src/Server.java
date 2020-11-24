@@ -15,12 +15,14 @@ public class Server {
 	private Socket theSocket;
 	private ServerSocket serverSocket; 
 	private ExecutorService handleClients;
+	private ServerMainController mainController;
 
 	
 	/**
 	 * constructor that starts the server
 	 */
-	public Server(int port) {
+	public Server(int port,ServerMainController mainController) {
+		this.mainController = mainController;
 		try {
 			serverSocket = new ServerSocket(port);
 			System.out.println("Server is running...");
@@ -44,7 +46,7 @@ public class Server {
 		while (true) {
 			connectNewSocket();
 			
-			handleClients.execute(new ServerThread(theSocket));
+			handleClients.execute(new ServerThread(theSocket, mainController));
 	        	        
 		}
 	}
@@ -77,14 +79,5 @@ public class Server {
 		}
 	}
 
-	/**
-	 * Driver function for server
-	 * @param args external arguments passed on run (not used)
-	 */
-	public static void main (String [] args) {
-	
-			Server myServer = new Server(8099); //same port as for client
-			myServer.runServer();
-			myServer.disconnect();
-	}
+
 }
