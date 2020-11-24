@@ -10,6 +10,7 @@ public class Supplier {
     private String companyName;
     private String address;
     private String contact;
+    private String type;
     private ArrayList<Tool> itemList;
 
     /**
@@ -19,12 +20,13 @@ public class Supplier {
      * @param addy address
      * @param c contact name
      */
-    public Supplier(int id, String comp, String addy, String c){
+    public Supplier(int id, String t, String comp, String addy, String c){
         
         setAddress(addy);
         setCompanyName(comp);
         setContact(c);
         setSupplierId(id);
+        setType(t);
         setItemList(new ArrayList<Tool>());
 
     }
@@ -106,6 +108,21 @@ public class Supplier {
      */
     public void setItemList(ArrayList<Tool> itemList) {
         this.itemList = itemList;
+    }
+
+
+    /**
+     * @return String return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

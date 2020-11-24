@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 
-public class InventoryGUI extends JFrame {
+public class CustomerGUI extends JFrame {
 
 
     private static final long serialVersionUID = 1L;
@@ -16,8 +16,8 @@ public class InventoryGUI extends JFrame {
 
 
 
-    public InventoryGUI(){
-        super("Inventory Manager");
+    public CustomerGUI(){
+        super("Customer Manager");
         setLayout(new BorderLayout());
 
         search = new SearchPanelInventory();
@@ -74,3 +74,4 @@ public class InventoryGUI extends JFrame {
 
 
 }
+

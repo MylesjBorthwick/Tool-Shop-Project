@@ -220,8 +220,8 @@ public class InventoryManager {
 		else
 			System.out.println("Search Result: " + searchResult.toString());
 		
-		System.out.println("\nTrying to remove the table");
-		inventory.removeTable();
+		//System.out.println("\nTrying to remove the table");
+		//inventory.removeTable();
 		
 		try {
 			inventory.statement.close();

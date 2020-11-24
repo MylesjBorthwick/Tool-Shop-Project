@@ -13,6 +13,9 @@ class InventoryModel implements Serializable
 		private boolean answered = false;
 
 
+    public InventoryModel(){
+      
+    }
 
         /**
          * A default constructor that builds a record with blank data

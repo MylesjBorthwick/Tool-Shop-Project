@@ -3,15 +3,13 @@ public class InventoryGUIController {
     private InventoryGUI gui;
     private InventoryModel model;
 
-    public InventoryGUIController(InventoryGUI g, InventoryModel m){
-        setGui(g);
-        setModel(m);
-
+    public InventoryGUIController(){
+        setGui(new InventoryGUI());
+        setModel(new InventoryModel());
         
     }
 
 
-    
 
     public Tool searchToolName(String name){
 

@@ -224,8 +224,8 @@ public class ClientManager {
 		else
 			System.out.println("Search Result: " + searchResult.toString());
 		
-		System.out.println("\nTrying to remove the table");
-		clientList.removeTable();
+		//System.out.println("\nTrying to remove the table");
+		//clientList.removeTable();
 		
 		try {
 			clientList.statement.close();
