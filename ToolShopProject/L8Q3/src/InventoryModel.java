@@ -20,8 +20,6 @@ class InventoryModel implements Serializable
 		public InventoryModel(String query) {
 			this.query = query;
 		} 
-
-		
 	
     /**
      * @return String return the query
