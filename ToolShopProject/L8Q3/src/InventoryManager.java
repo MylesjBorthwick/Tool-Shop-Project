@@ -23,7 +23,7 @@ public class InventoryManager {
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
 	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  //"jdbc:mysql://localhost:3306/toolshop",
 				  login          = "root",
-				  password       = "Engineering4Elohim";
+				  password       = "2703961Five!";
 
 	public InventoryManager()
 	{
@@ -237,8 +237,8 @@ public class InventoryManager {
 		electricalAddOns.printTable();
 
 
-		System.out.println("\nTrying to remove the table");
-		electricalAddOns.removeTable();
+		//System.out.println("\nTrying to remove the table");
+		//electricalAddOns.removeTable();
 		
 		try {
 			electricalAddOns.statement.close();
@@ -252,8 +252,8 @@ public class InventoryManager {
 
 
 
-		System.out.println("\nTrying to remove the table");
-		inventory.removeTable();
+		//System.out.println("\nTrying to remove the table");
+		//inventory.removeTable();
 		
 		try {
 			inventory.statement.close();
