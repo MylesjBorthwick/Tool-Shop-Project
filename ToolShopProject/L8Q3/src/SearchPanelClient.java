@@ -4,7 +4,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,8 +14,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 public class SearchPanelClient extends JPanel {
 
@@ -45,14 +45,14 @@ public class SearchPanelClient extends JPanel {
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
         gc.fill = GridBagConstraints.NONE;
-        
+
         Dimension dim = getPreferredSize();
         dim.width = 500;
         setPreferredSize(dim);
-        Border innerBorder = BorderFactory.createTitledBorder("Search Customers");
+        Border innerBorder = BorderFactory.createTitledBorder("Search Clients");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);       // Invisible border to give inner border more space
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
-
+        
 
 		searchType = new JLabel("Select Search Type:");
 		searchParam = new JLabel("Enter Search: ");
@@ -150,7 +150,7 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(clientId, gc);
+        add(clientLastName, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;

@@ -12,22 +12,23 @@ public class CustomerGUI extends JFrame {
 
     private static final long serialVersionUID = 1L;
     
-    private SearchPanelInventory search;
+    private SearchPanelClient search;
+    private InfoPanelClient info;
 
 
 
     public CustomerGUI(){
         super("Customer Manager");
         setLayout(new BorderLayout());
-
-        search = new SearchPanelInventory();
+        search = new SearchPanelClient();
+        info = new InfoPanelClient();
 
         add(search, BorderLayout.CENTER);
+        add(info, BorderLayout.EAST);
 
-        setMinimumSize(new Dimension(900, 500)); // Set minimum size
+        setMinimumSize(new Dimension(900, 500));
         pack();
-        //setSize(900, 600); // Set size if pack() isn't used
-        setVisible(true); // Make frame visible
+        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
     }
@@ -62,16 +63,88 @@ public class CustomerGUI extends JFrame {
         return search.getSearchParam();
     }
 
-    public Tool getListSelection()
+    public Client getListSelection()
     {
         return search.getListSelection();
     }
 
-    public void setSearchResultsList(ArrayList<Tool> tools)
+    public void setSearchResultsList(ArrayList<Client> clients)
     {
-        search.setSearchResultsList(tools);
+        search.setSearchResultsList(clients);
     }
 
+    public String getClientIDField() 
+    {
+        return info.getClientIDField();
+    }
+
+    public void setClientIDField(String text) 
+    {
+        info.setClientIDField(text);
+    }
+
+    public String getFirstNameField() 
+    {
+        return info.getFirstNameField();
+    }
+
+    public void setFirstNameField(String text) 
+    {
+        info.setFirstNameField(text);
+    }
+
+    public String getLastNameField() 
+    {
+        return info.getLastNameField();
+    }
+
+    public void setLastNameField(String text) 
+    {
+        info.setLastNameField(text);
+    }
+
+    public String getAddressField() 
+    {
+        return info.getAddressField();
+    }
+
+    public void setAddressField(String text) 
+    {
+        info.setAddressField(text);
+    }
+
+    public String getPostalCodeField() 
+    {
+        return info.getPostalCodeField();
+    }
+
+    public void setPostalCodeField(String text) 
+    {
+        info.setPostalCodeField(text);
+    }
+
+    public String getPhoneNumberField() 
+    {
+        return info.getPhoneNumberField();
+    }
+
+    public void setPhoneNumberField(String text) 
+    {
+        info.setPhoneNumberField(text);
+    }
+
+    public String getClientTypeCombo() 
+    {
+        return info.getClientTypeCombo();
+    }
+
+    public void setClientTypeCombo(String text) 
+    {
+        info.setClientTypeCombo(text);
+    }
 
 }
+
+
+
 
