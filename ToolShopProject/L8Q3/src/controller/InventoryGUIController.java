@@ -16,7 +16,6 @@ public class InventoryGUIController {
         setGui(g);
         setModel(i);
 
-
         gui.addExecuteListener((ActionEvent e)->{
 
             String executeType = "";
@@ -75,7 +74,6 @@ public class InventoryGUIController {
             invModel.setQueryId(6);
             gui.setTextField(invModel.getResponse());
         });
-
     }
 
 

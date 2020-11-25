@@ -44,13 +44,41 @@ public class CustomerGUI extends JFrame {
                 InventoryGUI igui = new InventoryGUI();
             }
         });
+    }
+        public void displayErrorMessage(String errorMessage)
+        {
+            JOptionPane.showMessageDialog(this, errorMessage);
+        }
+
+        public void addSearchListener(ActionListener searchListener){
+            search.addSearchListener(searchListener);
+        }
+
+        public void addClearListener(ActionListener clearListen){
+            search.addClearListener(clearListen);
+        }
+        
+        public String getSearchType(){
+            return search.getSearchType();
+        }
+    
+        public String getSearchParam(){
+            return search.getSearchParam();
+        }
+
+        public void setTextField(String text){
+            search.setTextField(text);
+        }
+
+
 
 
     }
 
 
 
-}
+
+
 
 
 

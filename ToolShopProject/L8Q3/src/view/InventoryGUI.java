@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 
-import model.Tool;
 
 public class InventoryGUI extends JFrame {
 

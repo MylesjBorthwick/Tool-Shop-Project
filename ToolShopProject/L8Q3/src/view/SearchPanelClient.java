@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
@@ -37,11 +38,10 @@ public class SearchPanelClient extends JPanel {
 	private JRadioButton clientLastName;
 	private JRadioButton clientType;
 	
-	private JTextField searchParamField;
+    private JTextField searchParamField;
+    private JTextArea textArea;
     private JButton searchButton;
     private JButton clearSearchButton;
-    private DefaultListModel<Client> searchListModel;
-    private JList<Client> searchResultsList;
     private JScrollPane searchResultsPane;
 
 
@@ -54,13 +54,12 @@ public class SearchPanelClient extends JPanel {
         Dimension dim = getPreferredSize();
         dim.width = 500;
         setPreferredSize(dim);
-        Border innerBorder = BorderFactory.createTitledBorder("Search Clients");
-   
-        
 
 		type = new JLabel("Select Search Type:");
 		param = new JLabel("Enter Search: ");
-		results = new JLabel("Results:");
+        results = new JLabel("Results:");
+        textArea = new JTextArea("");
+        textArea.setEditable(false);
 
 		searchTypeGroup = new ButtonGroup();
         clientId = new JRadioButton("Client ID");
@@ -69,9 +68,7 @@ public class SearchPanelClient extends JPanel {
         searchParamField = new JTextField(20);
         searchButton = new JButton("Search");
         clearSearchButton = new JButton("Clear Search");
-        searchListModel = new DefaultListModel<Client>();
-        searchResultsList = new JList<Client>(searchListModel);
-        searchResultsPane = new JScrollPane(searchResultsList);
+        searchResultsPane = new JScrollPane(textArea);
 
 
 		searchTypeGroup.add(clientId);
@@ -83,9 +80,6 @@ public class SearchPanelClient extends JPanel {
 		clientLastName.setActionCommand("lastName");
 		clientType.setActionCommand("clientType");
 
-		searchResultsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        searchResultsList.setLayoutOrientation(JList.VERTICAL);
-		searchResultsList.setVisibleRowCount(-1);
 		
 		searchResultsPane.setPreferredSize(new Dimension(250, 80));
 
@@ -101,10 +95,6 @@ public class SearchPanelClient extends JPanel {
     public void addClearListener(ActionListener clearListen){
         clearSearchButton.addActionListener(clearListen);
     }
-
-    public void addSelectionListener(ListSelectionListener selectionListener){
-        searchResultsList.addListSelectionListener(selectionListener);
-    }
     
     public String getSearchType(){
         return searchTypeGroup.getSelection().getActionCommand();
@@ -114,11 +104,9 @@ public class SearchPanelClient extends JPanel {
         return searchParamField.getText();
     }
 
-    public Client getSelectedClient(){
-        return searchResultsList.getSelectedValue();
+    public void setTextField(String text){
+        textArea.setText(text);
     }
-
-
 
 	private void addComponents(GridBagConstraints gc)
     {
@@ -215,17 +203,6 @@ public class SearchPanelClient extends JPanel {
         add(searchResultsPane, gc);
 	}
 
-	public void setSearchResultsList(ArrayList<Client> clients)
-    {
-        // Create and populate new JList Model
-        searchListModel = new DefaultListModel<Client>();
-        for (Client c : clients)
-        {
-            searchListModel.addElement(c);
-        }
-        // Refresh JList by switching to new model
-        searchResultsList.setModel(searchListModel);
-    }
 	
 
 
