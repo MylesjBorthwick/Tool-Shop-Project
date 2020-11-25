@@ -1,6 +1,9 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
+
 import view.CustomerGUI;
 
 
@@ -27,17 +30,17 @@ public class CustomerGUIController {
 
                 if(searchType == "lastName"){
                     custModel.setLastName(searchParam);
-                    custModel.setQuery(5);
+                    custModel.setQueryId(5);
                 }
 
                 else if(searchType == "clientId"){
                     custModel.setClientId(Integer.parseInt(searchParam));
-                    custModel.setQuery(4);
+                    custModel.setQueryId(4);
                 }
 
                 else if(searchType == "clientType"){
                     custModel.setClientType(searchParam);
-                    custModel.setQuery(6);
+                    custModel.setQueryId(6);
                 }
 
                 if(custModel.isAnswered() == true){
@@ -60,6 +63,62 @@ public class CustomerGUIController {
             gui.setTextField("");
         });
 
+        gui.addSaveListener((ActionEvent e)->{
+            if(gui.getClientIdField().isBlank()){
+                gui.displayErrorMessage("Cannot Add"+"\nNeed ClientID Field");
+            }
+            else{
+                try{
+                    int clientId = Integer.parseInt(gui.getClientIdField());
+                    String firstName = gui.getClientFirstNameField();
+                    String lastName = gui.getLastNameField();
+                    String postal = gui.getPostalField();
+                    String addy = gui.getAddressField();
+                    String phone = gui.getPhoneNumberField();
+                    String type = gui.getClientType();
+                    if(verifyAddNew()){
+                        custModel.setClientId(clientId);
+                        custModel.setFirstName(firstName);
+                        custModel.setLastName(lastName);
+                        custModel.setPostalCode(postal);
+                        custModel.setAddress(addy);
+                        custModel.setClientType(type);
+                        custModel.setPhoneNumber(phone);
+                        custModel.setQueryId(1);
+
+                    }
+                    if(custModel.isAnswered() == true){
+                        gui.displayErrorMessage("Client Saved!");
+                    }
+                    else{
+                        gui.displayErrorMessage("Client Not Saved!");
+                    }
+                }
+                catch(Exception er){
+                    gui.displayErrorMessage("Cannot Add Client"+
+                    "\nPlease Make Sure All Fields Are of Proper Type");
+                }
+            }
+            
+        });
+
+
+    }
+
+
+    private boolean verifyAddNew()
+    {
+        // Ask user if they really want to add new user
+        int action = JOptionPane.showConfirmDialog(null, 
+        "Do you want to add a new client? A new client ID will be generated.", 
+        "Confirm New Client", 
+        JOptionPane.OK_CANCEL_OPTION);
+        // Return true if user confirms
+        if (action == JOptionPane.OK_OPTION)
+        {
+            return true;
+        }
+        return false;
     }
 
 

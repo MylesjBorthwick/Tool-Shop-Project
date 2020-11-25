@@ -70,6 +70,52 @@ public class CustomerGUI extends JFrame {
             search.setTextField(text);
         }
 
+        public void addSaveListener(ActionListener saveListen){
+            info.addSaveListener(saveListen);
+        }
+    
+        public void addClearInfoListener(ActionListener clearListen){
+            info.addClearListener(clearListen);
+        }
+    
+        public void addDeleteListener(ActionListener deleteListen){
+            info.addDeleteListener(deleteListen);
+        }
+    
+        public void addUpdateListener(ActionListener updateListen){
+            info.addUpdateListener(updateListen);
+        }
+    
+        public String getClientIdField(){
+            return info.getClientIdField();
+        }
+    
+        public String getClientFirstNameField(){
+            return info.getClientFirstNameField();
+        }
+    
+        public String getLastNameField(){
+            return info.getLastNameField();
+        }
+    
+        public String getAddressField(){
+            return info.getAddressField();
+        }
+    
+        public String getPostalField(){
+            return info.getPostalField();
+        }
+    
+        public String getPhoneNumberField(){
+            return info.getPhoneNumberField();
+        }
+    
+        public String getClientType(){
+            return info.getClientType();
+        }
+
+        
+
 
 
 
