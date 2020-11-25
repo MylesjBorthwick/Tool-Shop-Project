@@ -1,18 +1,17 @@
 package controller;
 
-import managers.InventoryManager;
-import model.Tool;
+import java.awt.event.ActionEvent;
 import view.InventoryGUI;
 
 
 public class InventoryGUIController {
     
     private InventoryGUI gui;
-    private InventoryModel model;
+    private InventoryModel invModel;
 
 
 
-    public InventoryGUIController(InventoryGUI g, InventoryManager i){
+    public InventoryGUIController(InventoryGUI g, InventoryModel i){
         
         setGui(g);
         setModel(i);
@@ -27,45 +26,55 @@ public class InventoryGUIController {
                 executeType = gui.getExecuteType();
                 executeParam = gui.getExecuteParam();
 
-                if(executeType == "toolId"){
-                    int toolId = Integer.parseInt(executeParam);
-                    model.searchToolId()
+                if(executeType == "toolName"){
+                    invModel.setToolName(executeParam);
+                    invModel.setQueryId(2);
                 }
+
+                else if(executeType == "toolId"){
+                    invModel.setId(Integer.parseInt(executeParam));
+                    invModel.setQueryId(3);
+                }
+
+                else if(executeType == "checkQuant"){
+                    invModel.setToolName(executeParam);
+                    invModel.setQueryId(4);
+                }
+
+                else if(executeType == "decreaseQuant"){
+                    invModel.setToolName(executeParam);
+                    invModel.setQueryId(5);
+                }
+
+                if(invModel.isAnswered() == true){
+                    gui.setTextField(invModel.getResponse());
+                }
+                
+                else{
+                    gui.displayErrorMessage("No Results Found");
+                }
+                
             }
-
-
+            catch(Exception er){
+                gui.displayErrorMessage("Execution Error"+
+                "\nPlease make sure the execute command matches action type.");
+            }
 
         });
 
-    }
+        gui.addClearListener((ActionEvent e)->{
+            gui.setTextField("");
+        });
 
+        gui.addListListener((ActionEvent e)->{
+            invModel.setQueryId(1);
+            gui.setTextField(invModel.getResponse());
+        });
 
-
-    public Tool searchToolName(String name){
-        
-        
-        return null;
-    }
-
-    public Tool searchToolId(int id){
-
-
-
-        return null;
-    }
-
-    public int checkToolQuant(String name){
-
-
-
-        return 0;
-    }
-
-    public void decreaseToolQuant(String name){
-
-    }
-
-    public void listAllTools(){
+        gui.addOrderListener((ActionEvent e)->{
+            invModel.setQueryId(6);
+            gui.setTextField(invModel.getResponse());
+        });
 
     }
 
@@ -87,15 +96,15 @@ public class InventoryGUIController {
     /**
      * @return InventoryModel return the model
      */
-    public InventoryManager getModel() {
-        return model;
+    public InventoryModel getModel() {
+        return invModel;
     }
 
     /**
      * @param model the model to set
      */
-    public void setModel(InventoryManager model) {
-        this.model = model;
+    public void setModel(InventoryModel model) {
+        this.invModel = model;
     }
 
 }
