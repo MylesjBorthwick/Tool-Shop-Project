@@ -1,4 +1,5 @@
 package managers;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -10,26 +11,26 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import model.Supplier;
+import model.Tool;
 
 // Pre-Project Exercise 
 
 // This program allows you to create and manage a store inventory database.
 // It creates a database and datatable, then populates that table with tools from
 // Tools.txt.
-public class SupplierManager {
+public class InventoryDBManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "suppliers", dataFile = "suppliers.txt";
+	public String databaseName = "toolshop", tableName = "Tools", dataFile = "items.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
-	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  
+	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  //"jdbc:mysql://localhost:3306/toolshop",
 				  login          = "root",
-				  password       = "Engineering4Elohim";
+				  password       = "Engineering4Elohim" ;
 
-	public SupplierManager()
+	public InventoryDBManager()
 	{
 		try{
 			// If this throws an error, make sure you have added the mySQL connector JAR to the project
@@ -65,12 +66,13 @@ public class SupplierManager {
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
-					 "SUPPLIERID INT(4) NOT NULL, " +
+					 "ID INT(4) NOT NULL, " +
 					 "TYPE VARCHAR(20) NOT NULL, "+
-				     "NAME VARCHAR(45) NOT NULL, " + 
-				     "ADDRESS VARCHAR(45) NOT NULL, " + 
-				     "CONTACT VARCHAR(20) NOT NULL, " + 
-				     "PRIMARY KEY ( SUPPLIERID ))";
+				     "TOOLNAME VARCHAR(20) NOT NULL, " + 
+				     "QUANTITY INT(4) NOT NULL, " + 
+				     "PRICE DOUBLE(5,2) NOT NULL, " + 
+				     "SUPPLIERID INT(4) NOT NULL, " + 
+				     "PRIMARY KEY ( id ))";
 		try{
 			statement = jdbc_connection.createStatement();
 			statement.executeUpdate(sql);
@@ -104,13 +106,13 @@ public class SupplierManager {
 			Scanner sc = new Scanner(new FileReader(dataFile));
 			while(sc.hasNext())
 			{
-				String supInfo[] = sc.nextLine().split(";");
-				addSupplier( new Supplier( Integer.parseInt(supInfo[0]),
-													supInfo[1],
-                                                    supInfo[2],
-                                                    supInfo[3],
-                                                    supInfo[4]));
-						          
+				String toolInfo[] = sc.nextLine().split(";");
+				addTool( new Tool( Integer.parseInt(toolInfo[0]),
+													toolInfo[1],
+													toolInfo[2],
+						           Integer.parseInt(toolInfo[3]),
+						         Double.parseDouble(toolInfo[4]),
+						           Integer.parseInt(toolInfo[5])));
 			}
 			sc.close();
 		}
@@ -125,16 +127,16 @@ public class SupplierManager {
 	}
 
 	// Add a tool to the database table
-	public void addSupplier(Supplier sup)
+	public void addTool(Tool tool)
 	{
 		String sql = "INSERT INTO " + tableName +
-				" VALUES ( " + sup.getSupplierId() + ", '" + 
-				sup.getType() + "', '" + 
-				sup.getCompanyName() + "', '" + 
-				sup.getAddress() + "', '" + 
-                sup.getContact() + "');";
-                
-                System.out.println(sql);
+				" VALUES ( " + tool.getToolId() + ", '" + 
+				tool.getType() + "', '" + 
+				tool.getToolName() + "', " + 
+				tool.getToolQuant() + ", " + 
+				tool.getToolPrice() + ", " + 
+				tool.getSupplierId() + ");";
+		System.out.println(sql);
 		try{
 			statement = jdbc_connection.createStatement();
 			statement.executeUpdate(sql);
@@ -147,20 +149,21 @@ public class SupplierManager {
 
 	// This method should search the database table for a tool matching the toolID parameter and return that tool.
 	// It should return null if no tools matching that ID are found.
-	public Supplier searchTool(int supID)
+	public Tool searchTool(int toolID)
 	{
-		String sql = "SELECT * FROM " + tableName + " WHERE ID=" + supID;
-		ResultSet sup;
+		String sql = "SELECT * FROM " + tableName + " WHERE ID=" + toolID;
+		ResultSet tool;
 		try {
 			statement = jdbc_connection.createStatement();
-			sup = statement.executeQuery(sql);
-			if(sup.next())
+			tool = statement.executeQuery(sql);
+			if(tool.next())
 			{
-				return new Supplier(sup.getInt("SUPPLIERID"),
-								sup.getString("TYPE"),
-								sup.getString("NAME"), 
-                                sup.getString("ADDRESS"),
-                                sup.getString("CONTACT"));
+				return new Tool(tool.getInt("ToolId"),
+								tool.getString("Type"),
+								tool.getString("ToolName"), 
+								tool.getInt("Quantity"), 
+								tool.getDouble("Price"), 
+								tool.getInt("SupplierId"));
 			}
 		
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -168,28 +171,32 @@ public class SupplierManager {
 		return null;
 	}
 
-
-	public ArrayList<Supplier> getAllSuppliers()
+	// This method should search the database table for a tool matching the toolID parameter and return that tool.
+	// It should return null if no tools matching that ID are found.
+	public ArrayList<Tool> getAllTools()
 	{
-		ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
+		ArrayList<Tool> array = new ArrayList<Tool>();
 		String sql = "SELECT * FROM " + tableName;
-		ResultSet sup;
+		ResultSet tool;
 		try {
 			statement = jdbc_connection.createStatement();
-			sup = statement.executeQuery(sql);
-			while(sup.next())
+			tool = statement.executeQuery(sql);
+			while(tool.next())
 			{
-				suppliers.add(new Supplier(sup.getInt("SUPPLIERID"),
-								sup.getString("TYPE"),
-								sup.getString("NAME"), 
-                                sup.getString("ADDRESS"),
-                                sup.getString("CONTACT")));
+				array.add(new Tool(tool.getInt("ToolId"),
+								tool.getString("Type"),
+								tool.getString("ToolName"), 
+								tool.getInt("Quantity"), 
+								tool.getDouble("Price"), 
+								tool.getInt("SupplierId")));
 			}
 		
 		} catch (SQLException e) { e.printStackTrace(); }
 		
-		return suppliers;
+		return array;
 	}
+
+
 
 
 	// Prints all the Tools in the database to console
@@ -198,67 +205,79 @@ public class SupplierManager {
 		try {
 			String sql = "SELECT * FROM " + tableName;
 			statement = jdbc_connection.createStatement();
-			ResultSet sups = statement.executeQuery(sql);
-			System.out.println("Suppliers:");
-			while(sups.next())
+			ResultSet tools = statement.executeQuery(sql);
+			System.out.println("Tools:");
+			while(tools.next())
 			{
-				System.out.println(sups.getInt("SUPPLIERID")+" "+
-                                    sups.getString("TYPE")+ " " +
-                                    sups.getString("NAME")+ " " + 
-                                    sups.getString("ADDRESS")+ " " +
-                                    sups.getString("CONTACT"));
-                    
-
+				System.out.println(tools.getInt("ToolId") + " " + 
+								   tools.getString("Type")+ " " +
+								   tools.getString("ToolName") + " " + 
+								   tools.getInt("Quantity") + " " + 
+								   tools.getDouble("Price") + " " + 
+								   tools.getInt("SupplierId"));
 			}
-			sups.close();
+			tools.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+
+	
 	public static void main(String args[])
 	{
-		SupplierManager suplist = new SupplierManager();
+		InventoryDBManager inventory = new InventoryDBManager();
 		
 		// You should comment this line out once the first database is created (either here or in MySQL workbench)
-		//suplist.createDB();
+		//inventory.createDB();
 
-		suplist.createTable();
+		inventory.createTable();
 		
-		System.out.println("\nFilling the table with suppliers");
-		suplist.fillTable();
+		System.out.println("\nFilling the table with tools");
+		inventory.fillTable();
 
-		System.out.println("Reading all suppliers from the table:");
-		suplist.printTable();
-        
-		// System.out.println("\nSearching table for tool 1002: should return 'Grommets'");
-		// int supID = 1002;
-		// Tool searchResult = inventory.searchTool(toolID);
-		// if(searchResult == null)
-		// 	System.out.println("Search Failed to find a tool matching ID: " + toolID);
-		// else
-		// 	System.out.println("Search Result: " + searchResult.toString());
+		System.out.println("Reading all tools from the table:");
+		inventory.printTable();
 
-		// System.out.println("\nSearching table for tool 9000: should fail to find a tool");
-		// toolID = 9000;
-		// searchResult = inventory.searchTool(toolID);
-		// if(searchResult == null)
-		// 	System.out.println("Search Failed to find a tool matching ID: " + toolID);
-		// else
-		// 	System.out.println("Search Result: " + searchResult.toString());
+		System.out.println("\nSearching table for tool 1002: should return 'Grommets'");
+		int toolID = 1002;
+		Tool searchResult = inventory.searchTool(toolID);
+		if(searchResult == null)
+			System.out.println("Search Failed to find a tool matching ID: " + toolID);
+		else
+			System.out.println("Search Result: " + searchResult.toString());
+
+		System.out.println("\nSearching table for tool 9000: should fail to find a tool");
+		toolID = 9000;
+		searchResult = inventory.searchTool(toolID);
+		if(searchResult == null)
+			System.out.println("Search Failed to find a tool matching ID: " + toolID);
+		else
+			System.out.println("Search Result: " + searchResult.toString());
 		
-		DBSupplierTypeManager supType = new DBSupplierTypeManager();
-		//supType.createDB();
-		supType.createTable();
-		supType.fillTable();
-		supType.printTable();
+
+		//MANAGE THE ELECTRICALS
+
+		ElectricalManager electricalAddOns = new ElectricalManager();
+	
+		// You should comment this line out once the first database is created (either here or in MySQL workbench)
+		//inventory.createDB();
+
+		electricalAddOns.createTable();
+		
+		System.out.println("\nFilling the table with tools");
+		electricalAddOns.fillTable();
+
+		System.out.println("Reading all tools from the table:");
+		electricalAddOns.printTable();
+
 
 		//System.out.println("\nTrying to remove the table");
-		//supType.removeTable();
+		//electricalAddOns.removeTable();
 		
 		try {
-			supType.statement.close();
-			supType.jdbc_connection.close();
+			electricalAddOns.statement.close();
+			electricalAddOns.jdbc_connection.close();
 		} 
 		catch (SQLException e) { e.printStackTrace(); }
 		finally
@@ -266,12 +285,14 @@ public class SupplierManager {
 			System.out.println("\nThe program is finished running");
 		}
 
+		
+
 		//System.out.println("\nTrying to remove the table");
-		//suplist.removeTable();
+		//inventory.removeTable();
 		
 		try {
-			suplist.statement.close();
-			suplist.jdbc_connection.close();
+			inventory.statement.close();
+			inventory.jdbc_connection.close();
 		} 
 		catch (SQLException e) { e.printStackTrace(); }
 		finally

@@ -4,39 +4,36 @@ import java.sql.SQLException;
 
 import com.mysql.fabric.xmlrpc.Client;
 
-import managers.ClientManager;
+import managers.ClientDBManager;
 import model.CustomerList;
 
 public class ClientMainController 
 {
 
-	private ClientManager clientDBManager;
+	private ClientDBManager clientDB;
 	private CustomerList customerList;
 
     public ClientMainController(){
-		clientDBManager = new ClientManager();
+		clientDB = new ClientDBManager();
 		
 		// You should comment this line out once the first database is created (either here or in MySQL workbench)
 		//inventory.createDB();
-
-		clientDBManager.createTable();
-		
-		System.out.println("\nFilling the table with clients");
-		clientDBManager.fillTable();
-
-		System.out.println("Reading all clients from the table:");
-		clientDBManager.printTable();
+		// clientDBManager.createTable();
+		// System.out.println("\nFilling the table with clients");
+		// clientDBManager.fillTable();
+		// System.out.println("Reading all clients from the table:");
+		// clientDBManager.printTable();
 
 
-		customerList = new CustomerList(clientDBManager.getAll());
+		customerList = new CustomerList(clientDB.getAll());
 
-		System.out.println(customerList.printList());
-		System.out.println("\nTrying to remove the table");
-		clientDBManager.removeTable();
+		//System.out.println(customerList.printList());
+		//System.out.println("\nTrying to remove the table");
+		//clientDBManager.removeTable();
 		
 		try {
-			clientDBManager.statement.close();
-			clientDBManager.jdbc_connection.close();
+			clientDB.statement.close();
+			clientDB.jdbc_connection.close();
 		} 
 		catch (SQLException e) { e.printStackTrace(); }
 		finally
@@ -69,9 +66,11 @@ overload by lastname, id, and type for search
 	public Object receiveQuery(CustomerModel query){
 		switch(query.getQueryId()){
 				case 1:
+					clientDB.addClient(new model.Client(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
 					query.setResponse(customerList.addCustomer(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
 				break;
 				case 2:
+					clientDB.updateClient(new model.Client(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
 					query.setResponse(customerList.updateCustomer(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
 					break;
 				case 3:				

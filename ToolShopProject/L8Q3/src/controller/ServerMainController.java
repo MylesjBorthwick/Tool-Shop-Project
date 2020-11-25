@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.Serializable;
 
 import server.Server;
 
@@ -23,11 +22,11 @@ public class ServerMainController
     public Object passSerial(Object input){
         if(input.getClass() == CustomerModel.class){
             System.out.println("Customer");
-
+            return customerControl.receiveQuery((CustomerModel)input);
         }
-        else{
+        else if(input.getClass() == InventoryModel.class) {
             System.out.println("Tool");
-            inventoryControl.receiveQuery((InventoryModel)input);
+            return inventoryControl.receiveQuery((InventoryModel)input);
         }
         return input;
     }
