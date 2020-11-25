@@ -14,8 +14,6 @@ public class CustomerGUIController {
     private CustomerModel custModel;
 
 
-
-
     public CustomerGUIController(CustomerGUI g, CustomerModel i){
         
         setGui(g);
@@ -93,14 +91,11 @@ public class CustomerGUIController {
                         custModel.setClientType(type);
                         custModel.setPhoneNumber(phone);
                         custModel.setQueryId(1);
+                        gui.displayErrorMessage(custModel.getResponse());
+                        
 
                     }
-                    if(custModel.isAnswered() == true){
-                        gui.displayErrorMessage("Client Saved!");
-                    }
-                    else{
-                        gui.displayErrorMessage("Client Not Saved!");
-                    }
+                    
                 }
                 catch(Exception er){
                     gui.displayErrorMessage("Cannot Add Client"+
@@ -108,6 +103,51 @@ public class CustomerGUIController {
                 }
             }
             
+        });
+
+        gui.addDeleteListener((ActionEvent e)->{
+            if(gui.getClientIdField().isBlank()){
+                gui.displayErrorMessage("Cannot Delete"+"\nNeed ClientID Field");
+            }
+            else{
+                try{
+                    int clientId = Integer.parseInt(gui.getClientIdField());
+                    if(verifyDelete()){
+                        custModel.setClientId(clientId);
+                        custModel.setQueryId(3);
+                        gui.displayErrorMessage(custModel.getResponse());
+
+                    }
+                   
+                }
+                catch(Exception er){
+                    gui.displayErrorMessage("Cannot Add Client"+
+                    "\nPlease Make Sure All Fields Are of Proper Type");
+                }
+            }
+        });
+
+        gui.addUpdateListener((ActionEvent e)->{
+            if(gui.getClientIdField().isBlank()){
+                gui.displayErrorMessage("Need Client Id to Update");
+            }
+            else{
+                try{
+                    int clientId = Integer.parseInt(gui.getClientIdField());
+                    if(verifyUpdate()){
+                        custModel.setClientId(clientId);
+                        custModel.setQueryId(2);
+                        gui.displayErrorMessage(custModel.getResponse());
+
+                    }
+                   
+                }
+                catch(Exception er){
+                    gui.displayErrorMessage("Cannot Add Client"+
+                    "\nPlease Make Sure All Fields Are of Proper Type");
+                }
+                
+            }
         });
 
 
@@ -120,6 +160,36 @@ public class CustomerGUIController {
         int action = JOptionPane.showConfirmDialog(null, 
         "Do you want to add a new client? A new client ID will be generated.", 
         "Confirm New Client", 
+        JOptionPane.OK_CANCEL_OPTION);
+        // Return true if user confirms
+        if (action == JOptionPane.OK_OPTION)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean verifyUpdate()
+    {
+        // Ask user if they really want to add new user
+        int action = JOptionPane.showConfirmDialog(null, 
+        "Do You Want to Update This Client? ", 
+        "All Empty Fields Will Be Saved as Null", 
+        JOptionPane.OK_CANCEL_OPTION);
+        // Return true if user confirms
+        if (action == JOptionPane.OK_OPTION)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean verifyDelete()
+    {
+        // Ask user if they really want to add new user
+        int action = JOptionPane.showConfirmDialog(null, 
+        "Do you want delete this client?", 
+        "Confirm Deletion", 
         JOptionPane.OK_CANCEL_OPTION);
         // Return true if user confirms
         if (action == JOptionPane.OK_OPTION)
