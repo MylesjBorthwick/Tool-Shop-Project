@@ -2,6 +2,7 @@ package server;
 import java.io.*;
 import java.net.Socket;
 
+import controller.CustomerModel;
 /**
  * @author Myles Borthwick
  * @author Ken Loughery
@@ -62,7 +63,7 @@ public class ClientSocket {
 	 */
 	public static void main(String[] args)  {
 		ClientSocket aClient = new ClientSocket("localhost", 8099);
-		//aClient.pipelineRequest(new CustomerModel("Please help me find something"));
+		aClient.pipelineRequest(new CustomerModel("Please help me find something"));
 		aClient.disconnect();
 	}
 }

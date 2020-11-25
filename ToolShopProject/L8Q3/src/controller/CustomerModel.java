@@ -5,11 +5,11 @@ import java.io.Serializable;
  *   
  *
  */
-class CustomerModel implements Serializable
+public class CustomerModel implements Serializable
 	{
 
 		private static final long serialVersionUID = 1L;
-		private String query = null;
+		private int queryId = 0;
 		private String response = null;
 		private boolean answered = false;
 		private String firstName = null;
@@ -23,8 +23,8 @@ class CustomerModel implements Serializable
 		/**
          * A default constructor that builds a record with blank data
          */
-		public CustomerModel(String query, String firstName, String lastName, String address, String postalCode, int clientId, int phoneNumber, boolean clientType) {
-			this.query = query;
+		public CustomerModel(int queryId, String firstName, String lastName, String address, String postalCode, int clientId, int phoneNumber, boolean clientType) {
+			this.queryId = queryId;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.address = address;
@@ -37,8 +37,8 @@ class CustomerModel implements Serializable
         /**
          * A default constructor that builds a record with blank data
          */
-		public CustomerModel(String query) {
-			this.query = query;
+		public CustomerModel(int queryId) {
+			this.queryId = queryId;
 		} 
 
 		
@@ -46,15 +46,15 @@ class CustomerModel implements Serializable
     /**
      * @return String return the query
      */
-    public String getQuery() {
-        return query;
+    public int getQuery() {
+        return queryId;
     }
 
     /**
      * @param query the query to set
      */
-    public void setQuery(String query) {
-		this.query = query;
+    public void setQuery(int queryId) {
+		this.queryId = queryId;
 		this.answered = false;
     }
 

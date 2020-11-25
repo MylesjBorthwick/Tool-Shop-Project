@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 
 import managers.ElectricalManager;
@@ -116,6 +117,37 @@ public class InventoryMainController
 	}        
         
     
+
+	/**
+	 *	body of the front end, which calls the methods to display menu, receive results, and then interprets the menu items through 
+	 * a switch statement to generate the proper response from the backend, calling on the shop to generate an output
+	 */
+	public Object receiveQuery(InventoryModel query){
+
+
+	// switch(response){
+	// 		case 1:
+	// 			System.out.println(shop.printoutOfInventory());
+	// 		break;
+	// 		case 2:
+	// 			System.out.println(shop.getItem(getUserInput("Please enter the name of the tool you would like to find.")));
+	// 		break;
+	// 		case 3:					
+	// 			System.out.println(shop.getItem(getNumericalUserInput("Please enter the id number of the tool you would like to find.")));
+	// 		break;
+	// 		case 4:
+	// 			System.out.println(shop.getQuantity(getUserInput("Please enter the name of the tool you would like to find the remaining quantity of.")));
+	// 		break;
+	// 		case 5:
+	// 			System.out.println(shop.reduceItem("Please enter the name of the tool you would like to reduce the quantity of."));
+	// 		break;
+	// 		case 6: 
+	// 			System.out.println(shop.generateOrder());
+	// 		break;
+	// }
+		return query;
+	}
+
 
 
 

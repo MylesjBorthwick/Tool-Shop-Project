@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Client;
@@ -82,6 +83,30 @@ public class ClientManager {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Client> getAll()
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String sql = "SELECT * FROM " + tableName;
+		ResultSet client;
+		try {
+			statement = jdbc_connection.createStatement();
+			client = statement.executeQuery(sql);
+			while(client.next())
+			{
+				list.add( new Client(client.getInt("ID"),
+								  client.getString("FIRSTNAME"),
+								  client.getString("LASTNAME"),
+								  client.getString("ADDRESS"),
+								  client.getString("POSTALCODE"),
+								  client.getString("PHONENUMBER"),
+								  client.getString("CLIENTTYPE")));
+			}
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		return list;
 	}
 
 	// Removes the data table from the database (and all the data held within it!)

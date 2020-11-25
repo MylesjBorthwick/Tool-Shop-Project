@@ -46,7 +46,9 @@ public class ServerThread implements Runnable {
 	public void run() {
 
 		try {
-			System.out.println(socketIn.readObject().getClass());
+			Object temp = socketIn.readObject();
+			System.out.println(temp.getClass());
+			maincontroller.passSerial(temp);
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
