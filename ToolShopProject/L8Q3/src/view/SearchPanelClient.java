@@ -28,9 +28,9 @@ public class SearchPanelClient extends JPanel {
 	private static final long serialVersionUID = 1L;
     
 
-    private JLabel searchType;
-    private JLabel searchParam;
-	private JLabel searchResults;
+    private JLabel type;
+    private JLabel param;
+	private JLabel results;
 	
 	private ButtonGroup searchTypeGroup;
     private JRadioButton clientId;
@@ -55,13 +55,12 @@ public class SearchPanelClient extends JPanel {
         dim.width = 500;
         setPreferredSize(dim);
         Border innerBorder = BorderFactory.createTitledBorder("Search Clients");
-        Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);       // Invisible border to give inner border more space
-        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+   
         
 
-		searchType = new JLabel("Select Search Type:");
-		searchParam = new JLabel("Enter Search: ");
-		searchResults = new JLabel("Results:");
+		type = new JLabel("Select Search Type:");
+		param = new JLabel("Enter Search: ");
+		results = new JLabel("Results:");
 
 		searchTypeGroup = new ButtonGroup();
         clientId = new JRadioButton("Client ID");
@@ -93,7 +92,32 @@ public class SearchPanelClient extends JPanel {
 		addComponents(gc);
 
 
-	}
+    }
+
+    public void addSearchListener(ActionListener searchListen){
+        searchButton.addActionListener(searchListen);
+    }
+
+    public void addClearListener(ActionListener clearListen){
+        clearSearchButton.addActionListener(clearListen);
+    }
+
+    public void addSelectionListener(ListSelectionListener selectionListener){
+        searchResultsList.addListSelectionListener(selectionListener);
+    }
+    
+    public String getSearchType(){
+        return searchTypeGroup.getSelection().getActionCommand();
+    }
+
+    public String getSearchParam(){
+        return searchParamField.getText();
+    }
+
+    public Client getSelectedClient(){
+        return searchResultsList.getSelectedValue();
+    }
+
 
 
 	private void addComponents(GridBagConstraints gc)
@@ -106,7 +130,7 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;       // Have to initialize grid components before using them
         gc.anchor = GridBagConstraints.LINE_START;    // Sets label to right side of cell
         gc.insets = new Insets(0, 0, 0, 0);         // Adds 5 pixel space to the right of label
-        add(searchType, gc);
+        add(type, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -146,7 +170,7 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(searchParam, gc);
+        add(param, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -176,7 +200,7 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(searchResults, gc);
+        add(results, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;

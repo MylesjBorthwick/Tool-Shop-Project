@@ -47,6 +47,34 @@ public class InventoryGUI extends JFrame {
 
     }
 
+    public void addExecuteListener(ActionListener executeListener)
+    {
+        search.addExecuteListener(executeListener);
+    }
+
+    public void addClearListener(ActionListener clearListener)
+    {
+        search.addClearListener(clearListener);
+    }
+
+    public void addListListener(ActionListener listListener)
+    {
+        search.addListListener(listListener);
+    }
+
+    public void addOrderListener(ActionListener orderListener)
+    {
+        search.addOrderListener(orderListener);
+    }
+
+
+    public String getExecuteType(){
+        return search.getExecuteType();
+    }
+
+    public String getExecuteParam(){
+        return search.getExecuteParam();
+    }
    
 
 }

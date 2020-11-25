@@ -37,27 +37,20 @@ public class InfoPanelClient extends JPanel
     private JButton deleteButton;
     private JButton clearButton;
 
-    //================================================================================
-    // Constructors
-    //================================================================================
-    /**
-     * Constructs an InformationPanel object containing client information text
-     * fields and save, delete, and clear buttons. 
-     */
+ 
     public InfoPanelClient()
     {
         // Layout setup
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
-        gc.fill = GridBagConstraints.NONE;          // Take up all space in cell or not
+        gc.fill = GridBagConstraints.NONE;       
         
-        // Panel setup
-        Dimension dim = getPreferredSize(); // If you print this, you can see the default preferred size
+        
+        Dimension dim = getPreferredSize(); 
         dim.width = 400;
         setPreferredSize(dim);
         Border innerBorder = BorderFactory.createTitledBorder("Client Info");
-        Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);       // Invisible border to give inner border more space
-        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+              
 
         // Instantiate components
         clientIDLabel = new JLabel("Client ID: ");

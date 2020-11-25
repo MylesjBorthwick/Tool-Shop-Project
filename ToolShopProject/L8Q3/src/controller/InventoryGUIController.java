@@ -17,18 +17,31 @@ public class InventoryGUIController {
         setGui(g);
         setModel(i);
 
-        
+
+        gui.addExecuteListener((ActionEvent e)->{
+
+            String executeType = "";
+            String executeParam = "";
+
+            try{
+                executeType = gui.getExecuteType();
+                executeParam = gui.getExecuteParam();
+
+                if(executeType == "toolId"){
+                    int toolId = Integer.parseInt(executeParam);
+                    model.searchToolId()
+                }
+            }
 
 
-        
+
+        });
+
     }
 
 
 
     public Tool searchToolName(String name){
-        
-        
-        
         
         
         return null;
