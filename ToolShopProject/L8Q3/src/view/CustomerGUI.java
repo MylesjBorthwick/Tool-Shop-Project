@@ -37,82 +37,76 @@ public class CustomerGUI extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        switchToInv.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                InventoryGUI igui = new InventoryGUI();
-            }
-        });
     }
-        public void displayErrorMessage(String errorMessage)
-        {
-            JOptionPane.showMessageDialog(this, errorMessage);
-        }
 
-        public void addSearchListener(ActionListener searchListener){
-            search.addSearchListener(searchListener);
-        }
+    public void addSwitchListener(ActionListener e){
+        switchToInv.addActionListener(e);
+    }
 
-        public void addClearListener(ActionListener clearListen){
-            search.addClearListener(clearListen);
-        }
-        
-        public String getSearchType(){
-            return search.getSearchType();
-        }
+    public void displayErrorMessage(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(this, errorMessage);
+    }
+    public void addSearchListener(ActionListener searchListener){
+        search.addSearchListener(searchListener);
+    }
+    public void addClearListener(ActionListener clearListen){
+        search.addClearListener(clearListen);
+    }
     
-        public String getSearchParam(){
-            return search.getSearchParam();
-        }
+    public String getSearchType(){
+        return search.getSearchType();
+    }
 
-        public void setTextField(String text){
-            search.setTextField(text);
-        }
+    public String getSearchParam(){
+        return search.getSearchParam();
+    }
+    public void setTextField(String text){
+        search.setTextField(text);
+    }
+    public void addSaveListener(ActionListener saveListen){
+        info.addSaveListener(saveListen);
+    }
 
-        public void addSaveListener(ActionListener saveListen){
-            info.addSaveListener(saveListen);
-        }
-    
-        public void addClearInfoListener(ActionListener clearListen){
-            info.addClearListener(clearListen);
-        }
-    
-        public void addDeleteListener(ActionListener deleteListen){
-            info.addDeleteListener(deleteListen);
-        }
-    
-        public void addUpdateListener(ActionListener updateListen){
-            info.addUpdateListener(updateListen);
-        }
-    
-        public String getClientIdField(){
-            return info.getClientIdField();
-        }
-    
-        public String getClientFirstNameField(){
-            return info.getClientFirstNameField();
-        }
-    
-        public String getLastNameField(){
-            return info.getLastNameField();
-        }
-    
-        public String getAddressField(){
-            return info.getAddressField();
-        }
-    
-        public String getPostalField(){
-            return info.getPostalField();
-        }
-    
-        public String getPhoneNumberField(){
-            return info.getPhoneNumberField();
-        }
-    
-        public String getClientType(){
-            return info.getClientType();
-        }
+    public void addClearInfoListener(ActionListener clearListen){
+        info.addClearListener(clearListen);
+    }
+
+    public void addDeleteListener(ActionListener deleteListen){
+        info.addDeleteListener(deleteListen);
+    }
+
+    public void addUpdateListener(ActionListener updateListen){
+        info.addUpdateListener(updateListen);
+    }
+
+    public String getClientIdField(){
+        return info.getClientIdField();
+    }
+
+    public String getClientFirstNameField(){
+        return info.getClientFirstNameField();
+    }
+
+    public String getLastNameField(){
+        return info.getLastNameField();
+    }
+
+    public String getAddressField(){
+        return info.getAddressField();
+    }
+
+    public String getPostalField(){
+        return info.getPostalField();
+    }
+
+    public String getPhoneNumberField(){
+        return info.getPhoneNumberField();
+    }
+
+    public String getClientType(){
+        return info.getClientType();
+    }
 
         
 

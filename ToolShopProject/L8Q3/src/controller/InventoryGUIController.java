@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+
+import view.CustomerGUI;
 import view.InventoryGUI;
 
 
@@ -8,6 +10,7 @@ public class InventoryGUIController {
     
     private InventoryGUI gui;
     private InventoryModel invModel;
+    
 
 
 
@@ -15,6 +18,12 @@ public class InventoryGUIController {
         
         setGui(g);
         setModel(i);
+
+
+        gui.addSwitchListener((ActionEvent e)->{
+            gui.dispose();
+            CustomerGUIController cust = new CustomerGUIController(new CustomerGUI(), new CustomerModel());
+        });
 
         gui.addExecuteListener((ActionEvent e)->{
 

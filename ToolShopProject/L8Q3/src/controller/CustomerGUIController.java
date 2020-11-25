@@ -5,12 +5,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 import view.CustomerGUI;
+import view.InventoryGUI;
 
 
 public class CustomerGUIController {
     
     private CustomerGUI gui;
     private CustomerModel custModel;
+
 
 
 
@@ -56,6 +58,12 @@ public class CustomerGUIController {
                 gui.displayErrorMessage("Execution Error"+
                 "\nPlease make sure the execute command matches action type.");
             }
+
+        });
+
+        gui.addSwitchListener((ActionEvent e)->{
+            gui.dispose();
+            InventoryGUIController inventory = new InventoryGUIController(new InventoryGUI(), new InventoryModel());
 
         });
 
