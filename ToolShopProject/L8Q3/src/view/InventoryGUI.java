@@ -47,6 +47,11 @@ public class InventoryGUI extends JFrame {
 
     }
 
+    public void displayErrorMessage(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(this, errorMessage);
+    }
+
     public void addExecuteListener(ActionListener executeListener)
     {
         search.addExecuteListener(executeListener);
@@ -65,6 +70,10 @@ public class InventoryGUI extends JFrame {
     public void addOrderListener(ActionListener orderListener)
     {
         search.addOrderListener(orderListener);
+    }
+
+    public void setTextField(String text){
+        search.setTextField(text);
     }
 
 

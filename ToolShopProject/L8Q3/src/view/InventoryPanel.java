@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
@@ -43,9 +44,8 @@ public class InventoryPanel extends JPanel {
 	private JButton clearSearchButton;
     private JButton listAllTools;
     private JButton printOrder;
-    private DefaultListModel<Tool> searchListModel;
-    private JList<Tool> resultsList;
     private JScrollPane resultsPane;
+    private JTextArea textArea;
 
 
 	public InventoryPanel(){
@@ -57,7 +57,9 @@ public class InventoryPanel extends JPanel {
 
 		executeType = new JLabel("Select Action Type:");
 		executeParam = new JLabel("Enter Tool: ");
-		results = new JLabel("Results:");
+        results = new JLabel("Results:");
+        textArea = new JTextArea("");
+        textArea.setEditable(false);
 
 		actionTypeGroup = new ButtonGroup();
         toolId = new JRadioButton("Search by Tool ID");
@@ -70,9 +72,7 @@ public class InventoryPanel extends JPanel {
 		clearSearchButton = new JButton("Clear");
         listAllTools = new JButton("All Tools");
         printOrder = new JButton("Show Order");
-        searchListModel = new DefaultListModel<Tool>();
-        resultsList = new JList<Tool>(searchListModel);
-        resultsPane = new JScrollPane(resultsList);
+        resultsPane = new JScrollPane(textArea);
 
 
 		actionTypeGroup.add(toolId);
@@ -86,10 +86,6 @@ public class InventoryPanel extends JPanel {
 		toolName.setActionCommand("toolName");
 		checkQuant.setActionCommand("checkQuant");
 		decreaseQuant.setActionCommand("decreaseQuant");
-
-		resultsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        resultsList.setLayoutOrientation(JList.VERTICAL);
-		resultsList.setVisibleRowCount(-1);
 		
 		resultsPane.setPreferredSize(new Dimension(150, 80));
 
@@ -120,6 +116,10 @@ public class InventoryPanel extends JPanel {
 
     public String getExecuteParam(){
         return executeParamField.getText();
+    }
+
+    public void setTextField(String text){
+        textArea.setText(text);
     }
 
 
@@ -240,17 +240,5 @@ public class InventoryPanel extends JPanel {
         add(resultsPane, gc);
 	}
 
-	public void setresultsList(ArrayList<Tool> tools){
-        // Create and populate new JList Model
-        searchListModel = new DefaultListModel<Tool>();
-        for (Tool t : tools)
-        {
-            searchListModel.addElement(t);
-        }
-        // Refresh JList by switching to new model
-        resultsList.setModel(searchListModel);
-    }
 	
-
-
 }

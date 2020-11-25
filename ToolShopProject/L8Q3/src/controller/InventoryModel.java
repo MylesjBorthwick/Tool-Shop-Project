@@ -5,7 +5,7 @@ import java.io.Serializable;
  *   
  *
  */
-class InventoryModel implements Serializable
+public class InventoryModel implements Serializable
 	{
 
     private static final long serialVersionUID = 1L;
