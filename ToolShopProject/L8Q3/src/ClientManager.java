@@ -2,10 +2,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement; 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Pre-Project Exercise 
@@ -167,6 +168,33 @@ public class ClientManager {
 		return null;
 	}
 
+
+	public ArrayList<Client> getAll()
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String sql = "SELECT * FROM " + tableName;
+		ResultSet client;
+		try {
+			statement = jdbc_connection.createStatement();
+			client = statement.executeQuery(sql);
+			while(client.next())
+			{
+				list.add( new Client(client.getInt("ID"),
+								  client.getString("FIRSTNAME"),
+								  client.getString("LASTNAME"),
+								  client.getString("ADDRESS"),
+								  client.getString("POSTALCODE"),
+								  client.getString("PHONENUMBER"),
+								  client.getString("CLIENTTYPE")));
+			}
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		return list;
+	}
+
+
+
 	// Prints all the items in the database to console
 	public void printTable()
 	{
@@ -226,7 +254,7 @@ public class ClientManager {
 		
 		//System.out.println("\nTrying to remove the table");
 		//clientList.removeTable();
-		
+
 		try {
 			clientList.statement.close();
 			clientList.jdbc_connection.close();
