@@ -14,7 +14,7 @@ import java.util.Scanner;
 // This program allows you to create and manage a store inventory database.
 // It creates a database and datatable, then populates that table with tools from
 // Tools.txt.
-public class DBSupplierTypeManager {
+public class SupplierTypeDBManager {
 
 	public Connection jdbc_connection;
 	public Statement statement;
@@ -26,7 +26,7 @@ public class DBSupplierTypeManager {
 	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop", // "jdbc:mysql://localhost:3306/toolshop",
 			login = "root", password = "Engineering4Elohim";
 
-	public DBSupplierTypeManager()
+	public SupplierTypeDBManager()
 	{
 		try{
 			// If this throws an error, make sure you have added the mySQL connector JAR to the project

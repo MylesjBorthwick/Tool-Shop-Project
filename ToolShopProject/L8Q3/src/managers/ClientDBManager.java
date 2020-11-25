@@ -18,7 +18,7 @@ import model.Client;
 // This program allows you to create and manage a store inventory database.
 // It creates a database and datatable, then populates that table with tools from
 // items.txt.
-public class ClientManager {
+public class ClientDBManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
@@ -30,7 +30,7 @@ public class ClientManager {
 				  login          = "root",
 				  password       = "Engineering4Elohim";
 
-	public ClientManager()
+	public ClientDBManager()
 	{
 		try{
 			// If this throws an error, make sure you have added the mySQL connector JAR to the project
@@ -149,6 +149,71 @@ public class ClientManager {
 	}
 
 	// Add a tool to the database table
+	public void updateClient(Client client)
+	{
+
+		boolean updatedField = false;
+		String sql = "UPDATE " + tableName + " SET ";
+		if(client.getFirstName()!= null){
+			sql += "FIRSTNAME = '"+ client.getFirstName()+"'";
+			updatedField = true;
+		}
+		if(client.getLastName() != null){
+			if(updatedField){
+				sql += ", LASTNAME = '"+ client.getLastName()+"'";
+			}else{
+				sql += "LASTNAME = '"+ client.getLastName()+"'";
+			}
+			updatedField = true;
+		}
+		if(client.getAddress()!=null){
+			if(updatedField){
+				sql += ", ADDRESS = '"+ client.getLastName()+"'";
+			}else{
+				sql += "ADDRESS = '"+ client.getLastName()+"'";
+			}			
+			updatedField = true;
+		}
+		if(client.getPostalCode() != null){
+			if(updatedField){
+				sql += ", POSTALCODE = '"+ client.getPostalCode()+"'";
+			}else{
+				sql += "POSTALCODE = '"+ client.getPostalCode()+"'";
+			}	
+			updatedField = true;
+		}
+		if(client.getPhoneNumber()!= null){
+			if(updatedField){
+				sql += ", PHONENUMBER = '"+ client.getPhoneNumber()+"'";
+			}else{
+				sql += "PHONENUMBER = '"+ client.getPhoneNumber()+"'";
+			}	
+			updatedField = true;
+		}
+		if(client.getClientType()!= null){
+			if(updatedField){
+				sql += ", CLIENTTYPE = '"+ client.getClientType()+"'";
+			}else{
+				sql += "CLIENTTYPE = '"+ client.getClientType()+"'";
+			}			
+			updatedField = true;
+		}
+		if(updatedField){
+			sql+= " WHERE ID = " + Integer.toString(client.getId());
+			System.out.println(sql);
+			try{
+				statement = jdbc_connection.createStatement();
+				statement.executeUpdate(sql);
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	// Add a tool to the database table
 	public void addClient(Client client)
 	{
 		String sql = "INSERT INTO " + tableName +
@@ -169,6 +234,7 @@ public class ClientManager {
 			e.printStackTrace();
 		}
 	}
+
 
 	// This method should search the database table for a tool matching the toolID parameter and return that tool.
 	// It should return null if no tools matching that ID are found.
@@ -224,7 +290,7 @@ public class ClientManager {
 	
 	public static void main(String args[])
 	{
-		ClientManager clientList = new ClientManager();
+		ClientDBManager clientList = new ClientDBManager();
 		
 		// You should comment this line out once the first database is created (either here or in MySQL workbench)
 		//inventory.createDB();

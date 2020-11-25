@@ -27,17 +27,17 @@ public class CustomerGUIController {
 
                 if(searchType == "lastName"){
                     custModel.setLastName(searchParam);
-                    custModel.setQuery(5);
+                    custModel.setQueryId(5);
                 }
 
                 else if(searchType == "clientId"){
                     custModel.setClientId(Integer.parseInt(searchParam));
-                    custModel.setQuery(4);
+                    custModel.setQueryId(4);
                 }
 
                 else if(searchType == "clientType"){
                     custModel.setClientType(searchParam);
-                    custModel.setQuery(6);
+                    custModel.setQueryId(6);
                 }
 
                 if(custModel.isAnswered() == true){
