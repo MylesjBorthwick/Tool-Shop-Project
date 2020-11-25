@@ -42,7 +42,7 @@ public class CustomerList {
         this.customerList = customerList;
     }
 
-    public Client findClient(int id){
+    private Client findClient(int id){
         for (Client temp: customerList){
             if(temp.getId() == id){
                 return temp;
@@ -51,12 +51,79 @@ public class CustomerList {
         return null;
     }
 
+    public String findClientId(int id){
+        Client foundClient = findClient(id);
+        if(foundClient==null){
+            return "Client was not found.\n"+id+" does not exists as a client id in the database.\n";
+        }       
+        return foundClient.toString()+ "\n";
+    }
+
+    public String findClientName(String lastName){
+        String s = "";
+        for (Client temp: customerList){
+            if(temp.getLastName().equals(lastName)){
+                s += temp+ "\n";
+            }
+        }
+        if(s.length()>1){return s;}
+        return "No clients named "+lastName+ " were found in the database";
+    }
+
+    public String findClientType(String clientType){       
+        String s = "";
+        for (Client temp: customerList){
+            if(temp.getClientType().equals(clientType)){
+                s += temp+ "\n";
+            }
+        }
+        if(s.length()>1){return s;}
+        return "No clients of type "+clientType+ " was found in the database";
+    }  
 
 	public String addCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
 			String phoneNumber, String clientType) {
-                /////asdf//asdfkljaskldjflkadsjfkjadslfkjadslkfjadlskjfdjsfdjslfjsadljflasdjfkjasdlfjadklsjfadsjkfjadslfjlajsfdjaflsdjf
+                if(findClient(clientId)!= null){
+                    return firstName+ " was not added as a new client.\n"+clientId+" already exists as a client id in the database.\n";
+                }
                 customerList.add(new Client(clientId,firstName,lastName,address,postalCode,phoneNumber,clientType));
+                return firstName+ " was successfully added as a new client.\n";
+    }
 
+	public String removeCustomer(int clientId) {
+        Client deleteClient = findClient(clientId);
+        if(deleteClient== null){
+            return "Could not delete client.\n"+clientId+" does not exist as a client id in the database.\n";
+        }
+        customerList.remove(deleteClient);
+        return deleteClient.getFirstName()+ " was successfully removed from the list of clients.\n";
+	}
+
+	public String updateCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
+			String phoneNumber, String clientType) {
+                Client foundClient = findClient(clientId);
+                if(foundClient== null){
+                    return "Client was not updated.\n"+clientId+" does not exist as a client id in the database.\n";
+                }
+                if(firstName!= null){
+                    foundClient.setFirstName(firstName);
+                }
+                if(lastName != null){
+                    foundClient.setLastName(lastName);
+                }
+                if(address!=null){
+                    foundClient.setAddress(address);
+                }
+                if(postalCode != null){
+                    foundClient.setPostalCode(postalCode);
+                }
+                if(phoneNumber!= null){
+                    foundClient.setPhoneNumber(phoneNumber);
+                }
+                if(clientType!= null){
+                    foundClient.setClientType(clientType);
+                }
+                return foundClient.getFirstName()+ " was successfully updated with new client information.\n";       
 	}
 
 }

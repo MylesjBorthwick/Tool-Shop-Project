@@ -3,7 +3,13 @@ import java.io.Serializable;
 
 /**
  *   
- *
+ *(Customer)
+1:  add New Customer
+2: update Customer (set any non-updating fields to null)
+3: remove Customer
+4: search Customer (by id)
+5: search Customer (by last name)
+6: search Customer (by type)
  */
 public class CustomerModel implements Serializable
 	{
@@ -16,14 +22,14 @@ public class CustomerModel implements Serializable
 		private String lastName = null;
 		private String address = null;
 		private String postalCode = null;
-		private int clientId;
+		private int clientId = -1;
 		private String phoneNumber = null;
-		private boolean clientType; //positive is C
+		private String clientType; //positive is C
 		
 		/**
          * A default constructor that builds a record with blank data
          */
-		public CustomerModel(int queryId, String firstName, String lastName, String address, String postalCode, int clientId, int phoneNumber, boolean clientType) {
+		public CustomerModel(int queryId, String firstName, String lastName, String address, String postalCode, int clientId, String phoneNumber, String clientType) {
 			this.queryId = queryId;
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -39,7 +45,11 @@ public class CustomerModel implements Serializable
          */
 		public CustomerModel(int queryId) {
 			this.queryId = queryId;
-		} 
+        } 
+        
+        public CustomerModel(){
+
+        }
 
 		
 	
@@ -174,14 +184,14 @@ public class CustomerModel implements Serializable
     /**
      * @return boolean return the clientType
      */
-    public boolean isClientType() {
+    public String isClientType() {
         return clientType;
     }
 
     /**
      * @param clientType the clientType to set
      */
-    public void setClientType(boolean clientType) {
+    public void setClientType(String clientType) {
         this.clientType = clientType;
     }
 

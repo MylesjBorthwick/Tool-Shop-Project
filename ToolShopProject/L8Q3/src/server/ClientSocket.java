@@ -63,7 +63,7 @@ public class ClientSocket {
 	 */
 	public static void main(String[] args)  {
 		ClientSocket aClient = new ClientSocket("localhost", 8099);
-		aClient.pipelineRequest(new CustomerModel("Please help me find something"));
+		aClient.pipelineRequest(new CustomerModel());
 		aClient.disconnect();
 	}
 }

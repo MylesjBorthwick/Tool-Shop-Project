@@ -2,7 +2,10 @@ package controller;
 import java.io.Serializable;
 
 /**
- *   
+ *   	 * (Inventory)1: print all tools
+	 * 4: remaining quantity
+	 * 5: reduce quantity
+	 * 6: show order
  *
  */
 public class InventoryModel implements Serializable
