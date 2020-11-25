@@ -1,3 +1,5 @@
+package view;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -7,24 +9,26 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 
-public class CustomerGUI extends JFrame {
+import model.Tool;
+
+public class InventoryGUI extends JFrame {
 
 
     private static final long serialVersionUID = 1L;
     
-    private SearchPanelInventory search;
+    private InventoryPanel search;
 
 
 
-    public CustomerGUI(){
-        super("Customer Manager");
+    public InventoryGUI(){
+        super("Inventory Manager");
         setLayout(new BorderLayout());
 
-        search = new SearchPanelInventory();
+        search = new InventoryPanel();
 
         add(search, BorderLayout.CENTER);
 
-        setMinimumSize(new Dimension(900, 500)); // Set minimum size
+        setMinimumSize(new Dimension(700, 500)); // Set minimum size
         pack();
         //setSize(900, 600); // Set size if pack() isn't used
         setVisible(true); // Make frame visible
@@ -74,4 +78,3 @@ public class CustomerGUI extends JFrame {
 
 
 }
-

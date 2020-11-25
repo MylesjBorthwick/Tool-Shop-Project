@@ -1,3 +1,4 @@
+package model;
 /**
  * Shop class sets the Inventory and SupplierList for the shop
  * This class makes calls to inventory to search and decrease Tools

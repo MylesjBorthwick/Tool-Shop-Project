@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 /**
  * Inventory Class represents shop inventory. This class

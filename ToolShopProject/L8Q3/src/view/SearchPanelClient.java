@@ -1,10 +1,11 @@
+package view;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,10 +16,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 
-public class SearchPanelInventory extends JPanel {
+import model.Client;
+
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
+public class SearchPanelClient extends JPanel {
 
 	private static final long serialVersionUID = 1L;
     
@@ -28,52 +33,56 @@ public class SearchPanelInventory extends JPanel {
 	private JLabel searchResults;
 	
 	private ButtonGroup searchTypeGroup;
-    private JRadioButton toolId;
-	private JRadioButton toolName;
-	private JRadioButton toolType;
-    private JRadioButton supplierId;
+    private JRadioButton clientId;
+	private JRadioButton clientLastName;
+	private JRadioButton clientType;
 	
 	private JTextField searchParamField;
     private JButton searchButton;
     private JButton clearSearchButton;
-    private DefaultListModel<Tool> searchListModel;
-    private JList<Tool> searchResultsList;
+    private DefaultListModel<Client> searchListModel;
+    private JList<Client> searchResultsList;
     private JScrollPane searchResultsPane;
 
 
-	public SearchPanelInventory(){
+	public SearchPanelClient(){
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
-		gc.fill = GridBagConstraints.NONE;
+        gc.fill = GridBagConstraints.NONE;
 
+        Dimension dim = getPreferredSize();
+        dim.width = 500;
+        setPreferredSize(dim);
+        Border innerBorder = BorderFactory.createTitledBorder("Search Clients");
+        Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);       // Invisible border to give inner border more space
+        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+        
 
 		searchType = new JLabel("Select Search Type:");
 		searchParam = new JLabel("Enter Search: ");
 		searchResults = new JLabel("Results:");
 
 		searchTypeGroup = new ButtonGroup();
-        toolId = new JRadioButton("Tool ID");
-		toolName = new JRadioButton("Tool Name");
-		supplierId = new JRadioButton("Supplier ID");
-        toolType = new JRadioButton("Power Type");
+        clientId = new JRadioButton("Client ID");
+		clientLastName = new JRadioButton("Client Last Name");
+        clientType = new JRadioButton("Client Type");
         searchParamField = new JTextField(20);
         searchButton = new JButton("Search");
         clearSearchButton = new JButton("Clear Search");
-        searchListModel = new DefaultListModel<Tool>();
-        searchResultsList = new JList<Tool>(searchListModel);
+        searchListModel = new DefaultListModel<Client>();
+        searchResultsList = new JList<Client>(searchListModel);
         searchResultsPane = new JScrollPane(searchResultsList);
 
 
-		searchTypeGroup.add(toolId);
-		searchTypeGroup.add(toolName);
-		searchTypeGroup.add(toolType);
-		searchTypeGroup.add(supplierId);
+		searchTypeGroup.add(clientId);
+		searchTypeGroup.add(clientLastName);
+		searchTypeGroup.add(clientType);
 
-		toolId.setSelected(true);
-		toolId.setActionCommand("toolId");
-		toolName.setActionCommand("toolName");
-		toolType.setActionCommand("toolType");
+		clientId.setSelected(true);
+	    clientId.setActionCommand("clientId");
+		clientLastName.setActionCommand("lastName");
+		clientType.setActionCommand("clientType");
 
 		searchResultsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         searchResultsList.setLayoutOrientation(JList.VERTICAL);
@@ -96,7 +105,7 @@ public class SearchPanelInventory extends JPanel {
         return searchParamField.getText();
     }
     
-    public Tool getListSelection()
+    public Client getListSelection()
     {
         return searchResultsList.getSelectedValue();
 	}
@@ -136,7 +145,7 @@ public class SearchPanelInventory extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(toolId, gc);
+        add(clientId, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -146,7 +155,7 @@ public class SearchPanelInventory extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(toolName, gc);
+        add(clientLastName, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -156,7 +165,7 @@ public class SearchPanelInventory extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(toolType, gc);
+        add(clientType, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -211,13 +220,13 @@ public class SearchPanelInventory extends JPanel {
         add(searchResultsPane, gc);
 	}
 
-	public void setSearchResultsList(ArrayList<Tool> tools)
+	public void setSearchResultsList(ArrayList<Client> clients)
     {
         // Create and populate new JList Model
-        searchListModel = new DefaultListModel<Tool>();
-        for (Tool t : tools)
+        searchListModel = new DefaultListModel<Client>();
+        for (Client c : clients)
         {
-            searchListModel.addElement(t);
+            searchListModel.addElement(c);
         }
         // Refresh JList by switching to new model
         searchResultsList.setModel(searchListModel);

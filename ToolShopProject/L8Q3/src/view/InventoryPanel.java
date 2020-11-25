@@ -1,10 +1,11 @@
+package view;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,10 +16,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 
-public class SearchPanelClient extends JPanel {
+import model.Tool;
+
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
+public class InventoryPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
     
@@ -28,100 +33,110 @@ public class SearchPanelClient extends JPanel {
 	private JLabel searchResults;
 	
 	private ButtonGroup searchTypeGroup;
-    private JRadioButton clientId;
-	private JRadioButton clientLastName;
-	private JRadioButton clientType;
+    private JRadioButton toolId;
+	private JRadioButton toolName;
+	private JRadioButton checkQuant;
+	private JRadioButton decreaseQuant;
 	
 	private JTextField searchParamField;
     private JButton searchButton;
-    private JButton clearSearchButton;
-    private DefaultListModel<Client> searchListModel;
-    private JList<Client> searchResultsList;
+	private JButton clearSearchButton;
+    private JButton listAllTools;
+    private JButton printOrder;
+    private DefaultListModel<Tool> searchListModel;
+    private JList<Tool> searchResultsList;
     private JScrollPane searchResultsPane;
 
 
-	public SearchPanelClient(){
+	public InventoryPanel(){
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
-        gc.fill = GridBagConstraints.NONE;
-        
+		gc.fill = GridBagConstraints.NONE;
+
         Dimension dim = getPreferredSize();
         dim.width = 500;
         setPreferredSize(dim);
-        Border innerBorder = BorderFactory.createTitledBorder("Search Customers");
+        Border innerBorder = BorderFactory.createTitledBorder("Inventory");
         Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);       // Invisible border to give inner border more space
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
-
-		searchType = new JLabel("Select Search Type:");
-		searchParam = new JLabel("Enter Search: ");
+		searchType = new JLabel("Select Action Type:");
+		searchParam = new JLabel("Enter Tool: ");
 		searchResults = new JLabel("Results:");
 
 		searchTypeGroup = new ButtonGroup();
-        clientId = new JRadioButton("Client ID");
-		clientLastName = new JRadioButton("Client Last Name");
-        clientType = new JRadioButton("Client Type");
+        toolId = new JRadioButton("Search by Tool ID");
+		toolName = new JRadioButton("Search by Tool Name");
+		checkQuant = new JRadioButton("Check Quantity by Name");
+		decreaseQuant = new JRadioButton("Decrease Tool Quantity by Name");
+
         searchParamField = new JTextField(20);
-        searchButton = new JButton("Search");
-        clearSearchButton = new JButton("Clear Search");
-        searchListModel = new DefaultListModel<Client>();
-        searchResultsList = new JList<Client>(searchListModel);
+        searchButton = new JButton("Execute");
+		clearSearchButton = new JButton("Clear");
+        listAllTools = new JButton("All Tools");
+        printOrder = new JButton("Show Order");
+        searchListModel = new DefaultListModel<Tool>();
+        searchResultsList = new JList<Tool>(searchListModel);
         searchResultsPane = new JScrollPane(searchResultsList);
 
 
-		searchTypeGroup.add(clientId);
-		searchTypeGroup.add(clientLastName);
-		searchTypeGroup.add(clientType);
+		searchTypeGroup.add(toolId);
+		searchTypeGroup.add(toolName);
+		searchTypeGroup.add(checkQuant);
+		searchTypeGroup.add(decreaseQuant);
+		
 
-		clientId.setSelected(true);
-	    clientId.setActionCommand("clientId");
-		clientLastName.setActionCommand("lastName");
-		clientType.setActionCommand("clientType");
+		toolId.setSelected(true);
+		toolId.setActionCommand("toolId");
+		toolName.setActionCommand("toolName");
+		checkQuant.setActionCommand("checkQuant");
+		decreaseQuant.setActionCommand("decreaseQuant");
 
 		searchResultsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         searchResultsList.setLayoutOrientation(JList.VERTICAL);
 		searchResultsList.setVisibleRowCount(-1);
 		
-		searchResultsPane.setPreferredSize(new Dimension(250, 80));
+		searchResultsPane.setPreferredSize(new Dimension(150, 80));
 
 		addComponents(gc);
 
 
 	}
 
-	public String getSearchType()
-    {
+	public String getSearchType(){
         return searchTypeGroup.getSelection().getActionCommand();
     }
     
-    public String getSearchParam()
-    {
+    public String getSearchParam(){
         return searchParamField.getText();
     }
     
-    public Client getListSelection()
-    {
+    public Tool getListSelection(){
         return searchResultsList.getSelectedValue();
 	}
 	
-	public void addSearchListener(ActionListener listenerForSearchButton)
-    {
+	public void addSearchListener(ActionListener listenerForSearchButton){
         searchButton.addActionListener(listenerForSearchButton);
     }
 
-    public void addClearSearchListener(ActionListener clearSearchListener)
-    {
+    public void addClearSearchListener(ActionListener clearSearchListener){
         clearSearchButton.addActionListener(clearSearchListener);
+	}
+	
+	public void addListAllListener(ActionListener listAllListener){
+        listAllTools.addActionListener(listAllListener);
     }
 
-    public void addSelectionListener(ListSelectionListener selectionListener)
-    {
+    public void addShowOrderListener(ActionListener show){
+        printOrder.addActionListener(show);
+    }
+
+    public void addSelectionListener(ListSelectionListener selectionListener){
         searchResultsList.addListSelectionListener(selectionListener);
     }
 
-	private void addComponents(GridBagConstraints gc)
-    {
+	private void addComponents(GridBagConstraints gc){
         ////////////////////* First Row *////////////////////
         gc.weightx = 1;     // Ratio of space compared to other cells
         gc.weighty = 0.1;   // Making this row skinny
@@ -140,7 +155,7 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(clientId, gc);
+        add(toolId, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -150,7 +165,7 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(clientId, gc);
+        add(toolName, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -160,7 +175,17 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(clientType, gc);
+		add(checkQuant, gc);
+		
+		////////////////////* Next Row *////////////////////
+        gc.weightx = 1;
+        gc.weighty = 0.1;
+        gc.gridy++;
+
+        gc.gridx = 0;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0, 0, 0, 0);         
+        add(decreaseQuant, gc);
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -190,7 +215,20 @@ public class SearchPanelClient extends JPanel {
         gc.gridx = 2;
         gc.anchor = GridBagConstraints.CENTER;
         gc.insets = new Insets(0, 0, 0, 0);         
-        add(clearSearchButton, gc);
+		add(clearSearchButton, gc);
+
+		gc.gridx = 3;
+        gc.anchor = GridBagConstraints.CENTER;
+        gc.insets = new Insets(0, 0, 0, 0);         
+        add(listAllTools, gc);
+
+        gc.gridx = 4;
+        gc.anchor = GridBagConstraints.CENTER;
+        gc.insets = new Insets(0, 0, 0, 0);         
+        add(printOrder, gc);
+        
+
+		
 
         ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
@@ -208,20 +246,19 @@ public class SearchPanelClient extends JPanel {
         gc.gridy++;
 
         gc.gridx = 0;
-        gc.gridwidth = 3;
+        gc.gridwidth = 5;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.fill = GridBagConstraints.BOTH;
         gc.insets = new Insets(0, 0, 0, 0);         
         add(searchResultsPane, gc);
 	}
 
-	public void setSearchResultsList(ArrayList<Client> clients)
-    {
+	public void setSearchResultsList(ArrayList<Tool> tools){
         // Create and populate new JList Model
-        searchListModel = new DefaultListModel<Client>();
-        for (Client c : clients)
+        searchListModel = new DefaultListModel<Tool>();
+        for (Tool t : tools)
         {
-            searchListModel.addElement(c);
+            searchListModel.addElement(t);
         }
         // Refresh JList by switching to new model
         searchResultsList.setModel(searchListModel);
