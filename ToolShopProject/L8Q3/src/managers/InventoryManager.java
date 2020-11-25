@@ -158,12 +158,12 @@ public class InventoryManager {
 			tool = statement.executeQuery(sql);
 			if(tool.next())
 			{
-				return new Tool(tool.getInt("ID"),
-								tool.getString("TYPE"),
-								tool.getString("TOOLNAME"), 
-								tool.getInt("QUANTITY"), 
-								tool.getDouble("PRICE"), 
-								tool.getInt("SUPPLIERID"));
+				return new Tool(tool.getInt("ToolId"),
+								tool.getString("Type"),
+								tool.getString("ToolName"), 
+								tool.getInt("Quantity"), 
+								tool.getDouble("Price"), 
+								tool.getInt("SupplierId"));
 			}
 		
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -183,12 +183,12 @@ public class InventoryManager {
 			tool = statement.executeQuery(sql);
 			while(tool.next())
 			{
-				array.add(new Tool(tool.getInt("ID"),
-								tool.getString("TYPE"),
-								tool.getString("TOOLNAME"), 
-								tool.getInt("QUANTITY"), 
-								tool.getDouble("PRICE"), 
-								tool.getInt("SUPPLIERID")));
+				array.add(new Tool(tool.getInt("ToolId"),
+								tool.getString("Type"),
+								tool.getString("ToolName"), 
+								tool.getInt("Quantity"), 
+								tool.getDouble("Price"), 
+								tool.getInt("SupplierId")));
 			}
 		
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -209,12 +209,12 @@ public class InventoryManager {
 			System.out.println("Tools:");
 			while(tools.next())
 			{
-				System.out.println(tools.getInt("ID") + " " + 
-								   tools.getString("TYPE")+ " " +
-								   tools.getString("TOOLNAME") + " " + 
-								   tools.getInt("QUANTITY") + " " + 
-								   tools.getDouble("PRICE") + " " + 
-								   tools.getInt("SUPPLIERID"));
+				System.out.println(tools.getInt("ToolId") + " " + 
+								   tools.getString("Type")+ " " +
+								   tools.getString("ToolName") + " " + 
+								   tools.getInt("Quantity") + " " + 
+								   tools.getDouble("Price") + " " + 
+								   tools.getInt("SupplierId"));
 			}
 			tools.close();
 		} catch (SQLException e) {

@@ -1,9 +1,7 @@
 package view;
-public class GUITestTemp {
-    
 
+public class GUIClientTest {
     public static void main(String[] args) {
-        //InventoryGUI invGui = new InventoryGUI();
         CustomerGUI custGui = new CustomerGUI();
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import managers.InventoryManager;
 import model.Tool;
 import view.InventoryGUI;
 
@@ -11,9 +12,14 @@ public class InventoryGUIController {
 
 
 
-    public InventoryGUIController(){
-        setGui(new InventoryGUI());
-        setModel(new InventoryModel());
+    public InventoryGUIController(InventoryGUI g, InventoryManager i){
+        
+        setGui(g);
+        setModel(i);
+
+        
+
+
         
     }
 
@@ -68,14 +74,14 @@ public class InventoryGUIController {
     /**
      * @return InventoryModel return the model
      */
-    public InventoryModel getModel() {
+    public InventoryManager getModel() {
         return model;
     }
 
     /**
      * @param model the model to set
      */
-    public void setModel(InventoryModel model) {
+    public void setModel(InventoryManager model) {
         this.model = model;
     }
 

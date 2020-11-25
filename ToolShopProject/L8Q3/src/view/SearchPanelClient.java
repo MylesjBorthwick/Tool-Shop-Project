@@ -95,35 +95,6 @@ public class SearchPanelClient extends JPanel {
 
 	}
 
-	public String getSearchType()
-    {
-        return searchTypeGroup.getSelection().getActionCommand();
-    }
-    
-    public String getSearchParam()
-    {
-        return searchParamField.getText();
-    }
-    
-    public Client getListSelection()
-    {
-        return searchResultsList.getSelectedValue();
-	}
-	
-	public void addSearchListener(ActionListener listenerForSearchButton)
-    {
-        searchButton.addActionListener(listenerForSearchButton);
-    }
-
-    public void addClearSearchListener(ActionListener clearSearchListener)
-    {
-        clearSearchButton.addActionListener(clearSearchListener);
-    }
-
-    public void addSelectionListener(ListSelectionListener selectionListener)
-    {
-        searchResultsList.addListSelectionListener(selectionListener);
-    }
 
 	private void addComponents(GridBagConstraints gc)
     {

@@ -17,11 +17,6 @@ import javax.swing.border.Border;
 
 public class InfoPanelClient extends JPanel
 {
-  
-  
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     private JLabel clientIDLabel;
@@ -94,25 +89,6 @@ public class InfoPanelClient extends JPanel
         addComponents(gc);
 
     }
-
-    //================================================================================
-    // Listener methods
-    //================================================================================
-    public void addSaveListener(ActionListener saveListener)
-    {
-        saveButton.addActionListener(saveListener);
-    }
-
-    public void addDeleteListener(ActionListener deleteListener)
-    {
-        deleteButton.addActionListener(deleteListener);
-    }
-
-    public void addClearListener(ActionListener clearListener)
-    {
-        clearButton.addActionListener(clearListener);
-    }
-
 
     //================================================================================
     // Helper methods
@@ -266,73 +242,6 @@ public class InfoPanelClient extends JPanel
         add(clearButton, gc);
     }
 
-    //================================================================================
-    // Getters, setters, and toString
-    //================================================================================
-    public String getClientIDField() 
-    {
-        return clientIDField.getText();
-    }
-
-    public void setClientIDField(String text) 
-    {
-        this.clientIDField.setText(text);
-    }
-
-    public String getFirstNameField() 
-    {
-        return firstNameField.getText();
-    }
-
-    public void setFirstNameField(String text) 
-    {
-        this.firstNameField.setText(text);
-    }
-
-    public String getLastNameField() 
-    {
-        return lastNameField.getText();
-    }
-
-    public void setLastNameField(String text) 
-    {
-        this.lastNameField.setText(text);
-    }
-
-    public String getAddressField() 
-    {
-        return addressField.getText();
-    }
-
-    public void setAddressField(String text) 
-    {
-        this.addressField.setText(text);
-    }
-
-    public String getPostalCodeField() 
-    {
-        return postalCodeField.getText();
-    }
-
-    public void setPostalCodeField(String text) 
-    {
-        this.postalCodeField.setText(text);
-    }
-
-    public String getPhoneNumberField() 
-    {
-        return phoneNumberField.getText();
-    }
-
-    public void setPhoneNumberField(String text) 
-    {
-        this.phoneNumberField.setText(text);
-    }
-
-    public String getClientTypeCombo() 
-    {
-        return (String)clientTypeCombo.getSelectedItem();
-    }
 
     public void setClientTypeCombo(String text)
     {
