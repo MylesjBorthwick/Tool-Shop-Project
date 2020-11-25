@@ -123,28 +123,29 @@ public class InventoryMainController
 	 * a switch statement to generate the proper response from the backend, calling on the shop to generate an output
 	 */
 	public Object receiveQuery(InventoryModel query){
-
-
-	// switch(response){
-	// 		case 1:
-	// 			System.out.println(shop.printoutOfInventory());
-	// 		break;
-	// 		case 2:
-	// 			System.out.println(shop.getItem(getUserInput("Please enter the name of the tool you would like to find.")));
-	// 		break;
-	// 		case 3:					
-	// 			System.out.println(shop.getItem(getNumericalUserInput("Please enter the id number of the tool you would like to find.")));
-	// 		break;
-	// 		case 4:
-	// 			System.out.println(shop.getQuantity(getUserInput("Please enter the name of the tool you would like to find the remaining quantity of.")));
-	// 		break;
-	// 		case 5:
-	// 			System.out.println(shop.reduceItem("Please enter the name of the tool you would like to reduce the quantity of."));
-	// 		break;
-	// 		case 6: 
-	// 			System.out.println(shop.generateOrder());
-	// 		break;
-	// }
+		switch(query.getQueryId()){
+				case 1:
+					System.out.println(shop.printoutOfInventory());
+				break;
+				case 2:
+					query.setResponse(shop.getItem(query.getToolName()));
+				break;
+				case 3:					
+					query.setResponse(shop.getItem(query.getId()));
+				break;
+				case 4:
+					query.setResponse(shop.getQuantity(query.getToolName()));
+				break;
+				case 5:
+				query.setResponse(shop.reduceItem(query.getToolName()));
+				break;
+				case 6: 
+					query.setResponse(shop.generateOrder());
+				break;
+				default:
+					query.setResponse("Invalid query id\n");
+				break;
+		}
 		return query;
 	}
 

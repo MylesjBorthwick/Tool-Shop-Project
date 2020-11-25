@@ -9,116 +9,83 @@ package model;
 
 public class Shop {
 
-    private Inventory shopInventory;
-    private SupplierList shopSuppliers;
+	private Inventory theInventory;
+	private SupplierList suppliers;
 
-    /**
-     * Shop constructor
-     * @param inventory of shop
-     * @param suppliers of shop
-     */
-    public Shop(Inventory inventory, SupplierList suppliers){
+	
+	/**
+	 * Initializes the shop with the supplier and inventory classes
+	 * @param theInventory to initialize
+	 * @param suppliers to initialize
+	 */
+	public Shop(Inventory theInventory, SupplierList suppliers) {
+		this.theInventory = theInventory;
+		this.suppliers = suppliers;
+	}
 
-        setShopInventory(inventory);
-        setShopSuppliers(suppliers);
-    }
+	/**
+	 *	@return a string containing all the generated aspects of an order
+	 */
+	public String generateOrder() {
+		return theInventory.getMyOrder().toString();
+	}
 
-    /**
-     * Function too print shop's Tools
-     */
-    public void listShopTools(){
-        System.out.println(shopInventory);
-    }
+	
+	/**
+	 * attempts to reduce an item and returns a description of whether this was successful
+	 *	@return string indicating the success or failure of an item reduction
+	 */
+	public String reduceItem(String itemName) {
+		if(theInventory.manageTool(itemName) != null) {		
+			return "Success! Reduced the number of items."; }
+		return "Unable to reduce the number of items.";	
+	}
 
-    /**
-     * Gets Tool by name from inventory
-     * @param name
-     * @return searched Tool
-     */
-    public String getToolName(String name){
-        Tool theTool = shopInventory.searchForToolName(name);
-        if(theTool==null){
-            String s = "Sorry, no Tool matching that name was found in inventory";
-            return s;
-        }
-        else{
-            return theTool.toString();
-        }
-    }
-    /**
-     * Gets Tool by id from inventory
-     * @param id
-     * @return searched Tool
-     */
-    public String getToolId(int id){
-        Tool theTool = shopInventory.searchForToolId(id);
-        if(theTool==null){
-            String s = "Sorry, no Tool matching that ID was found in inventory";
-            return s;
-        }
-        else{
-            return theTool.toString();
-        }
-    }
+	/**
+	 * overloaded method to find an item by its name
+	 * @param itemName to search
+	 *	@return string of the item 
+	 */
+	public String getItem(String itemName) {
+		Tool foundItem = theInventory.searchForToolName(itemName);
+		if(foundItem == null)
+			return "\nItem not found. \n";
+		return foundItem.toString();
+	}
+	
+	/**
+	 * overloaded method to find an item by its id
+	 * @param id to search for
+	 *	@return string of the item 
+	 */
+	public String getItem(int id) {
+		Tool foundItem = theInventory.searchForToolId(id);
+		if(foundItem == null)
+			return "\nItem not found. \n";
+		return foundItem.toString();
+	}
+	
+	/**
+	 * gets the quantity in stock of an item searched for by name
+	 * @param itemName to search
+	 *	@return string of the item's quantity, or an error message
+	 */
+	public String getQuantity(String itName) {
+		Tool foundItem = theInventory.searchForToolName(itName);
+		if(foundItem == null)
+			return "\nItem not found. \n";
+		return "\nItem Quantity: " + foundItem.getToolQuant() + "\n";
+	}
+	
+	
+	/**
+	 *	prints out the full inventory
+	 */
+	public String printoutOfInventory() {
+		return theInventory.toString();
+	}
+	
 
-    /**
-     * Finds quantity of Tool by searching
-     * Tool by name in inventory
-     * @param name
-     * @return qunatity of searched Tool
-     */
-    public String getToolQuant(String name){
-        Tool theTool = shopInventory.searchForToolName(name);
-        if(theTool==null){
-            String s = "Sorry, no Tool matching that name was found in inventory";
-            return s;
-        }
-        else{
-            int quant = theTool.getToolQuant();
-            return Integer.toString(quant);
-        }
-    }
-    /**
-     * Checks to see if Tool could be decreased in inventory
-     * @param name
-     * @return messsage
-     */
-    public String decreaseTool(String name){
-        if(shopInventory.manageTool(name)==null){
-            return "Couldn't decrease Tool quantity\n";
-        }
-
-        else{
-            return "Tool quantity was decreased\n";
-        }
-    }
-
-    /**
-     * @return Inventory return the shopInventory
-     */
-    public Inventory getShopInventory() {
-        return shopInventory;
-    }
-
-    /**
-     * @param shopInventory the shopInventory to set
-     */
-    public void setShopInventory(Inventory shopInventory) {
-        this.shopInventory = shopInventory;
-    }
-
-    /**
-     * @return SupplierList return the shopSuppliers
-     */
-    public SupplierList getShopSuppliers() {
-        return shopSuppliers;
-    }
-
-    /**
-     * @param shopSuppliers the shopSuppliers to set
-     */
-    public void setShopSuppliers(SupplierList shopSuppliers) {
-        this.shopSuppliers = shopSuppliers;
-    }
-
+	
+	
 }

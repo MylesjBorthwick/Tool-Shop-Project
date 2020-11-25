@@ -17,8 +17,8 @@ public class CustomerModel implements Serializable
 		private String address = null;
 		private String postalCode = null;
 		private int clientId;
-		private int phoneNumber;
-		private boolean clientType;
+		private String phoneNumber = null;
+		private boolean clientType; //positive is C
 		
 		/**
          * A default constructor that builds a record with blank data
@@ -46,14 +46,14 @@ public class CustomerModel implements Serializable
     /**
      * @return String return the query
      */
-    public int getQuery() {
+    public int getQueryId() {
         return queryId;
     }
 
     /**
      * @param query the query to set
      */
-    public void setQuery(int queryId) {
+    public void setQueryId(int queryId) {
 		this.queryId = queryId;
 		this.answered = false;
     }
@@ -160,14 +160,14 @@ public class CustomerModel implements Serializable
     /**
      * @return int return the phoneNumber
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
     /**
      * @param phoneNumber the phoneNumber to set
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

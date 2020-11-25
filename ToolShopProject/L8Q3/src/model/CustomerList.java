@@ -42,4 +42,21 @@ public class CustomerList {
         this.customerList = customerList;
     }
 
+    public Client findClient(int id){
+        for (Client temp: customerList){
+            if(temp.getId() == id){
+                return temp;
+            }
+        }
+        return null;
+    }
+
+
+	public String addCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
+			String phoneNumber, String clientType) {
+                /////asdf//asdfkljaskldjflkadsjfkjadslfkjadslkfjadlskjfdjsfdjslfjsadljflasdjfkjasdlfjadklsjfadsjkfjadslfjlajsfdjaflsdjf
+                customerList.add(new Client(clientId,firstName,lastName,address,postalCode,phoneNumber,clientType));
+
+	}
+
 }

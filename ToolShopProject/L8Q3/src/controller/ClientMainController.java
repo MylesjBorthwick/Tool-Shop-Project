@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 
+import com.mysql.fabric.xmlrpc.Client;
+
 import managers.ClientManager;
 import model.CustomerList;
 
@@ -44,9 +46,39 @@ public class ClientMainController
 		
 	}        
 
+	/**
+	 * addNewCustomer
+	 * 
++updateCustomer()
++removeCustomer()
++searchCustomer(): void
+overload by lastname, id, and type for search
+
++switch()*/
+	public Object receiveQuery(CustomerModel query){
+		switch(query.getQueryId()){
+				case 1:
+					String clientType = "R";
+					if(query.isClientType()){clientType = "C";}
+					query.setResponse(customerList.addCustomer(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), clientType));
+				break;
+				case 2:
+					query.setResponse(shop.getItem(query.getToolName()));
+				break;
+				case 3:					
+					query.setResponse(shop.getItem(query.getId()));
+				break;
+				case 4:
+					query.setResponse(shop.getQuantity(query.getToolName()));
+				break;
+				default:
+					query.setResponse("Invalid query id\n");
+				break;
+		}
+		return query;
+	}
 
 
-	
 
 
     public static void main(String[] args) throws Exception 
