@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -14,19 +15,16 @@ import model.Client;
 
 public class CustomerGUI extends JFrame {
 
-
     private static final long serialVersionUID = 1L;
-    
+
     private JButton switchToInv;
     private SearchPanelClient search;
     private InfoPanelClient info;
 
-
-
-    public CustomerGUI(){
+    public CustomerGUI() {
         super("Customer Manager");
         setLayout(new BorderLayout());
-        switchToInv = new JButton ("Customer Manager");
+        switchToInv = new JButton("Customer Manager");
         search = new SearchPanelClient();
         info = new InfoPanelClient();
 
@@ -37,7 +35,16 @@ public class CustomerGUI extends JFrame {
         setMinimumSize(new Dimension(900, 500));
         pack();
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        switchToInv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                InventoryGUI igui = new InventoryGUI();
+            }
+        });
+
 
     }
 

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -14,15 +15,12 @@ import model.Tool;
 
 public class InventoryGUI extends JFrame {
 
-
     private static final long serialVersionUID = 1L;
-    
+
     private InventoryPanel search;
     private JButton switchToClient;
 
-
-
-    public InventoryGUI(){
+    public InventoryGUI() {
         super("Inventory Manager");
         setLayout(new BorderLayout());
 
@@ -35,7 +33,17 @@ public class InventoryGUI extends JFrame {
         pack();
         //setSize(900, 600); // Set size if pack() isn't used
         setVisible(true); // Make frame visible
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        switchToClient.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                CustomerGUI cgui = new CustomerGUI();
+
+            }
+        });
 
     }
 
