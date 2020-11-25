@@ -10,7 +10,7 @@ class InventoryModel implements Serializable
 
     private static final long serialVersionUID = 1L;
     private int queryId = 0;
-    private int toolId = 0;
+    private int id = 0;
 		private String toolName = null;
 		private String response = null;
 		private boolean answered = false;
@@ -74,20 +74,6 @@ class InventoryModel implements Serializable
     }
 
     /**
-     * @return int return the toolId
-     */
-    public int getToolId() {
-        return toolId;
-    }
-
-    /**
-     * @param toolId the toolId to set
-     */
-    public void setToolId(int toolId) {
-        this.toolId = toolId;
-    }
-
-    /**
      * @return String return the toolName
      */
     public String getToolName() {
@@ -99,6 +85,21 @@ class InventoryModel implements Serializable
      */
     public void setToolName(String toolName) {
         this.toolName = toolName;
+    }
+
+
+    /**
+     * @return int return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
