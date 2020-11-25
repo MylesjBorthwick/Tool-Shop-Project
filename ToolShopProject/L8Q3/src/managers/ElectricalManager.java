@@ -24,7 +24,7 @@ public class ElectricalManager {
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
 	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  //"jdbc:mysql://localhost:3306/toolshop",
 				  login          = "root",
-				  password       = "2703961Five!";
+				  password       = "Engineering4Elohim";
 
 	public ElectricalManager()
 	{

@@ -1,4 +1,9 @@
+package controller;
+
 import java.sql.SQLException;
+
+import managers.ClientManager;
+import model.CustomerList;
 
 public class ClientMainController 
 {
@@ -38,6 +43,10 @@ public class ClientMainController
 		}
 		
 	}        
+
+
+
+	
 
 
     public static void main(String[] args) throws Exception 

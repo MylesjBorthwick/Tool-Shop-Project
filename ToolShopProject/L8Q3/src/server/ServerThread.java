@@ -1,4 +1,5 @@
 package server;
+
 /**
  * This class handles the two client sockets during the game, to allow them to communicate
  * and update themselves during gameplay, until an end-game condition has been achieved
@@ -10,6 +11,8 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
+
+import controller.ServerMainController;
 
 public class ServerThread implements Runnable {
 
@@ -43,7 +46,9 @@ public class ServerThread implements Runnable {
 	public void run() {
 
 		try {
-			System.out.println(socketIn.readObject().getClass());
+			Object temp = socketIn.readObject();
+			System.out.println(temp.getClass());
+			maincontroller.passSerial(temp);
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}

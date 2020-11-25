@@ -8,8 +8,10 @@ import java.io.Serializable;
 class InventoryModel implements Serializable
 	{
 
-		private static final long serialVersionUID = 1L;
-		private String query = null;
+    private static final long serialVersionUID = 1L;
+    private int queryId = 0;
+    private int toolId = 0;
+		private String toolName = null;
 		private String response = null;
 		private boolean answered = false;
 
@@ -21,24 +23,9 @@ class InventoryModel implements Serializable
         /**
          * A default constructor that builds a record with blank data
          */
-		public InventoryModel(String query) {
-			this.query = query;
+		public InventoryModel(int queryId) {
+			this.queryId = queryId;
 		} 
-	
-    /**
-     * @return String return the query
-     */
-    public String getQuery() {
-        return query;
-    }
-
-    /**
-     * @param query the query to set
-     */
-    public void setQuery(String query) {
-		this.query = query;
-		this.answered = false;
-    }
 
     /**
      * @return String return the response
@@ -69,5 +56,49 @@ class InventoryModel implements Serializable
         this.answered = answered;
     }
 
+
+
+    /**
+     * @return int return the queryId
+     */
+    public int getQueryId() {
+        return queryId;
+    }
+
+    /**
+     * @param queryId the queryId to set
+     */
+    public void setQueryId(int queryId) {
+        this.queryId = queryId;
+        this.answered = false;
+    }
+
+    /**
+     * @return int return the toolId
+     */
+    public int getToolId() {
+        return toolId;
+    }
+
+    /**
+     * @param toolId the toolId to set
+     */
+    public void setToolId(int toolId) {
+        this.toolId = toolId;
+    }
+
+    /**
+     * @return String return the toolName
+     */
+    public String getToolName() {
+        return toolName;
+    }
+
+    /**
+     * @param toolName the toolName to set
+     */
+    public void setToolName(String toolName) {
+        this.toolName = toolName;
+    }
 
 }
