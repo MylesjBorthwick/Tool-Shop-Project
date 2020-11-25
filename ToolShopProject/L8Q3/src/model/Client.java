@@ -28,7 +28,6 @@ public class Client
         setClientType(clientType);
     }
 
-
     public int getId() 
     {
         return id;

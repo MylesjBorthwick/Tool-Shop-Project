@@ -23,10 +23,11 @@ public class ServerMainController
     public Object passSerial(Object input){
         if(input.getClass() == CustomerModel.class){
             System.out.println("Customer");
-            
+
         }
         else{
             System.out.println("Tool");
+            inventoryControl.receiveQuery((InventoryModel)input);
         }
         return input;
     }
