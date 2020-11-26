@@ -2,16 +2,11 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionListener;
 
-import model.Client;
 
 public class CustomerGUI extends JFrame {
 
@@ -108,10 +103,29 @@ public class CustomerGUI extends JFrame {
         return info.getClientType();
     }
 
-        
+    public void setClientIdField(String t){
+        info.setClientIdField(t);
+    }
 
+    public void setClientFirstNameField(String t){
+        info.setClientFirstNameField(t);
+    }
 
+    public void setLastNameField(String t){
+        info.setLastNameField(t);
+    }
 
+    public void setAddressField(String t){
+        info.setAddressField(t);
+    }
+
+    public void setPostalField(String t){
+        info.setPostalField(t);
+    }
+
+    public void setPhoneNumberField(String t){
+        info.setPhoneNumberField(t);
+    }
 
     }
 

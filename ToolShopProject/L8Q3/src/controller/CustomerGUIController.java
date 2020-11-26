@@ -1,9 +1,7 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.JOptionPane;
-
 import server.ClientSocket;
 import view.CustomerGUI;
 import view.InventoryGUI;
@@ -60,7 +58,7 @@ public class CustomerGUIController {
             }
             catch(Exception er){
                 gui.displayErrorMessage("Execution Error"+
-                "\nPlease make sure the execute command matches action type.");
+                "\nPlease Make Sure the Execute Command Matches Action Type");
             }
 
         });
@@ -137,7 +135,7 @@ public class CustomerGUIController {
 
         gui.addUpdateListener((ActionEvent e)->{
             if(gui.getClientIdField().isBlank()){
-                gui.displayErrorMessage("Need Client Id to Update");
+                gui.displayErrorMessage("Cannot Update"+"\nNeed ClientID Field");
             }
             else{
                 try{
@@ -158,6 +156,14 @@ public class CustomerGUIController {
             }
         });
 
+        gui.addClearInfoListener((ActionEvent e)->{
+            gui.setClientIdField("");
+            gui.setClientFirstNameField("");
+            gui.setLastNameField("");
+            gui.setPostalField("");
+            gui.setAddressField("");
+            gui.setPhoneNumberField("");
+        });
 
     }
 
@@ -166,8 +172,8 @@ public class CustomerGUIController {
     {
         // Ask user if they really want to add new user
         int action = JOptionPane.showConfirmDialog(null, 
-        "Do you want to add a new client? A new client ID will be generated.", 
-        "Confirm New Client", 
+        "All Empty Fields Will Be Saved As Null", 
+        "Confirm New Client?", 
         JOptionPane.OK_CANCEL_OPTION);
         // Return true if user confirms
         if (action == JOptionPane.OK_OPTION)

@@ -18,13 +18,13 @@ public class SupplierTypeDBManager {
 
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "international", dataFile = "international.txt";
+	public String databaseName = "toolshop607", tableName = "international", dataFile = "international.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the
 	// "[DATABASE NAME]" blank to get a connection and create one with the
 	// createDB() method.
-	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop", // "jdbc:mysql://localhost:3306/toolshop",
-			login = "root", password = "Engineering4Elohim";
+	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop607", // "jdbc:mysql://localhost:3306/toolshop",
+			login = "root", password = "2703961Five!";
 
 	public SupplierTypeDBManager()
 	{

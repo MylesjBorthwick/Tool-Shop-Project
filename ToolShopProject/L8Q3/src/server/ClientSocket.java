@@ -2,7 +2,6 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
-
 import controller.CustomerGUIController;
 import controller.CustomerModel;
 import controller.InventoryModel;

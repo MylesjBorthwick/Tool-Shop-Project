@@ -1,9 +1,4 @@
 package controller;
-
-import java.sql.SQLException;
-
-import com.mysql.fabric.xmlrpc.Client;
-
 import managers.ClientDBManager;
 import model.CustomerList;
 

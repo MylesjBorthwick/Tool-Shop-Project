@@ -4,15 +4,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 
 public class InfoPanelClient extends JPanel
@@ -127,6 +124,30 @@ public class InfoPanelClient extends JPanel
 
     public String getClientType(){
         return (String)clientTypeCombo.getSelectedItem();
+    }
+
+    public void setClientIdField(String t){
+        clientIDField.setText(t);
+    }
+
+    public void setClientFirstNameField(String t){
+        firstNameField.setText(t);
+    }
+
+    public void setLastNameField(String t){
+        lastNameField.setText(t);
+    }
+
+    public void setAddressField(String t){
+        addressField.setText(t);
+    }
+
+    public void setPostalField(String t){
+        postalCodeField.setText(t);
+    }
+
+    public void setPhoneNumberField(String t){
+        phoneNumberField.setText(t);
     }
 
 
