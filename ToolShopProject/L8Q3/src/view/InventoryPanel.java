@@ -1,34 +1,34 @@
 package view;
+/**
+ * InventoryPanel Class Creates and Organizes Elements
+ * For Iventory management and searching. Gets user input from element
+ * interaction. GridBagLayout used for GUI layout
+ * 
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since November 2020
+ */
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
 
-import model.Tool;
-
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
 public class InventoryPanel extends JPanel {
 
+    //Instance Variables
 	private static final long serialVersionUID = 1L;
     
-
     private JLabel executeType;
     private JLabel executeParam;
 	private JLabel results;
@@ -39,105 +39,140 @@ public class InventoryPanel extends JPanel {
 	private JRadioButton checkQuant;
 	private JRadioButton decreaseQuant;
 	
-	private JTextField executeParamField;
+    private JTextField executeParamField;
+    
     private JButton searchButton;
 	private JButton clearSearchButton;
     private JButton listAllTools;
     private JButton printOrder;
+
     private JScrollPane resultsPane;
     private JTextArea textArea;
 
-
+    /**
+     * Panel Constructor
+     */
 	public InventoryPanel(){
 
+        //Set Panel Layout
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.fill = GridBagConstraints.NONE;
 
-
+        //Create GUI Elements with required Settings
+        //Labels
 		executeType = new JLabel("Select Action Type:");
 		executeParam = new JLabel("Enter Tool: ");
         results = new JLabel("Results:");
+        //TextArea for Printing
         textArea = new JTextArea("");
         textArea.setEditable(false);
-
+        //Radio Button For type selection
 		actionTypeGroup = new ButtonGroup();
         toolId = new JRadioButton("Search by Tool ID");
 		toolName = new JRadioButton("Search by Tool Name");
 		checkQuant = new JRadioButton("Check Quantity by Name");
 		decreaseQuant = new JRadioButton("Decrease Tool Quantity by Name");
-
+        //Textfield for input
         executeParamField = new JTextField(20);
+        //Buttons
         searchButton = new JButton("Execute");
 		clearSearchButton = new JButton("Clear");
         listAllTools = new JButton("All Tools");
         printOrder = new JButton("Show Order");
+        //Scroll pane for TextArea
         resultsPane = new JScrollPane(textArea);
 
-
+        //Add Radio Buttons to group
 		actionTypeGroup.add(toolId);
 		actionTypeGroup.add(toolName);
 		actionTypeGroup.add(checkQuant);
 		actionTypeGroup.add(decreaseQuant);
 		
-
+        //Settings for radio buttons
 		toolId.setSelected(true);
 		toolId.setActionCommand("toolId");
 		toolName.setActionCommand("toolName");
 		checkQuant.setActionCommand("checkQuant");
 		decreaseQuant.setActionCommand("decreaseQuant");
-		
+        
+        //Results Box Settings
 		resultsPane.setPreferredSize(new Dimension(150, 80));
 
+        //Add components to window
 		addComponents(gc);
 
     }
 
+    /**
+     * Add Listener for Execute Button
+     * @param executeListener
+     */
     public void addExecuteListener(ActionListener executeListener){
         searchButton.addActionListener(executeListener);
     }
 
+    /**
+     * Add Listener for CLear Button
+     */
     public void addClearListener(ActionListener clearListen){
         clearSearchButton.addActionListener(clearListen);
     }
 
+     /**
+     * Add Listener for List all Button
+     */
     public void addListListener(ActionListener listListener){
         listAllTools.addActionListener(listListener);
     }
 
+     /**
+     * Add Listener for Order Button
+     */
     public void addOrderListener(ActionListener orderListener){
         printOrder.addActionListener(orderListener);
     }
 
-    
+    /**
+     * Getter for Type Selection
+     * @return Action Command string
+     */
     public String getExecuteType(){
         return actionTypeGroup.getSelection().getActionCommand();
     }
 
+    /**
+     * Getter for Search Field
+     */
     public String getExecuteParam(){
         return executeParamField.getText();
     }
 
+    /**
+     * Setter For TextArea
+     */
     public void setTextField(String text){
         textArea.setText(text);
     }
 
-
-
-
-
+    /**
+     * Adds/Organizes components to Window 
+     * Sets layout of Panel Elements
+     * @param GridBagConstraints gc
+     */
 	private void addComponents(GridBagConstraints gc){
-        ////////////////////* First Row *////////////////////
-        gc.weightx = 1;     // Ratio of space compared to other cells
-        gc.weighty = 0.1;   // Making this row skinny
+       
+        //Add All Elements with Position to gridlayout
+
+        gc.weightx = 1;     
+        gc.weighty = 0.1;  
         gc.gridy = 0;
 
-        gc.gridx = 0;       // Have to initialize grid components before using them
-        gc.anchor = GridBagConstraints.LINE_START;    // Sets label to right side of cell
-        gc.insets = new Insets(0, 0, 0, 0);         // Adds 5 pixel space to the right of label
+        gc.gridx = 0;       
+        gc.anchor = GridBagConstraints.LINE_START;    
+        gc.insets = new Insets(0, 0, 0, 0);         
         add(executeType, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -147,7 +182,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(toolId, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -157,7 +191,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(toolName, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -167,7 +200,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
 		add(checkQuant, gc);
 		
-		////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -177,7 +209,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(decreaseQuant, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -187,7 +218,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(executeParam, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -217,7 +247,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(printOrder, gc);
         
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -227,7 +256,6 @@ public class InventoryPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(results, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 2;
         gc.gridy++;

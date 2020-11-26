@@ -1,11 +1,12 @@
 package model;
-
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-
-
-public class Client
-{
+/**
+ * Client Class, Represents clients in database. This class includes a constructor + getters
+ * setters, and toString
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov 2020
+ */
+public class Client{
     
     private int id;
     private String firstName;
@@ -15,9 +16,18 @@ public class Client
     private String phoneNumber;
     private String clientType;
 
-    public Client(  int id, String firstName, String lastName, String address, 
-                    String postalCode, String phoneNumber, String clientType)
-    {
+    /**
+     * COnstructor, sets client info
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param address
+     * @param postalCode
+     * @param phoneNumber
+     * @param clientType
+     */
+    public Client(int id, String firstName, String lastName, String address, 
+                    String postalCode, String phoneNumber, String clientType){
         setId(id);
         setFirstName(firstName);
         setLastName(lastName);
@@ -27,146 +37,86 @@ public class Client
         setClientType(clientType);
     }
 
-    public int getId() 
-    {
+    
+    /**
+     * Getters and Setters for Client
+     */
+
+    public int getId() {
         return id;
     }
 
-    public String getStringId()
-    {
+    public String getStringId(){
         return Integer.toString(id);
     }
 
-    public void setId(int id) 
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() 
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public boolean setFirstName(String firstName) 
-    {
-        // Check first name format
-        if (firstName.length() > 0 && firstName.length() <= 20)
-        {
-            // Set first name
-            this.firstName = firstName;
-            return true;
-        }
-        // If wrong format, prompt user
-        JOptionPane.showMessageDialog(null, "Invalid first name format. Expected: 1-20 char length");
-        return false;
+    public void setFirstName(String firstName) {
+        // Set Client first name
+        this.firstName = firstName;
+      
     }
 
-    public String getLastName() 
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    public boolean setLastName(String lastName)
-    {
-        // Check last name format
-        if (lastName.length() > 0 && lastName.length() <= 20)
-        {
-            // Set last name
-            this.lastName = lastName;
-            return true;
-        }
-        // If wrong format, prompt user
-        JOptionPane.showMessageDialog(null, "Invalid last name format. Expected: 1-20 char length");
-        return false;
+    public void setLastName(String lastName){
+        // Set Client last name
+        this.lastName = lastName;
     }
-
-    public String getAddress() 
-    {
+    
+    public String getAddress() {
         return address;
     }
 
-    public boolean setAddress(String address) 
-    {
-        // Check address format
-        if (address.length() > 0 && address.length() <= 50)
-        {
-            // Set address
-            this.address = address;
-            return true;
-        }
-        // If wrong format, prompt user
-        JOptionPane.showMessageDialog(null, "Invalid address format. Expected: 1-50 char length");
-        return false;
+    public void setAddress(String address) {
+        // Set Client address
+        this.address = address;
     }
 
-    public String getPostalCode() 
-    {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public boolean setPostalCode(String postalCode) 
-    {
-        // Check postal code format
-        if (Pattern.matches("^[A-Z]\\d[A-Z]\\s\\d[A-Z]\\d", postalCode))
-        {
-            // Convert letters to uppercase
-            postalCode = postalCode.toUpperCase();
-            // Set postalCode
-            this.postalCode = postalCode;
-            return true;
-        }
-        // If wrong format, prompt user
-        JOptionPane.showMessageDialog(null, "Invalid postal code format. Expected: A1A 1A1");
-        return false;
+    public void setPostalCode(String postalCode) {
+        // Set client postalCode
+        this.postalCode = postalCode;
+    
     }
 
-    public String getPhoneNumber() 
-    {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public boolean setPhoneNumber(String phoneNumber) 
-    {
-        // Check phone number format
-        if (Pattern.matches("^\\d{3}[-]\\d{3}[-]\\d{4}", phoneNumber))
-        {
-            // Set phone number
-            this.phoneNumber = phoneNumber;
-            return true;
-        }
-        // If wrong format, prompt user
-        JOptionPane.showMessageDialog(null, "Invalid phone number format. Expected: 111-111-1111");
-        return false;
+    public boolean setPhoneNumber(String phoneNumber) {
+        // Set client phone number
+        this.phoneNumber = phoneNumber;
+        return true;
+      
     }
 
-    public String getClientType() 
-    {
+    public String getClientType() {
         return clientType;
     }
 
-
-    public boolean setClientType(String clientType) 
-    {
-        // Check client type format
-        if (clientType.equals("R") || clientType.equals("C"))
-        {
-            // Set client type
-            this.clientType = clientType;
-            return true;
-        }
-        // If wrong format, prompt user
-        JOptionPane.showMessageDialog(null, "Invalid client type. Expected: Residential or Commercial");
-        return false;
-        
+    public void setClientType(String clientType) {
+        // Set client type
+        this.clientType = clientType;
     }
-
-    public String toString()
-    {
-        return id + " " + firstName + " " + lastName + " " + clientType;
+    /**
+     * ToString for Client Object
+     */
+    public String toString(){
+        return id + "; " + firstName + "; " + lastName + "; " + address + "; "+ postalCode + "; " + phoneNumber + "; " + clientType+"\n";
     }
-
-    
-
 
 
 }

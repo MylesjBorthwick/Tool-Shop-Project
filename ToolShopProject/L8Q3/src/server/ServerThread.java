@@ -17,16 +17,16 @@ public class ServerThread implements Runnable {
 
 	private ObjectOutputStream socketOut;
 	private ObjectInputStream socketIn;
-	private ServerMainController maincontroller;
+	private ServerMainController mainController;
 
 	/**
 	 * Constructor that receives a socket, initiates the input and output streams, and
 	 * sets the main controller to pass the incoming objects to
 	 * @param theSocket the socket for the connections from the first player
-	 * @param maincontroller the socket for the connections from the second player
+	 * @param mainController the socket for the connections from the second player
 	 */
-	public ServerThread(Socket theSocket, ServerMainController maincontroller) {
-		this.maincontroller = maincontroller;
+	public ServerThread(Socket theSocket, ServerMainController mainController) {
+		this.mainController = mainController;
 		try {
 			socketOut = new ObjectOutputStream(theSocket.getOutputStream());
 			socketIn = new ObjectInputStream(theSocket.getInputStream());
@@ -47,7 +47,7 @@ public class ServerThread implements Runnable {
 			try {
 				receive = socketIn.readObject();
 				if(receive!= null){
-					socketOut.writeObject(maincontroller.passSerial(receive));	
+					socketOut.writeObject(mainController.passSerial(receive));	
 				}
 				Thread.sleep(1000);
 			} catch(EOFException e){

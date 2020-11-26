@@ -22,13 +22,13 @@ public class InventoryDBManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "tools", dataFile = "items.txt";
+	public String databaseName = "toolshop607", tableName = "tools", dataFile = "items.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
-	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  //"jdbc:mysql://localhost:3306/toolshop",
+	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop607",  //"jdbc:mysql://localhost:3306/toolshop",
 				  login          = "root",
-				  password       = "Engineering4Elohim" ;
+				  password       = "2703961Five!" ;
 
 				  
 	/**
@@ -270,6 +270,10 @@ public class InventoryDBManager {
 	
 
 
+	
+	/** 
+	 * @param args[]
+	 */
 	public static void main(String args[])
 	{
 		InventoryDBManager inventory = new InventoryDBManager();

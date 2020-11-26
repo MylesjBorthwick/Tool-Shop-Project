@@ -1,19 +1,24 @@
 package view;
+
+/**
+ *Info Panel For Client Managment GUI. Handles View for
+ *Client Adding, deleting and updating 
+ *@author Myles Borthwick
+ *@author Ken Loyghery
+ *@since November 2020
+ */
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-
 
 public class InfoPanelClient extends JPanel
 {
@@ -38,22 +43,22 @@ public class InfoPanelClient extends JPanel
     private JButton clearButton;
     private JButton updateButton;
 
- 
+    /**
+    * Information Panel Constructor. Creates GUI for information panel
+    */
     public InfoPanelClient()
     {
-        // Layout setup
+        //Setup Layout
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
         gc.fill = GridBagConstraints.NONE;       
         
-        
+        //Set Dimensions
         Dimension dim = getPreferredSize(); 
         dim.width = 400;
         setPreferredSize(dim);
-        
-              
 
-        // Instantiate components
+        //Construct Components
         clientIDLabel = new JLabel("Client ID: ");
         firstNameLabel = new JLabel("First Name: "); 
         lastNameLabel = new JLabel("Last Name: ");
@@ -73,17 +78,22 @@ public class InfoPanelClient extends JPanel
         clearButton = new JButton("Clear");
         updateButton = new JButton("Update");
 
-        // JComboBox setup
+        //SetUp ComboBox
         DefaultComboBoxModel<String> clientTypeModel = new DefaultComboBoxModel<String>();
         clientTypeModel.addElement("C");
         clientTypeModel.addElement("R");
         clientTypeCombo.setModel(clientTypeModel);
-        clientTypeCombo.setSelectedIndex(0);    // Sets default selection to "Residential"
+        //Set Default for Combobox
+        clientTypeCombo.setSelectedIndex(0);
 
-        // Add components to panel
+        //Add All COmponents
         addComponents(gc);
 
     }
+
+    /**
+     * Add Listeners for info panel
+     */
 
     public void addSaveListener(ActionListener saveListen){
         saveButton.addActionListener(saveListen);
@@ -100,6 +110,10 @@ public class InfoPanelClient extends JPanel
     public void addUpdateListener(ActionListener updateListen){
         updateButton.addActionListener(updateListen);
     }
+
+    /**
+     * Getters for info panel fields
+     */
 
     public String getClientIdField(){
         return clientIDField.getText();
@@ -129,27 +143,57 @@ public class InfoPanelClient extends JPanel
         return (String)clientTypeCombo.getSelectedItem();
     }
 
+    /**
+     * Setters for ClientINFO panels gui fields
+     */
 
+    public void setClientIdField(String t){
+        clientIDField.setText(t);
+    }
+
+    public void setClientFirstNameField(String t){
+        firstNameField.setText(t);
+    }
+
+    public void setLastNameField(String t){
+        lastNameField.setText(t);
+    }
+
+    public void setAddressField(String t){
+        addressField.setText(t);
+    }
+
+    public void setPostalField(String t){
+        postalCodeField.setText(t);
+    }
+
+    public void setPhoneNumberField(String t){
+        phoneNumberField.setText(t);
+    }
+
+    /**
+     * Add components to panel, with positions in layout
+     * @param gc
+     */
     private void addComponents(GridBagConstraints gc)
     {
-        ////////////////////* First Row *////////////////////
-        gc.weightx = 1;     // Ratio of space compared to other cells
-        gc.weighty = 0.1;   // Making this row skinny
+        
+        gc.weightx = 1;     
+        gc.weighty = 0.1;   
         gc.gridy = 0;
 
-        gc.gridx = 0;       // Have to initialize grid components before using them
+        gc.gridx = 0;       
         gc.gridwidth = 1;
-        gc.anchor = GridBagConstraints.LINE_END;    // Sets label to right side of cell
-        gc.insets = new Insets(0, 0, 0, 0);         // Adds 5 pixel space to the right of label
+        gc.anchor = GridBagConstraints.LINE_END;   
+        gc.insets = new Insets(0, 0, 0, 0);        
         add(clientIDLabel, gc);
 
         gc.gridx = 1;
-        gc.gridwidth = 2;   // Allows field to take up 2 grid slots
-        gc.anchor = GridBagConstraints.LINE_START;  // Sets field to left side of cell
+        gc.gridwidth = 2;  
+        gc.anchor = GridBagConstraints.LINE_START;  
         gc.insets = new Insets(0, 0, 0, 0);
         add(clientIDField, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -166,7 +210,6 @@ public class InfoPanelClient extends JPanel
         gc.insets = new Insets(0, 0, 0, 0);
         add(firstNameField, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -183,7 +226,6 @@ public class InfoPanelClient extends JPanel
         gc.insets = new Insets(0, 0, 0, 0);
         add(lastNameField, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -200,7 +242,6 @@ public class InfoPanelClient extends JPanel
         gc.insets = new Insets(0, 0, 0, 0);
         add(addressField, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -217,7 +258,6 @@ public class InfoPanelClient extends JPanel
         gc.insets = new Insets(0, 0, 0, 0);
         add(postalCodeField, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -234,7 +274,6 @@ public class InfoPanelClient extends JPanel
         gc.insets = new Insets(0, 0, 0, 0);
         add(phoneNumberField, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -251,7 +290,6 @@ public class InfoPanelClient extends JPanel
         gc.insets = new Insets(0, 0, 0, 0);
         add(clientTypeCombo, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.2;
         gc.gridy++;
@@ -282,13 +320,6 @@ public class InfoPanelClient extends JPanel
 
 
     }
-
-
-   
-
-
-
-
 
 
 }

@@ -24,13 +24,13 @@ public class ClientDBManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "Clients", dataFile = "clients.txt";
+	public String databaseName = "toolshop607", tableName = "Clients", dataFile = "clients.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
-	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop",  
+	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop607",  
 				  login          = "root",
-				  password       = "Engineering4Elohim";
+				  password       = "2703961Five!";
 
 
 	/**
@@ -338,6 +338,10 @@ public class ClientDBManager {
 		}
 	}
 	
+	
+	/** 
+	 * @param args[]
+	 */
 	public static void main(String args[])
 	{
 		ClientDBManager clientList = new ClientDBManager();
