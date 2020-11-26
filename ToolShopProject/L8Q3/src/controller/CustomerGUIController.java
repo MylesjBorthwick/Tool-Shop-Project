@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
+import server.ClientSocket;
 import view.CustomerGUI;
 import view.InventoryGUI;
 
@@ -12,10 +13,11 @@ public class CustomerGUIController {
     
     private CustomerGUI gui;
     private CustomerModel custModel;
+    private ClientSocket socket;
 
 
-    public CustomerGUIController(CustomerGUI g, CustomerModel i){
-        
+    public CustomerGUIController(CustomerGUI g, CustomerModel i, ClientSocket s){
+        socket = s;
         setGui(g);
         setModel(i);
 
@@ -31,16 +33,20 @@ public class CustomerGUIController {
                 if(searchType == "lastName"){
                     custModel.setLastName(searchParam);
                     custModel.setQueryId(5);
+                    custModel = (CustomerModel)socket.pipelineRequest(custModel);
                 }
 
                 else if(searchType == "clientId"){
                     custModel.setClientId(Integer.parseInt(searchParam));
                     custModel.setQueryId(4);
+                    custModel = (CustomerModel)socket.pipelineRequest(custModel);
                 }
 
                 else if(searchType == "clientType"){
                     custModel.setClientType(searchParam);
                     custModel.setQueryId(6);
+                    custModel = (CustomerModel)socket.pipelineRequest(custModel);
+                    
                 }
 
                 if(custModel.isAnswered() == true){
@@ -61,7 +67,7 @@ public class CustomerGUIController {
 
         gui.addSwitchListener((ActionEvent e)->{
             gui.dispose();
-            InventoryGUIController inventory = new InventoryGUIController(new InventoryGUI(), new InventoryModel());
+            InventoryGUIController inventory = new InventoryGUIController(new InventoryGUI(), new InventoryModel(), socket);
 
         });
 
@@ -91,6 +97,7 @@ public class CustomerGUIController {
                         custModel.setClientType(type);
                         custModel.setPhoneNumber(phone);
                         custModel.setQueryId(1);
+                        custModel = (CustomerModel)socket.pipelineRequest(custModel);
                         gui.displayErrorMessage(custModel.getResponse());
                         
 
@@ -115,6 +122,7 @@ public class CustomerGUIController {
                     if(verifyDelete()){
                         custModel.setClientId(clientId);
                         custModel.setQueryId(3);
+                        custModel = (CustomerModel)socket.pipelineRequest(custModel);
                         gui.displayErrorMessage(custModel.getResponse());
 
                     }

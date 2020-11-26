@@ -24,7 +24,7 @@ public class CustomerModel implements Serializable
 		private String postalCode = null;
 		private int clientId = -1;
 		private String phoneNumber = null;
-		private String clientType; //positive is C
+        private String clientType; //positive is C
 		
 		/**
          * A default constructor that builds a record with blank data

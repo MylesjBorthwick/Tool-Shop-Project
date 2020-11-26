@@ -1,8 +1,11 @@
 package server;
+
 import java.io.*;
 import java.net.Socket;
 
+import controller.CustomerGUIController;
 import controller.CustomerModel;
+import view.CustomerGUI;
 /**
  * @author Myles Borthwick
  * @author Ken Loughery
@@ -63,7 +66,11 @@ public class ClientSocket {
 	 */
 	public static void main(String[] args)  {
 		ClientSocket aClient = new ClientSocket("localhost", 8099);
-		aClient.pipelineRequest(new CustomerModel());
+        CustomerGUI cust = new CustomerGUI();
+        CustomerModel cm = new CustomerModel();
+		CustomerGUIController cont = new CustomerGUIController(cust, cm, aClient);
 		aClient.disconnect();
 	}
+
+
 }

@@ -5,6 +5,7 @@ import controller.CustomerModel;
 import controller.InventoryGUIController;
 import controller.InventoryModel;
 
+
 public class GUITest {
     public static void main(String[] args) {
         //InventoryGUI inv = new InventoryGUI();
@@ -12,7 +13,7 @@ public class GUITest {
         
         CustomerGUI cust = new CustomerGUI();
         CustomerModel cm = new CustomerModel();
-        CustomerGUIController cont = new CustomerGUIController(cust, cm);
+       //CustomerGUIController cont = new CustomerGUIController(cust, cm, );
         //InventoryGUIController control = new InventoryGUIController(inv, mod);
 
     }

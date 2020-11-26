@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 
+import server.ClientSocket;
 import view.CustomerGUI;
 import view.InventoryGUI;
 
@@ -10,19 +11,19 @@ public class InventoryGUIController {
     
     private InventoryGUI gui;
     private InventoryModel invModel;
-    
+    private ClientSocket socket;
 
 
 
-    public InventoryGUIController(InventoryGUI g, InventoryModel i){
-        
+    public InventoryGUIController(InventoryGUI g, InventoryModel i, ClientSocket s){
+        socket = s;
         setGui(g);
         setModel(i);
 
 
         gui.addSwitchListener((ActionEvent e)->{
             gui.dispose();
-            CustomerGUIController cust = new CustomerGUIController(new CustomerGUI(), new CustomerModel());
+            CustomerGUIController cust = new CustomerGUIController(new CustomerGUI(), new CustomerModel(),socket);
         });
 
         gui.addExecuteListener((ActionEvent e)->{
@@ -37,21 +38,25 @@ public class InventoryGUIController {
                 if(executeType == "toolName"){
                     invModel.setToolName(executeParam);
                     invModel.setQueryId(2);
+                    invModel = (InventoryModel)socket.pipelineRequest(invModel);
                 }
 
                 else if(executeType == "toolId"){
                     invModel.setId(Integer.parseInt(executeParam));
                     invModel.setQueryId(3);
+                    invModel = (InventoryModel)socket.pipelineRequest(invModel);
                 }
 
                 else if(executeType == "checkQuant"){
                     invModel.setToolName(executeParam);
                     invModel.setQueryId(4);
+                    invModel = (InventoryModel)socket.pipelineRequest(invModel);
                 }
 
                 else if(executeType == "decreaseQuant"){
                     invModel.setToolName(executeParam);
                     invModel.setQueryId(5);
+                    invModel = (InventoryModel)socket.pipelineRequest(invModel);
                 }
 
                 if(invModel.isAnswered() == true){
@@ -76,11 +81,13 @@ public class InventoryGUIController {
 
         gui.addListListener((ActionEvent e)->{
             invModel.setQueryId(1);
+            invModel = (InventoryModel)socket.pipelineRequest(invModel);
             gui.setTextField(invModel.getResponse());
         });
 
         gui.addOrderListener((ActionEvent e)->{
             invModel.setQueryId(6);
+            invModel = (InventoryModel)socket.pipelineRequest(invModel);
             gui.setTextField(invModel.getResponse());
         });
     }
