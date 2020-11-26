@@ -25,7 +25,15 @@ public class InventoryMainController
 
 	}        
         
-    
+    /**
+ *   	 * (Inventory)1: print all tools
+ * 2:get item by name
+ * 3: get item by id
+	 * 4: remaining quantity
+	 * 5: reduce quantity 
+	 * 6: show order
+ *
+ */
 
 	/**
 	 *	body of the front end, which calls the methods to display menu, receive results, and then interprets the menu items through 
@@ -34,7 +42,7 @@ public class InventoryMainController
 	public Object receiveQuery(InventoryModel query){
 		switch(query.getQueryId()){
 				case 1:
-					System.out.println(shop.printoutOfInventory());
+					query.setResponse(shop.printoutOfInventory());
 				break;
 				case 2:
 					query.setResponse(shop.getItem(query.getToolName()));
@@ -46,7 +54,8 @@ public class InventoryMainController
 					query.setResponse(shop.getQuantity(query.getToolName()));
 				break;
 				case 5:
-				query.setResponse(shop.reduceItem(query.getToolName()));
+					inventoryDBManager.updateToolQuantity(shop.getToolId(query.getToolName()));
+					query.setResponse(shop.reduceItem(query.getToolName()));
 				break;
 				case 6: 
 					query.setResponse(shop.generateOrder());

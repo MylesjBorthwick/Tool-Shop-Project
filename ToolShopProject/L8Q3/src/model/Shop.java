@@ -84,6 +84,11 @@ public class Shop {
 	public String printoutOfInventory() {
 		return theInventory.toString();
 	}
+
+	public int getToolId(String toolName) {
+		Tool foundItem = theInventory.searchForToolName(toolName);
+		return foundItem.getToolId();
+	}
 	
 
 	

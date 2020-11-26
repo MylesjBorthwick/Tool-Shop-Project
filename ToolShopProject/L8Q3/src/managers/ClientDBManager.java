@@ -148,6 +148,22 @@ public class ClientDBManager {
 		}
 	}
 
+	//DELETE FROM table_name WHERE condition; 
+	// Add a tool to the database table
+	public void deleteClient(int clientId)
+	{
+		String sql = "DELETE FROM " + tableName +
+				" WHERE ID = " + clientId + ";";
+		System.out.println(sql);
+		try{
+			statement = jdbc_connection.createStatement();
+			statement.executeUpdate(sql);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	// Add a tool to the database table
 	public void updateClient(Client client)
 	{
