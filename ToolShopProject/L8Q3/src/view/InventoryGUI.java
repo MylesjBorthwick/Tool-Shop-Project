@@ -34,15 +34,6 @@ public class InventoryGUI extends JFrame {
         setVisible(true); // Make frame visible
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        switchToClient.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                CustomerGUI cgui = new CustomerGUI();
-
-            }
-        });
 
     }
     public void addSwitchListener(ActionListener switchListen){
