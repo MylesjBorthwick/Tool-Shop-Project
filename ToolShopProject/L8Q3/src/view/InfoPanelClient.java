@@ -36,6 +36,7 @@ public class InfoPanelClient extends JPanel
     private JButton saveButton;
     private JButton deleteButton;
     private JButton clearButton;
+    private JButton updateButton;
 
  
     public InfoPanelClient()
@@ -49,7 +50,7 @@ public class InfoPanelClient extends JPanel
         Dimension dim = getPreferredSize(); 
         dim.width = 400;
         setPreferredSize(dim);
-        Border innerBorder = BorderFactory.createTitledBorder("Client Info");
+        
               
 
         // Instantiate components
@@ -70,6 +71,7 @@ public class InfoPanelClient extends JPanel
         saveButton = new JButton("Save");
         deleteButton = new JButton("Delete");
         clearButton = new JButton("Clear");
+        updateButton = new JButton("Update");
 
         // JComboBox setup
         DefaultComboBoxModel<String> clientTypeModel = new DefaultComboBoxModel<String>();
@@ -83,13 +85,51 @@ public class InfoPanelClient extends JPanel
 
     }
 
-    //================================================================================
-    // Helper methods
-    //================================================================================
-    /**
-     * Adds each component to the panel.
-     * @param gc GridBagConstraints object corresponding to panel
-     */
+    public void addSaveListener(ActionListener saveListen){
+        saveButton.addActionListener(saveListen);
+    }
+
+    public void addClearListener(ActionListener clearListen){
+        clearButton.addActionListener(clearListen);
+    }
+
+    public void addDeleteListener(ActionListener deleteListen){
+        deleteButton.addActionListener(deleteListen);
+    }
+
+    public void addUpdateListener(ActionListener updateListen){
+        updateButton.addActionListener(updateListen);
+    }
+
+    public String getClientIdField(){
+        return clientIDField.getText();
+    }
+
+    public String getClientFirstNameField(){
+        return firstNameField.getText();
+    }
+
+    public String getLastNameField(){
+        return lastNameField.getText();
+    }
+
+    public String getAddressField(){
+        return addressField.getText();
+    }
+
+    public String getPostalField(){
+        return postalCodeField.getText();
+    }
+
+    public String getPhoneNumberField(){
+        return phoneNumberField.getText();
+    }
+
+    public String getClientType(){
+        return (String)clientTypeCombo.getSelectedItem();
+    }
+
+
     private void addComponents(GridBagConstraints gc)
     {
         ////////////////////* First Row *////////////////////
@@ -233,16 +273,18 @@ public class InfoPanelClient extends JPanel
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);
         add(clearButton, gc);
+
+        gc.gridx = 3;
+        gc.gridwidth = 1;
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.insets = new Insets(0, 0, 0, 0);
+        add(updateButton, gc);
+
+
     }
 
 
-    public void setClientTypeCombo(String text)
-    {
-        if (text.equals("C") || text.equals("R"))
-        {
-            this.clientTypeCombo.setSelectedItem(text);
-        }
-    }
+   
 
 
 

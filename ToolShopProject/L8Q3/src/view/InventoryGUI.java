@@ -45,6 +45,9 @@ public class InventoryGUI extends JFrame {
         });
 
     }
+    public void addSwitchListener(ActionListener switchListen){
+        switchToClient.addActionListener(switchListen);
+    }
 
     public void displayErrorMessage(String errorMessage)
     {
