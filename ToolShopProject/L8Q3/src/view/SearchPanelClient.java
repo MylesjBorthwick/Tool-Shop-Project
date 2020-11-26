@@ -1,33 +1,31 @@
 package view;
 
+/**
+ *Search Panel For Client Managment GUI. Handles View for
+ *Client Searching 
+ *@author Myles Borthwick
+ *@author Ken Loyghery
+ *@since November 2020
+ */
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
-
-import model.Client;
-
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
 public class SearchPanelClient extends JPanel {
 
+    //Instance Variables
 	private static final long serialVersionUID = 1L;
-    
 
     private JLabel type;
     private JLabel param;
@@ -44,23 +42,28 @@ public class SearchPanelClient extends JPanel {
     private JButton clearSearchButton;
     private JScrollPane searchResultsPane;
 
-
+    /**
+     * Search Panel Constructor, Creates elements and adds them
+     * to panel.
+     */
 	public SearchPanelClient(){
 
+        //Set Panel Layout
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
         gc.fill = GridBagConstraints.NONE;
 
+        //Set Dimension
         Dimension dim = getPreferredSize();
         dim.width = 500;
         setPreferredSize(dim);
 
+        //Create GUI elemnets and handle initial settings
 		type = new JLabel("Select Search Type:");
 		param = new JLabel("Enter Search: ");
         results = new JLabel("Results:");
         textArea = new JTextArea("");
         textArea.setEditable(false);
-
 		searchTypeGroup = new ButtonGroup();
         clientId = new JRadioButton("Client ID");
 		clientLastName = new JRadioButton("Client Last Name");
@@ -70,57 +73,74 @@ public class SearchPanelClient extends JPanel {
         clearSearchButton = new JButton("Clear Search");
         searchResultsPane = new JScrollPane(textArea);
 
-
+        //Add RadiButtons to Group
 		searchTypeGroup.add(clientId);
 		searchTypeGroup.add(clientLastName);
 		searchTypeGroup.add(clientType);
-
+        //Initial Settinggs for RadioButtons
 		clientId.setSelected(true);
 	    clientId.setActionCommand("clientId");
 		clientLastName.setActionCommand("lastName");
 		clientType.setActionCommand("clientType");
 
-		
+		//Results Pane Settings
 		searchResultsPane.setPreferredSize(new Dimension(250, 80));
-
+        //Add All Components
 		addComponents(gc);
 
-
     }
-
+    /**
+     * Add listener for  Search Button
+     * @param searchListen
+     */
     public void addSearchListener(ActionListener searchListen){
         searchButton.addActionListener(searchListen);
     }
-
+    /**
+     * Add listener for Clear Button
+     */
     public void addClearListener(ActionListener clearListen){
         clearSearchButton.addActionListener(clearListen);
     }
-    
+    /**
+     * Get Search Type from RadioButton Group
+     * @return type command
+     */
     public String getSearchType(){
         return searchTypeGroup.getSelection().getActionCommand();
     }
 
+    /**
+     * Get Search Field input
+     * @return String in Search bar
+     */
     public String getSearchParam(){
         return searchParamField.getText();
     }
-
+    /**
+     * Set Text in TextArea
+     * @param text to be entered
+     */
     public void setTextField(String text){
         textArea.setText(text);
     }
-
+    /**
+     * Add Elements to Layout with grid position
+     * and settings
+     * @param gc
+     */
 	private void addComponents(GridBagConstraints gc)
     {
-        ////////////////////* First Row *////////////////////
-        gc.weightx = 1;     // Ratio of space compared to other cells
-        gc.weighty = 0.1;   // Making this row skinny
+        
+        gc.weightx = 1;     
+        gc.weighty = 0.1;  
         gc.gridy = 0;
 
-        gc.gridx = 0;       // Have to initialize grid components before using them
-        gc.anchor = GridBagConstraints.LINE_START;    // Sets label to right side of cell
-        gc.insets = new Insets(0, 0, 0, 0);         // Adds 5 pixel space to the right of label
+        gc.gridx = 0;       
+        gc.anchor = GridBagConstraints.LINE_START;   
+        gc.insets = new Insets(0, 0, 0, 0);        
         add(type, gc);
-
-        ////////////////////* Next Row *////////////////////
+        
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -129,8 +149,7 @@ public class SearchPanelClient extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
         add(clientId, gc);
-
-        ////////////////////* Next Row *////////////////////
+        
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -140,7 +159,6 @@ public class SearchPanelClient extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(clientLastName, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -150,7 +168,6 @@ public class SearchPanelClient extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(clientType, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -159,8 +176,7 @@ public class SearchPanelClient extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
         add(param, gc);
-
-        ////////////////////* Next Row *////////////////////
+        
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -180,7 +196,6 @@ public class SearchPanelClient extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(clearSearchButton, gc);
 
-        ////////////////////* Next Row *////////////////////
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridy++;
@@ -189,8 +204,7 @@ public class SearchPanelClient extends JPanel {
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);         
         add(results, gc);
-
-        ////////////////////* Next Row *////////////////////
+        
         gc.weightx = 1;
         gc.weighty = 2;
         gc.gridy++;
@@ -202,8 +216,4 @@ public class SearchPanelClient extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);         
         add(searchResultsPane, gc);
 	}
-
-	
-
-
 }

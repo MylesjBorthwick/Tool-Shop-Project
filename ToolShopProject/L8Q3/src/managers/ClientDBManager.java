@@ -85,6 +85,10 @@ public class ClientDBManager {
 		}
 	}
 	
+	
+	/** 
+	 * @return ArrayList<Client>
+	 */
 	public ArrayList<Client> getAll()
 	{
 		ArrayList<Client> list = new ArrayList<Client>();
@@ -148,6 +152,10 @@ public class ClientDBManager {
 		}
 	}
 
+	
+	/** 
+	 * @param clientId
+	 */
 	//DELETE FROM table_name WHERE condition; 
 	// Add a tool to the database table
 	public synchronized void deleteClient(int clientId)
@@ -164,6 +172,10 @@ public class ClientDBManager {
 			e.printStackTrace();
 		}
 	}
+	
+	/** 
+	 * @param client
+	 */
 	// Add a tool to the database table
 	public synchronized void updateClient(Client client)
 	{
@@ -229,6 +241,10 @@ public class ClientDBManager {
 
 	}
 
+	
+	/** 
+	 * @param client
+	 */
 	// Add a tool to the database table
 	public synchronized void addClient(Client client)
 	{
@@ -252,6 +268,11 @@ public class ClientDBManager {
 	}
 
 
+	
+	/** 
+	 * @param clientId
+	 * @return Client
+	 */
 	// This method should search the database table for a tool matching the toolID parameter and return that tool.
 	// It should return null if no tools matching that ID are found.
 	public Client searchClient(int clientId)
@@ -304,6 +325,10 @@ public class ClientDBManager {
 		}
 	}
 	
+	
+	/** 
+	 * @param args[]
+	 */
 	public static void main(String args[])
 	{
 		ClientDBManager clientList = new ClientDBManager();

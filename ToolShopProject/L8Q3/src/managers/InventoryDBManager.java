@@ -126,6 +126,10 @@ public class InventoryDBManager {
 		}
 	}
 
+	
+	/** 
+	 * @param toolId
+	 */
 	// Add a tool to the database table
 	public synchronized void updateToolQuantity(int toolId)
 	{
@@ -147,6 +151,10 @@ public class InventoryDBManager {
 		}
 	}
 
+	
+	/** 
+	 * @param tool
+	 */
 	// Add a tool to the database table
 	public void addTool(Tool tool)
 	{
@@ -168,6 +176,11 @@ public class InventoryDBManager {
 		}
 	}
 
+	
+	/** 
+	 * @param toolID
+	 * @return Tool
+	 */
 	// This method should search the database table for a tool matching the toolID parameter and return that tool.
 	// It should return null if no tools matching that ID are found.
 	public Tool searchTool(int toolID)
@@ -192,6 +205,10 @@ public class InventoryDBManager {
 		return null;
 	}
 
+	
+	/** 
+	 * @return ArrayList<Tool>
+	 */
 	// This method should search the database table for a tool matching the toolID parameter and return that tool.
 	// It should return null if no tools matching that ID are found.
 	public ArrayList<Tool> getAllTools()
@@ -245,6 +262,10 @@ public class InventoryDBManager {
 	
 
 
+	
+	/** 
+	 * @param args[]
+	 */
 	public static void main(String args[])
 	{
 		InventoryDBManager inventory = new InventoryDBManager();
