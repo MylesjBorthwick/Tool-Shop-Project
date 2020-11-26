@@ -73,7 +73,8 @@ overload by lastname, id, and type for search
 					clientDB.updateClient(new model.Client(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
 					query.setResponse(customerList.updateCustomer(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
 					break;
-				case 3:				
+				case 3:		
+					clientDB.deleteClient(query.getClientId());		
 					query.setResponse(customerList.removeCustomer(query.getClientId()));
 				break;
 				case 4:

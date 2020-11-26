@@ -127,6 +127,27 @@ public class InventoryDBManager {
 	}
 
 	// Add a tool to the database table
+	public void updateToolQuantity(int toolId)
+	{
+		Tool foundTool =  searchTool(toolId);
+		
+		if(foundTool.getToolQuant()-1 >= 0){
+			String sql = "UPDATE " + tableName + " SET QUANTITY = "+ 
+			Integer.toString(foundTool.getToolQuant()-1) + " WHERE ID = " 
+			+ Integer.toString(toolId);
+			System.out.println(sql);
+			try{
+				statement = jdbc_connection.createStatement();
+				statement.executeUpdate(sql);
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// Add a tool to the database table
 	public void addTool(Tool tool)
 	{
 		String sql = "INSERT INTO " + tableName +
@@ -223,7 +244,7 @@ public class InventoryDBManager {
 	}
 	
 
-	
+
 	public static void main(String args[])
 	{
 		InventoryDBManager inventory = new InventoryDBManager();
