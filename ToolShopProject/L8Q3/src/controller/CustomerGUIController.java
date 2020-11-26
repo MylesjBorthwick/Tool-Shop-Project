@@ -234,7 +234,7 @@ public class CustomerGUIController {
     {
         // Ask for user confirmation
         int action = JOptionPane.showConfirmDialog(null, 
-        "Do You Want to Update This Client? ", 
+        "Do You Want to Update This Client? "+" \nAll Empty Fields Will Be Saved As NUll", 
         "Update Confirmation", 
         JOptionPane.OK_CANCEL_OPTION);
         // Return true if user confirms

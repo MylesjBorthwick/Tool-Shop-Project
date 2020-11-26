@@ -70,7 +70,7 @@ public class Tool {
      */
     @Override
     public String toString(){
-        String s = "ToolID:"+getToolId()+", "+ getToolName()+", Quantity:"+getToolQuant()+", Price:"+getToolPrice()+"\n";
+        String s = "ToolID:"+getToolId()+", "+ getToolName()+", Quantity:"+getToolQuant()+", Price:"+getToolPrice()+ ", Type:"+getType()+", Supplier:"+getSupplierId()+"\n";
         //Optional addition of supplier info for Tool format
         //+", SupplierInfo:["+getToolSupplier()+"]\n";
         return s;
