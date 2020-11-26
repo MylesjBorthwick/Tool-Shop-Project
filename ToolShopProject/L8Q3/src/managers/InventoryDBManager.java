@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,11 +12,12 @@ import java.util.Scanner;
 
 import model.Tool;
 
-// Pre-Project Exercise 
-
-// This program allows you to create and manage a store inventory database.
-// It creates a database and datatable, then populates that table with tools from
-// Tools.txt.
+/**
+ * This class manages the tools SQL database, creating and populating the table within the database with the items.txt
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
 public class InventoryDBManager {
 	
 	public Connection jdbc_connection;
@@ -30,6 +30,10 @@ public class InventoryDBManager {
 				  login          = "root",
 				  password       = "Engineering4Elohim" ;
 
+				  
+	/**
+	 * Constructor that initializes a connection to the specified database
+	 */
 	public InventoryDBManager()
 	{
 		try{
@@ -44,8 +48,10 @@ public class InventoryDBManager {
 		catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// Use the jdbc connection to create a new database in MySQL. 
-	// (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/InventoryDB")
+	/**
+	 * Use the jdbc connection to create a new database in MySQL. 
+	 * (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/toolshop")
+	 */
 	public void createDB()
 	{
 		try {
@@ -62,7 +68,9 @@ public class InventoryDBManager {
 		}
 	}
 
-	// Create a data table inside of the database to hold tools
+	/**
+	 * Create a data table inside of the database to hold tools
+	 */
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
@@ -84,7 +92,9 @@ public class InventoryDBManager {
 		}
 	}
 
-	// Removes the data table from the database (and all the data held within it!)
+	/**
+	 * Removes the data table from the database (and all the data held within it!)
+	 */
 	public void removeTable()
 	{
 		String sql = "DROP TABLE " + tableName;
@@ -99,7 +109,9 @@ public class InventoryDBManager {
 		}
 	}
 
-	// Fills the data table with all the tools from the text file 'Tools.txt' if found
+	/**
+	 * Fills the data table with all the tools from the text file 'items.txt' if found
+	 */
 	public void fillTable()
 	{
 		try{
@@ -126,7 +138,11 @@ public class InventoryDBManager {
 		}
 	}
 
-	// Add a tool to the database table
+	/**
+	 * updates a tool found by its tool id with new values. If any fields in the received client are 
+	 * null these are skipped, if client id is not found does nothing
+	 * @param client information client class containing update information
+	 */
 	public synchronized void updateToolQuantity(int toolId)
 	{
 		Tool foundTool =  searchTool(toolId);
@@ -147,7 +163,10 @@ public class InventoryDBManager {
 		}
 	}
 
-	// Add a tool to the database table
+	/**
+	 * add a Tool to the database table
+	 * @param tool to add to table
+	 */
 	public void addTool(Tool tool)
 	{
 		String sql = "INSERT INTO " + tableName +
@@ -167,9 +186,11 @@ public class InventoryDBManager {
 			e.printStackTrace();
 		}
 	}
-
-	// This method should search the database table for a tool matching the toolID parameter and return that tool.
-	// It should return null if no tools matching that ID are found.
+	/**
+	 * This method searches the database table for a Tool matching the toolID parameter and return that tool.
+	 * @param toolId to search for
+	 * @return Tool found, or null if not found
+	 */
 	public Tool searchTool(int toolID)
 	{
 		String sql = "SELECT * FROM " + tableName + " WHERE ToolId=" + toolID;
@@ -192,8 +213,10 @@ public class InventoryDBManager {
 		return null;
 	}
 
-	// This method should search the database table for a tool matching the toolID parameter and return that tool.
-	// It should return null if no tools matching that ID are found.
+	/**
+	 * pulls all the tools from the database table
+	 * @return ArrayList of Tool
+	 */
 	public ArrayList<Tool> getAllTools()
 	{
 		ArrayList<Tool> array = new ArrayList<Tool>();
@@ -220,7 +243,9 @@ public class InventoryDBManager {
 
 
 
-	// Prints all the Tools in the database to console
+	/**
+	 * Prints all the tools in the database to console
+	 */
 	public void printTable()
 	{
 		try {
@@ -279,7 +304,7 @@ public class InventoryDBManager {
 
 		//MANAGE THE ELECTRICALS
 
-		ElectricalManager electricalAddOns = new ElectricalManager();
+		ElectricalDBManager electricalAddOns = new ElectricalDBManager();
 	
 
 		electricalAddOns.createTable();

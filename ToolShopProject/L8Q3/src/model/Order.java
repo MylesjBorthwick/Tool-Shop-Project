@@ -6,7 +6,8 @@ import java.util.Random;
  * Class for Order object. Initializes order with an order id and time
  * Can add orderlines to its orders
  * @author Myles Borthwick
- * @version 1.0
+ * @author Ken Loughery
+ * @since Nov, 2020
  */
 public class Order {
     //Member Variables

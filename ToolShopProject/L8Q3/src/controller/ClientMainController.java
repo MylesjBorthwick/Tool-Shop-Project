@@ -1,11 +1,16 @@
 package controller;
 
-import java.sql.SQLException;
-
-import com.mysql.fabric.xmlrpc.Client;
-
 import managers.ClientDBManager;
 import model.CustomerList;
+
+
+/**
+ * This class controls the backend functionality for the client, including updating & adding clients, searching for client information, 
+ * and returning responses. This class will use the customerList to set responses to send back to the GUI. 
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
 
 public class ClientMainController 
 {
@@ -13,31 +18,27 @@ public class ClientMainController
 	private ClientDBManager clientDB;
 	private CustomerList customerList;
 
+	/**
+	 * Default constructor that will create a DB manager and pull all the information from the SQL database to populate the customer list instance
+	 */
     public ClientMainController(){
 		clientDB = new ClientDBManager();
 		customerList = new CustomerList(clientDB.getAll());
 	}        
 
+
 	/**
-	 * addNewCustomer
-	 * (Inventory)1: print all tools
-	 * 4: remaining quantity
-	 * 5: reduce quantity
-	 * 6: show order
-
-(Customer)
-1:  add New Customer
-2: update Customer (set any non-updating fields to null)
-3: remove Customer
-4: search Customer (by id)
-5: search Customer (by last name)
-6: search Customer (by type)
-+updateCustomer()
-+removeCustomer()
-+searchCustomer(): void
-overload by lastname, id, and type for search
-
-+switch()*/
+	 * method to receive queries from the frontend and send a response by populating the response field of the InventoryModel. Query codes
+	 * call methods in the backend shop and SQL database to achieve the following features (by query id number):
+	 * 1: add a new client
+	 * 2: update a client by id (null fields are ignored)
+	 * 3: remove a client by id
+	 * 4: display client information by id
+	 * 5: display client information by last name
+	 * 6: display client information by client type
+	 * @param query the input query that contains the query id to find, and will store the response
+	 * @return query object that has the response and all previous fields
+	 */
 	public synchronized Object receiveQuery(CustomerModel query){
 		switch(query.getQueryId()){
 				case 1:
@@ -68,11 +69,4 @@ overload by lastname, id, and type for search
 		return query;
 	}
 
-
-
-
-    public static void main(String[] args) throws Exception 
-    {
-        ClientMainController clientMainControl = new ClientMainController();
-    }
 }

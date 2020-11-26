@@ -3,8 +3,8 @@ package model;
  * Shop class sets the Inventory and SupplierList for the shop
  * This class makes calls to inventory to search and decrease Tools
  * @author Myles Borthwick
- * @version 1.0
- * @since Oct, 2020
+ * @author Ken Loughery
+ * @since Nov, 2020
  */
 
 public class Shop {

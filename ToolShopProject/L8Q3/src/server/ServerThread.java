@@ -1,12 +1,11 @@
 package server;
 
 /**
- * This class handles the two client sockets during the game, to allow them to communicate
- * and update themselves during gameplay, until an end-game condition has been achieved
- * 
- * ENSF 607 Lab 6
+ * This class handles the communications from the clients who have connected to the server,
+ * sending the information to the main backend controller until the client disconnects
  * @author Myles Borthwick
  * @author Ken Loughery
+ * @since Nov, 2020
  */
 
 import java.io.*;
@@ -19,12 +18,12 @@ public class ServerThread implements Runnable {
 	private ObjectOutputStream socketOut;
 	private ObjectInputStream socketIn;
 	private ServerMainController maincontroller;
+
 	/**
-	 * Constructor that receives two sockets, one for each player, and initiates the
-	 * player names from them to complete the player classes
-	 * 
-	 * @param player1 the socket for the connections from the first player
-	 * @param player2 the socket for the connections from the second player
+	 * Constructor that receives a socket, initiates the input and output streams, and
+	 * sets the main controller to pass the incoming objects to
+	 * @param theSocket the socket for the connections from the first player
+	 * @param maincontroller the socket for the connections from the second player
 	 */
 	public ServerThread(Socket theSocket, ServerMainController maincontroller) {
 		this.maincontroller = maincontroller;
@@ -38,10 +37,9 @@ public class ServerThread implements Runnable {
 	}
 
 	/**
-	 * Method that will run to organize the gameplay, sending messages to each
-	 * client when it is their turn, as well as with end-game conditions, as needed.
+	 * Method that will run to pass the objects to the backend and send the received objects back to the 
+	 * client socket
 	 */
-
 	@Override
 	public void run() {
 		Object receive = null;
@@ -49,7 +47,6 @@ public class ServerThread implements Runnable {
 			try {
 				receive = socketIn.readObject();
 				if(receive!= null){
-					System.out.println(receive.getClass());
 					socketOut.writeObject(maincontroller.passSerial(receive));	
 				}
 				Thread.sleep(1000);
@@ -64,8 +61,6 @@ public class ServerThread implements Runnable {
 
 	}
 
-	public synchronized void pipeline(){
-		
-	}
+
 	
 } // end of class

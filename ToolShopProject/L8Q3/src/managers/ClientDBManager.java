@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,11 +12,14 @@ import java.util.Scanner;
 
 import model.Client;
 
-// Pre-Project Exercise 
 
-// This program allows you to create and manage a store inventory database.
-// It creates a database and datatable, then populates that table with tools from
-// items.txt.
+/**
+ * This class manages the client SQL database, creating and populating the table within the database with the clients.txt
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
+
 public class ClientDBManager {
 	
 	public Connection jdbc_connection;
@@ -30,6 +32,10 @@ public class ClientDBManager {
 				  login          = "root",
 				  password       = "Engineering4Elohim";
 
+
+	/**
+	 * Constructor that initializes a connection to the specified database
+	 */
 	public ClientDBManager()
 	{
 		try{
@@ -44,8 +50,11 @@ public class ClientDBManager {
 		catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// Use the jdbc connection to create a new database in MySQL. 
-	// (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/InventoryDB")
+	
+	/**
+	 * Use the jdbc connection to create a new database in MySQL. 
+	 * (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/toolshop")
+	 */
 	public void createDB()
 	{
 		try {
@@ -62,7 +71,9 @@ public class ClientDBManager {
 		}
 	}
 
-	// Create a data table inside of the database to hold tools
+	/**
+	 * Create a data table inside of the database to hold clients
+	 */
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
@@ -85,6 +96,10 @@ public class ClientDBManager {
 		}
 	}
 	
+	/**
+	 * pulls all the clients from the database table
+	 * @return ArrayList of Client
+	 */
 	public ArrayList<Client> getAll()
 	{
 		ArrayList<Client> list = new ArrayList<Client>();
@@ -109,7 +124,9 @@ public class ClientDBManager {
 		return list;
 	}
 
-	// Removes the data table from the database (and all the data held within it!)
+	/**
+	 * Removes the data table from the database (and all the data held within it!)
+	 */
 	public void removeTable()
 	{
 		String sql = "DROP TABLE " + tableName;
@@ -124,7 +141,9 @@ public class ClientDBManager {
 		}
 	}
 
-	// Fills the data table with all the tools from the text file 'items.txt' if found
+	/**
+	 * Fills the data table with all the clients from the text file 'clients.txt' if found
+	 */
 	public void fillTable()
 	{
 		try{
@@ -148,8 +167,11 @@ public class ClientDBManager {
 		}
 	}
 
-	//DELETE FROM table_name WHERE condition; 
-	// Add a tool to the database table
+
+	/**
+	 * delete a row from the client table that matches the client id
+	 * @param clientId of the client to delete (if not found does nothing)
+	 */
 	public synchronized void deleteClient(int clientId)
 	{
 		String sql = "DELETE FROM " + tableName +
@@ -164,10 +186,14 @@ public class ClientDBManager {
 			e.printStackTrace();
 		}
 	}
-	// Add a tool to the database table
+
+	/**
+	 * updates a client found by their client id with new values. If any fields in the received client are 
+	 * null these are skipped, if client id is not found does nothing
+	 * @param client information client class containing update information
+	 */
 	public synchronized void updateClient(Client client)
 	{
-
 		boolean updatedField = false;
 		String sql = "UPDATE " + tableName + " SET ";
 		if(client.getFirstName()!= null){
@@ -229,7 +255,10 @@ public class ClientDBManager {
 
 	}
 
-	// Add a tool to the database table
+	/**
+	 * add a client to the database table
+	 * @param client client to add to table
+	 */
 	public synchronized void addClient(Client client)
 	{
 		String sql = "INSERT INTO " + tableName +
@@ -252,8 +281,11 @@ public class ClientDBManager {
 	}
 
 
-	// This method should search the database table for a tool matching the toolID parameter and return that tool.
-	// It should return null if no tools matching that ID are found.
+	/**
+	 * This method searches the database table for a client matching the clientID parameter and return that client.
+	 * @param clientId to search for
+	 * @return client found, or null if not found
+	 */
 	public Client searchClient(int clientId)
 	{
 		String sql = "SELECT * FROM " + tableName + " WHERE ID=" + clientId;
@@ -278,7 +310,9 @@ public class ClientDBManager {
 		return null;
 	}
 
-	// Prints all the items in the database to console
+	/**
+	 * Prints all the clients in the database to console
+	 */
 	public void printTable()
 	{
 		try {

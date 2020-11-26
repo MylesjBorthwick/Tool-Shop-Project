@@ -2,54 +2,50 @@ package controller;
 import java.io.Serializable;
 
 /**
- *   
- *(Customer)
-1:  add New Customer
-2: update Customer (set any non-updating fields to null)
-3: remove Customer
-4: search Customer (by id)
-5: search Customer (by last name)
-6: search Customer (by type)
+ * This class is the model that will store the information for the queries that will be sent from the frontend to the backend
+ * for the customer Model. Query id is set to get the response from the backend, and is encoded as follows:
+ * 1: add a new client
+ * 2: update a client by id (null fields are ignored)
+ * 3: remove a client by id
+ * 4: display client information by id
+ * 5: display client information by last name
+ * 6: display client information by client type
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
  */
+
 public class CustomerModel implements Serializable
 	{
 
-		private static final long serialVersionUID = 1L;
-		private int queryId = 0;
-		private String response = null;
-		private boolean answered = false;
-		private String firstName = null;
-		private String lastName = null;
-		private String address = null;
-		private String postalCode = null;
-		private int clientId = -1;
-		private String phoneNumber = null;
-        private String clientType; //positive is C
-		
-		/**
-         * A default constructor that builds a record with blank data
-         */
-		public CustomerModel(int queryId, String firstName, String lastName, String address, String postalCode, int clientId, String phoneNumber, String clientType) {
-			this.queryId = queryId;
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.address = address;
-			this.postalCode = postalCode;
-			this.clientId = clientId;
-			this.phoneNumber = phoneNumber;
-			this.clientType = clientType;
-		} 
-	  
-        /**
-         * A default constructor that builds a record with blank data
-         */
-		public CustomerModel(int queryId) {
-			this.queryId = queryId;
-        } 
-        
-        public CustomerModel(){
+    private static final long serialVersionUID = 1L;
+    private int queryId;
+    private String response;
+    private boolean answered;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String postalCode;
+    private int clientId;
+    private String phoneNumber;
+    private String clientType; 
+    
 
-        }
+    /**
+     * default constructor that sets all the fields to default configurations
+     */
+    public CustomerModel(){
+        queryId = 0;
+        response = null;
+        answered = false;
+        firstName = null;
+        lastName = null;
+        address = null;
+        postalCode = null;
+        clientId = -1;
+        phoneNumber = null;
+        clientType = null; 
+    }
 
 		
 	
@@ -61,7 +57,7 @@ public class CustomerModel implements Serializable
     }
 
     /**
-     * @param query the query to set
+     * @param query the query to set, setting the query sets the answered attribute to false
      */
     public void setQueryId(int queryId) {
 		this.queryId = queryId;
@@ -76,7 +72,7 @@ public class CustomerModel implements Serializable
     }
 
     /**
-     * @param response the response to set
+     * @param response the response to set, setting the response sets the answered attribute to true
      */
     public void setResponse(String response) {
 		this.response = response;

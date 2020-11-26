@@ -3,8 +3,9 @@ import java.util.ArrayList;
 /**
  * Supplier List Class
  * Holds shop suppliers and can set/print list
+ * @author Ken Loughery
  * @author Myles Borthwick
- * @version 1.0
+ * @since Nov, 2020
  */
 public class SupplierList {
 

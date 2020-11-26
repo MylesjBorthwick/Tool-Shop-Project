@@ -1,8 +1,9 @@
 package model;
 /**
  * Class representing an ordeline for an object
+ * @author Ken Loughery
  * @author Myles Borthwick
- * @version 1.0
+ * @since Nov, 2020
  */
 public class OrderLine {
     //Member variables

@@ -2,14 +2,17 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
-
 import controller.CustomerGUIController;
 import controller.CustomerModel;
 import controller.InventoryModel;
 import view.CustomerGUI;
+
 /**
+ * This class connects the front end GUI controllers to the server. It instantiates the first of the GUI controllers,
+ * begins a connection, and has the necessary methods to send serializable models to the server
  * @author Myles Borthwick
  * @author Ken Loughery
+ * @since Nov, 2020
  */
 
 public class ClientSocket {
@@ -35,7 +38,11 @@ public class ClientSocket {
 			System.err.println(e.getStackTrace());
 		}
 	}
-
+	/**
+	 * Method that will pipeline a serializable object to the backend server and return the response
+	 * @param sendRequest the serializable to be sent to the server
+	 * @return the server response, if no response is received after 10 tries, returns the input object
+	 */
 	public Object pipelineRequest(Serializable sendRequest) {
 		for(int i = 0; i< 10;i++){
 			try {
@@ -62,9 +69,6 @@ public class ClientSocket {
 		
 	}
 	
-	/**
-	 * main function to run the client
-	 */
 	public static void main(String[] args)  {
 		ClientSocket aClient = new ClientSocket("localhost", 8099);
 		aClient.pipelineRequest(new InventoryModel());

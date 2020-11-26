@@ -3,18 +3,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-// Pre-Project Exercise 
 
-// This program allows you to create and manage a store inventory database.
-// It creates a database and datatable, then populates that table with tools from
-// Tools.txt.
-public class ElectricalManager {
+/**
+ * This class manages the electrical SQL database, creating and populating the table within the database with the electrical.txt
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
+public class ElectricalDBManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
@@ -26,7 +27,10 @@ public class ElectricalManager {
 				  login          = "root",
 				  password       = "Engineering4Elohim";
 
-	public ElectricalManager()
+	/**
+	 * Constructor that initializes a connection to the specified database
+	 */			  
+	public ElectricalDBManager()
 	{
 		try{
 			// If this throws an error, make sure you have added the mySQL connector JAR to the project
@@ -40,25 +44,10 @@ public class ElectricalManager {
 		catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// Use the jdbc connection to create a new database in MySQL. 
-	// (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/InventoryDB")
-	public void createDB()
-	{
-		try {
-			statement = jdbc_connection.createStatement();
-			statement.executeUpdate("CREATE DATABASE " + databaseName);
-			System.out.println("Created Database " + databaseName);
-		} 
-		catch( SQLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	// Create a data table inside of the database to hold tools
+	/**
+	 * Create a data table inside of the database to hold electrical tool information
+	 */	
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
@@ -76,7 +65,10 @@ public class ElectricalManager {
 		}
 	}
 
-	// Removes the data table from the database (and all the data held within it!)
+
+	/**
+	 * Removes the data table from the database (and all the data held within it!)
+	 */
 	public void removeTable()
 	{
 		String sql = "DROP TABLE " + tableName;
@@ -91,7 +83,9 @@ public class ElectricalManager {
 		}
 	}
 
-	// Fills the data table with all the tools from the text file 'Tools.txt' if found
+	/**
+	 * Fills the data table with all the electrical information from the text file 'electrical.txt' if found
+	 */
 	public void fillTable()
 	{
 		try{
@@ -112,7 +106,6 @@ public class ElectricalManager {
 				{
 					e.printStackTrace();
 				}
-
 			}
 			sc.close();
 		}
@@ -128,7 +121,9 @@ public class ElectricalManager {
 
 
 
-	// Prints all the Tools in the database to console
+	/**
+	 * Prints all the clients in the database to console
+	 */
 	public void printTable()
 	{
 		try {

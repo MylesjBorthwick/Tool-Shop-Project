@@ -3,17 +3,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-// Pre-Project Exercise 
+/**
+ * This class manages the international SQL database, creating and populating the table within the database with the international.txt
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
 
-// This program allows you to create and manage a store inventory database.
-// It creates a database and datatable, then populates that table with tools from
-// Tools.txt.
 public class SupplierTypeDBManager {
 
 	public Connection jdbc_connection;
@@ -26,6 +27,9 @@ public class SupplierTypeDBManager {
 	public String connectionInfo = "jdbc:mysql://localhost:3306/toolshop", // "jdbc:mysql://localhost:3306/toolshop",
 			login = "root", password = "Engineering4Elohim";
 
+	/**
+	 * Constructor that initializes a connection to the specified database
+	 */
 	public SupplierTypeDBManager()
 	{
 		try{
@@ -40,25 +44,10 @@ public class SupplierTypeDBManager {
 		catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// Use the jdbc connection to create a new database in MySQL. 
-	// (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/InventoryDB")
-	public void createDB()
-	{
-		try {
-			statement = jdbc_connection.createStatement();
-			statement.executeUpdate("CREATE DATABASE " + databaseName);
-			System.out.println("Created Database " + databaseName);
-		} 
-		catch( SQLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	// Create a data table inside of the database to hold tools
+	/**
+	 * Create a data table inside of the database to hold the supplier international information
+	 */
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
@@ -76,7 +65,9 @@ public class SupplierTypeDBManager {
 		}
 	}
 
-	// Removes the data table from the database (and all the data held within it!)
+	/**
+	 * Removes the data table from the database (and all the data held within it!)
+	 */
 	public void removeTable()
 	{
 		String sql = "DROP TABLE " + tableName;
@@ -91,7 +82,9 @@ public class SupplierTypeDBManager {
 		}
 	}
 
-	// Fills the data table with all the tools from the text file 'Tools.txt' if found
+	/**
+	 * Fills the data table with all the international supplier information from the text file 'international.txt' if found
+	 */
 	public void fillTable()
 	{
 		try{
@@ -126,9 +119,9 @@ public class SupplierTypeDBManager {
 		}
 	}
 
-
-
-	// Prints all the Tools in the database to console
+	/**
+	 * Prints all the international supplier information in the database to console
+	 */
 	public void printTable()
 	{
 		try {

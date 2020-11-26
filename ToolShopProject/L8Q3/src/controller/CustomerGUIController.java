@@ -124,9 +124,7 @@ public class CustomerGUIController {
                         custModel.setQueryId(3);
                         custModel = (CustomerModel)socket.pipelineRequest(custModel);
                         gui.displayErrorMessage(custModel.getResponse());
-
                     }
-                   
                 }
                 catch(Exception er){
                     gui.displayErrorMessage("Cannot Add Client"+
@@ -142,11 +140,24 @@ public class CustomerGUIController {
             else{
                 try{
                     int clientId = Integer.parseInt(gui.getClientIdField());
+                    String firstName = gui.getClientFirstNameField();
+                    String lastName = gui.getLastNameField();
+                    String postal = gui.getPostalField();
+                    String addy = gui.getAddressField();
+                    String phone = gui.getPhoneNumberField();
+                    String type = gui.getClientType();
                     if(verifyUpdate()){
                         custModel.setClientId(clientId);
                         custModel.setQueryId(2);
+                        custModel.setClientId(clientId);
+                        custModel.setFirstName(firstName);
+                        custModel.setLastName(lastName);
+                        custModel.setPostalCode(postal);
+                        custModel.setAddress(addy);
+                        custModel.setClientType(type);
+                        custModel.setPhoneNumber(phone);
+                        custModel = (CustomerModel)socket.pipelineRequest(custModel);
                         gui.displayErrorMessage(custModel.getResponse());
-
                     }
                    
                 }

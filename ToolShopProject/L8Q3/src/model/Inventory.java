@@ -4,7 +4,9 @@ import java.util.ArrayList;
  * Inventory Class represents shop inventory. This class
  * holds Tools in inventory and handles searching for Tools 
  * as well as creating orders
+ * @author Ken Loughery
  * @author Myles Borthwick
+ * @since Nov, 2020
  */
 
 public class Inventory {

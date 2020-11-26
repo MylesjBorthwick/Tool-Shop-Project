@@ -1,47 +1,43 @@
 package model;
 import java.util.ArrayList;
+
 /**
+ * This class controls the functionality for the list of clients, including updating & adding clients, searching for client information, 
+ * and returning responses.
  * @author Myles Borthwick
- * @version 1.0
+ * @author Ken Loughery
+ * @since Nov, 2020
  */
 
 public class CustomerList {
 
     private ArrayList<Client> customerList;
+
     /**
-     * Constructor
-     * @param suppliers
+     * Constructor that sets the ArrayList of Client that methods will work on
+     * @param clients an arrayList of type Client
      */
     public CustomerList(ArrayList<Client> clients){
-        setCustomerList(clients);
+        this.customerList = clients;
     }
 
     /**
-     * Print supplier list
+     * @return a string of all the Clients in the list
      */
     public synchronized String printList(){
         String s = "";
-        for(Client sup:customerList){
-            s+= sup;
+        for(Client cust:customerList){
+            s+= cust;
             s += "\n";
         }
         return s;
     }
 
     /**
-     * @return ArrayList<Supplier> return the supplierList
+     * Helper method that will find a client within the list by the client id
+     * @param id of the client to find
+     * @return Client found in the list
      */
-    public ArrayList<Client> getCustomerList() {
-        return customerList;
-    }
-
-    /**
-     * @param supplierList the supplierList to set
-     */
-    public synchronized void setCustomerList(ArrayList<Client> customerList) {
-        this.customerList = customerList;
-    }
-
     private synchronized Client findClient(int id){
         for (Client temp: customerList){
             if(temp.getId() == id){
@@ -51,6 +47,11 @@ public class CustomerList {
         return null;
     }
 
+    /**
+     * method that returns a printout of the client information for a client found by id
+     * @param id of the client to find information for
+     * @return string representation of the client information
+     */
     public synchronized String findClientId(int id){
         Client foundClient = findClient(id);
         if(foundClient==null){
@@ -59,6 +60,11 @@ public class CustomerList {
         return foundClient.toString()+ "\n";
     }
 
+    /**
+     * method that returns a printout of the client information for all the clients with the same name
+     * @param lastName of the clients to find information for
+     * @return string representation of all the client's information
+     */
     public synchronized String findClientName(String lastName){
         String s = "";
         for (Client temp: customerList){
@@ -70,6 +76,11 @@ public class CustomerList {
         return "No clients named "+lastName+ " were found in the database";
     }
 
+    /**
+     * method that returns a printout of the client information for all the clients with the type
+     * @param clientType of the clients to find information for
+     * @return string representation of all the client's information
+     */
     public synchronized String findClientType(String clientType){       
         String s = "";
         for (Client temp: customerList){
@@ -81,6 +92,17 @@ public class CustomerList {
         return "No clients of type "+clientType+ " was found in the database";
     }  
 
+    /**
+     * Create and add a new client to the list
+     * @param clientId for the client to add
+     * @param firstName for the client to add
+     * @param lastName for the client to add
+     * @param address for the client to add
+     * @param postalCode for the client to add
+     * @param phoneNumber for the client to add
+     * @param clientType for the client to add
+     * @return a string of whether the client could be added (based on if the id is unique)
+     */
 	public synchronized String addCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
 			String phoneNumber, String clientType) {
                 if(findClient(clientId)!= null){
@@ -90,6 +112,11 @@ public class CustomerList {
                 return firstName+ " was successfully added as a new client.\n";
     }
 
+    /**
+     * remove a client from the list, based on their client id
+     * @param clientId the id of the client to remove
+     * @return a string based on whether the client could be deleted (based on if their id exists)
+     */
 	public synchronized String removeCustomer(int clientId) {
         Client deleteClient = findClient(clientId);
         if(deleteClient== null){
@@ -99,6 +126,18 @@ public class CustomerList {
         return deleteClient.getFirstName()+ " was successfully removed from the list of clients.\n";
 	}
 
+    /**
+     * Updates a client information, based on their id. This method will search for the client and will update their fields based on
+     * the inputs that are not null
+     * @param clientId of the client to find
+     * @param firstName to update (if not null)
+     * @param lastName to update (if not null)
+     * @param address to update (if not null)
+     * @param postalCode to update (if not null)
+     * @param phoneNumber to update (if not null)
+     * @param clientType to update (if not null)
+     * @return a string of whether the client was updated (based on whether the id exists)
+     */
 	public synchronized String updateCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
 			String phoneNumber, String clientType) {
                 Client foundClient = findClient(clientId);
@@ -123,6 +162,7 @@ public class CustomerList {
                 if(clientType!= null){
                     foundClient.setClientType(clientType);
                 }
+                
                 return foundClient.getFirstName()+ " was successfully updated with new client information.\n";       
 	}
 

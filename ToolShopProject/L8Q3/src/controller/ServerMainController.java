@@ -1,7 +1,14 @@
 package controller;
-
-
 import server.Server;
+
+/**
+ * This class starts the server and backend functions. It will receives server objects and 
+ * sorts them to the proper backend controller (between CustomerModel and InventoryModel)
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
+
 
 public class ServerMainController 
 {
@@ -10,7 +17,10 @@ public class ServerMainController
     private InventoryMainController inventoryControl;
     
     
-
+    /**
+     * constructor that initializes a new server, the two backend controllers, and begins the 
+     * server operations
+     */
     public ServerMainController(){
         customerControl = new ClientMainController();
         inventoryControl = new InventoryMainController();
@@ -19,13 +29,18 @@ public class ServerMainController
         server.disconnect();
     }
 
+    /**
+     * Passes the serial object from the server socket to the appropriate backend controller, 
+     * if the input object is not of type customerModel nor inventoryModel it returns the object back 
+     * to the client socket
+     * @param input object that will be sent to the appropriate backend, this object contains the query for the backend to interpret
+     * @return the object that has had its query answered by the backend controllers
+     */
     public synchronized Object passSerial(Object input){
         if(input.getClass() == CustomerModel.class){
-            System.out.println("Customer");
             return customerControl.receiveQuery((CustomerModel)input);
         }
         else if(input.getClass() == InventoryModel.class) {
-            System.out.println("Tool");
             return inventoryControl.receiveQuery((InventoryModel)input);
         }
         return input;

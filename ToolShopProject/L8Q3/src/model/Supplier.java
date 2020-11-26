@@ -2,8 +2,9 @@ package model;
 import java.util.ArrayList;
 /**
  * Supplier class holds supplier information
+ * @author Ken Loughery
  * @author Myles Borthwick
- * @version 1.0
+ * @since Nov, 2020
  */
 public class Supplier {
     //Member variables (supplier info)

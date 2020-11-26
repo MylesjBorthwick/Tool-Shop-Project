@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,11 +11,12 @@ import java.util.Scanner;
 
 import model.Supplier;
 
-// Pre-Project Exercise 
-
-// This program allows you to create and manage a store inventory database.
-// It creates a database and datatable, then populates that table with tools from
-// Tools.txt.
+/**
+ * This class manages the supplies SQL database, creating and populating the table within the database with the suppliers.txt
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
+ */
 public class SupplierDBManager {
 	
 	public Connection jdbc_connection;
@@ -29,6 +29,9 @@ public class SupplierDBManager {
 				  login          = "root",
 				  password       = "Engineering4Elohim";
 
+ 	/**
+	 * Constructor that initializes a connection to the specified database
+	 */
 	public SupplierDBManager()
 	{
 		try{
@@ -43,8 +46,10 @@ public class SupplierDBManager {
 		catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// Use the jdbc connection to create a new database in MySQL. 
-	// (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/InventoryDB")
+	/**
+	 * Use the jdbc connection to create a new database in MySQL. 
+	 * (e.g. if you are connected to "jdbc:mysql://localhost:3306", the database will be created at "jdbc:mysql://localhost:3306/toolshop")
+	 */
 	public void createDB()
 	{
 		try {
@@ -61,7 +66,9 @@ public class SupplierDBManager {
 		}
 	}
 
-	// Create a data table inside of the database to hold tools
+	/**
+	 * Create a data table inside of the database to hold suppliers
+	 */
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
@@ -82,7 +89,10 @@ public class SupplierDBManager {
 		}
 	}
 
-	// Removes the data table from the database (and all the data held within it!)
+
+	/**
+	 * Removes the data table from the database (and all the data held within it!)
+	 */
 	public void removeTable()
 	{
 		String sql = "DROP TABLE " + tableName;
@@ -97,7 +107,9 @@ public class SupplierDBManager {
 		}
 	}
 
-	// Fills the data table with all the tools from the text file 'Tools.txt' if found
+	/**
+	 * Fills the data table with all the tools from the text file 'items.txt' if found
+	 */
 	public void fillTable()
 	{
 		try{
@@ -124,7 +136,10 @@ public class SupplierDBManager {
 		}
 	}
 
-	// Add a tool to the database table
+	/**
+	 * add a Supplier to the database table
+	 * @param sup to add to table
+	 */
 	public void addSupplier(Supplier sup)
 	{
 		String sql = "INSERT INTO " + tableName +
@@ -145,11 +160,14 @@ public class SupplierDBManager {
 		}
 	}
 
-	// This method should search the database table for a tool matching the toolID parameter and return that tool.
-	// It should return null if no tools matching that ID are found.
-	public Supplier searchTool(int supID)
+	/**
+	 * This method searches the database table for a Supplier matching the supplier ID parameter and return that supplier.
+	 * @param supId to search for
+	 * @return Supplier found, or null if not found
+	 */
+	public Supplier searchSupplier(int supID)
 	{
-		String sql = "SELECT * FROM " + tableName + " WHERE ID=" + supID;
+		String sql = "SELECT * FROM " + tableName + " WHERE SUPPLIERID=" + supID;
 		ResultSet sup;
 		try {
 			statement = jdbc_connection.createStatement();
@@ -168,7 +186,10 @@ public class SupplierDBManager {
 		return null;
 	}
 
-
+	/**
+	 * pulls all the suppliers from the database table
+	 * @return ArrayList of all Supplier
+	 */
 	public ArrayList<Supplier> getAllSuppliers()
 	{
 		ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
@@ -192,7 +213,9 @@ public class SupplierDBManager {
 	}
 
 
-	// Prints all the Tools in the database to console
+	/**
+	 * Prints all the suppliers in the database to console
+	 */
 	public void printTable()
 	{
 		try {
@@ -231,21 +254,6 @@ public class SupplierDBManager {
 		System.out.println("Reading all suppliers from the table:");
 		suplist.printTable();
         
-		// System.out.println("\nSearching table for tool 1002: should return 'Grommets'");
-		// int supID = 1002;
-		// Tool searchResult = inventory.searchTool(toolID);
-		// if(searchResult == null)
-		// 	System.out.println("Search Failed to find a tool matching ID: " + toolID);
-		// else
-		// 	System.out.println("Search Result: " + searchResult.toString());
-
-		// System.out.println("\nSearching table for tool 9000: should fail to find a tool");
-		// toolID = 9000;
-		// searchResult = inventory.searchTool(toolID);
-		// if(searchResult == null)
-		// 	System.out.println("Search Failed to find a tool matching ID: " + toolID);
-		// else
-		// 	System.out.println("Search Result: " + searchResult.toString());
 		
 		SupplierTypeDBManager supType = new SupplierTypeDBManager();
 		//supType.createDB();

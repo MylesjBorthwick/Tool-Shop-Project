@@ -1,11 +1,13 @@
 package model;
 /**
  * Class representing Tool in inventory
+ * @author Ken Loughery
  * @author Myles Borthwick
- * @version 1.0
+ * @since Nov, 2020
  */
+
 public class Tool {
-    //Member variables
+
     private int ToolId;
     private double ToolPrice;
     private int ToolQuant;
@@ -13,6 +15,7 @@ public class Tool {
     private boolean alreadyOrdered;
     private int supplierId;
     private String type;
+
     /**
      * Tool Constructor
      * @param id of tool

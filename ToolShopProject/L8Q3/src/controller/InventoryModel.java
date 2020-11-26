@@ -2,33 +2,39 @@ package controller;
 import java.io.Serializable;
 
 /**
- *   	 * (Inventory)1: print all tools
-	 * 4: remaining quantity
-	 * 5: reduce quantity
-	 * 6: show order
- *
+ * This class is the model that will store the information for the queries that will be sent from the frontend to the backend
+ * for the inventory Model. Query id is set to get the response from the backend, and is encoded as follows:
+ * 1: display all the tools
+ * 2: tool information by tool name
+ * 3: tool information by tool id
+ * 4: tool quantity by tool name
+ * 5: decrease tool quantity
+ * 6: display order information
+ * @author Myles Borthwick
+ * @author Ken Loughery
+ * @since Nov, 2020
  */
+
 public class InventoryModel implements Serializable
 	{
 
     private static final long serialVersionUID = 1L;
-    private int queryId = 0;
-    private int id = 0;
-		private String toolName = null;
-		private String response = null;
-		private boolean answered = false;
+    private int queryId;
+    private int id;
+	private String toolName;
+	private String response;
+	private boolean answered;
 
-
+    /**
+     * default constructor that sets all the fields to default configurations
+     */
     public InventoryModel(){
-      
+        queryId = -1;
+        id = 0;
+        toolName = null;
+        response = null;
+        answered = false;    
     }
-
-        /**
-         * A default constructor that builds a record with blank data
-         */
-		public InventoryModel(int queryId) {
-			this.queryId = queryId;
-		} 
 
     /**
      * @return String return the response
