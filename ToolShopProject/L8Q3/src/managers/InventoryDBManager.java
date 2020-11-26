@@ -127,7 +127,7 @@ public class InventoryDBManager {
 	}
 
 	// Add a tool to the database table
-	public void updateToolQuantity(int toolId)
+	public synchronized void updateToolQuantity(int toolId)
 	{
 		Tool foundTool =  searchTool(toolId);
 		

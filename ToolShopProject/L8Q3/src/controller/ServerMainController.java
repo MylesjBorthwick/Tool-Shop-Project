@@ -19,7 +19,7 @@ public class ServerMainController
         server.disconnect();
     }
 
-    public Object passSerial(Object input){
+    public synchronized Object passSerial(Object input){
         if(input.getClass() == CustomerModel.class){
             System.out.println("Customer");
             return customerControl.receiveQuery((CustomerModel)input);

@@ -26,7 +26,7 @@ public class Shop {
 	/**
 	 *	@return a string containing all the generated aspects of an order
 	 */
-	public String generateOrder() {
+	public synchronized String generateOrder() {
 		return theInventory.getMyOrder().toString();
 	}
 
@@ -35,7 +35,7 @@ public class Shop {
 	 * attempts to reduce an item and returns a description of whether this was successful
 	 *	@return string indicating the success or failure of an item reduction
 	 */
-	public String reduceItem(String itemName) {
+	public synchronized String reduceItem(String itemName) {
 		if(theInventory.manageTool(itemName) != null) {		
 			return "Success! Reduced the number of items."; }
 		return "Unable to reduce the number of items.";	
@@ -46,7 +46,7 @@ public class Shop {
 	 * @param itemName to search
 	 *	@return string of the item 
 	 */
-	public String getItem(String itemName) {
+	public synchronized String getItem(String itemName) {
 		Tool foundItem = theInventory.searchForToolName(itemName);
 		if(foundItem == null)
 			return "\nItem not found. \n";
@@ -58,7 +58,7 @@ public class Shop {
 	 * @param id to search for
 	 *	@return string of the item 
 	 */
-	public String getItem(int id) {
+	public synchronized String getItem(int id) {
 		Tool foundItem = theInventory.searchForToolId(id);
 		if(foundItem == null)
 			return "\nItem not found. \n";
@@ -70,7 +70,7 @@ public class Shop {
 	 * @param itemName to search
 	 *	@return string of the item's quantity, or an error message
 	 */
-	public String getQuantity(String itName) {
+	public synchronized String getQuantity(String itName) {
 		Tool foundItem = theInventory.searchForToolName(itName);
 		if(foundItem == null)
 			return "\nItem not found. \n";
@@ -81,11 +81,11 @@ public class Shop {
 	/**
 	 *	prints out the full inventory
 	 */
-	public String printoutOfInventory() {
+	public synchronized String printoutOfInventory() {
 		return theInventory.toString();
 	}
 
-	public int getToolId(String toolName) {
+	public synchronized int getToolId(String toolName) {
 		Tool foundItem = theInventory.searchForToolName(toolName);
 		return foundItem.getToolId();
 	}

@@ -19,7 +19,7 @@ public class CustomerList {
     /**
      * Print supplier list
      */
-    public String printList(){
+    public synchronized String printList(){
         String s = "";
         for(Client sup:customerList){
             s+= sup;
@@ -38,11 +38,11 @@ public class CustomerList {
     /**
      * @param supplierList the supplierList to set
      */
-    public void setCustomerList(ArrayList<Client> customerList) {
+    public synchronized void setCustomerList(ArrayList<Client> customerList) {
         this.customerList = customerList;
     }
 
-    private Client findClient(int id){
+    private synchronized Client findClient(int id){
         for (Client temp: customerList){
             if(temp.getId() == id){
                 return temp;
@@ -51,7 +51,7 @@ public class CustomerList {
         return null;
     }
 
-    public String findClientId(int id){
+    public synchronized String findClientId(int id){
         Client foundClient = findClient(id);
         if(foundClient==null){
             return "Client was not found.\n"+id+" does not exists as a client id in the database.\n";
@@ -59,7 +59,7 @@ public class CustomerList {
         return foundClient.toString()+ "\n";
     }
 
-    public String findClientName(String lastName){
+    public synchronized String findClientName(String lastName){
         String s = "";
         for (Client temp: customerList){
             if(temp.getLastName().equals(lastName)){
@@ -70,7 +70,7 @@ public class CustomerList {
         return "No clients named "+lastName+ " were found in the database";
     }
 
-    public String findClientType(String clientType){       
+    public synchronized String findClientType(String clientType){       
         String s = "";
         for (Client temp: customerList){
             if(temp.getClientType().equals(clientType)){
@@ -81,7 +81,7 @@ public class CustomerList {
         return "No clients of type "+clientType+ " was found in the database";
     }  
 
-	public String addCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
+	public synchronized String addCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
 			String phoneNumber, String clientType) {
                 if(findClient(clientId)!= null){
                     return firstName+ " was not added as a new client.\n"+clientId+" already exists as a client id in the database.\n";
@@ -90,7 +90,7 @@ public class CustomerList {
                 return firstName+ " was successfully added as a new client.\n";
     }
 
-	public String removeCustomer(int clientId) {
+	public synchronized String removeCustomer(int clientId) {
         Client deleteClient = findClient(clientId);
         if(deleteClient== null){
             return "Could not delete client.\n"+clientId+" does not exist as a client id in the database.\n";
@@ -99,7 +99,7 @@ public class CustomerList {
         return deleteClient.getFirstName()+ " was successfully removed from the list of clients.\n";
 	}
 
-	public String updateCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
+	public synchronized String updateCustomer(int clientId, String firstName, String lastName, String address, String postalCode,
 			String phoneNumber, String clientType) {
                 Client foundClient = findClient(clientId);
                 if(foundClient== null){

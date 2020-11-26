@@ -150,7 +150,7 @@ public class ClientDBManager {
 
 	//DELETE FROM table_name WHERE condition; 
 	// Add a tool to the database table
-	public void deleteClient(int clientId)
+	public synchronized void deleteClient(int clientId)
 	{
 		String sql = "DELETE FROM " + tableName +
 				" WHERE ID = " + clientId + ";";
@@ -165,7 +165,7 @@ public class ClientDBManager {
 		}
 	}
 	// Add a tool to the database table
-	public void updateClient(Client client)
+	public synchronized void updateClient(Client client)
 	{
 
 		boolean updatedField = false;
@@ -230,7 +230,7 @@ public class ClientDBManager {
 	}
 
 	// Add a tool to the database table
-	public void addClient(Client client)
+	public synchronized void addClient(Client client)
 	{
 		String sql = "INSERT INTO " + tableName +
 				" VALUES ( " + client.getId() + ", '" + 

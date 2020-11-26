@@ -39,7 +39,7 @@ public class InventoryMainController
 	 *	body of the front end, which calls the methods to display menu, receive results, and then interprets the menu items through 
 	 * a switch statement to generate the proper response from the backend, calling on the shop to generate an output
 	 */
-	public Object receiveQuery(InventoryModel query){
+	public synchronized Object receiveQuery(InventoryModel query){
 		switch(query.getQueryId()){
 				case 1:
 					query.setResponse(shop.printoutOfInventory());

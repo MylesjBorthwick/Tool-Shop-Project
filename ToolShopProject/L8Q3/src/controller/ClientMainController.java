@@ -38,7 +38,7 @@ public class ClientMainController
 overload by lastname, id, and type for search
 
 +switch()*/
-	public Object receiveQuery(CustomerModel query){
+	public synchronized Object receiveQuery(CustomerModel query){
 		switch(query.getQueryId()){
 				case 1:
 					clientDB.addClient(new model.Client(query.getClientId(),query.getFirstName(), query.getLastName(),query.getAddress(),query.getPostalCode(), query.getPhoneNumber(), query.isClientType()));
