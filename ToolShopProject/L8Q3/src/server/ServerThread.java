@@ -44,14 +44,23 @@ public class ServerThread implements Runnable {
 
 	@Override
 	public void run() {
-
-		try {
-			Object temp = socketIn.readObject();
-			System.out.println(temp.getClass());
-			maincontroller.passSerial(temp);
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+		Object receive = null;
+		while(true){
+			try {
+				receive = socketIn.readObject();
+				if(receive!= null){
+					System.out.println(receive.getClass());
+					socketOut.writeObject(maincontroller.passSerial(receive));	
+				}
+				Thread.sleep(1000);
+			} catch(EOFException e){
+				break;
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+
 
 	}
 

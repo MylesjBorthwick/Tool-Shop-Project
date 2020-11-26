@@ -15,32 +15,7 @@ public class ClientMainController
 
     public ClientMainController(){
 		clientDB = new ClientDBManager();
-		
-		// You should comment this line out once the first database is created (either here or in MySQL workbench)
-		//inventory.createDB();
-		// clientDBManager.createTable();
-		// System.out.println("\nFilling the table with clients");
-		// clientDBManager.fillTable();
-		// System.out.println("Reading all clients from the table:");
-		// clientDBManager.printTable();
-
-
 		customerList = new CustomerList(clientDB.getAll());
-
-		//System.out.println(customerList.printList());
-		//System.out.println("\nTrying to remove the table");
-		//clientDBManager.removeTable();
-		
-		try {
-			clientDB.statement.close();
-			clientDB.jdbc_connection.close();
-		} 
-		catch (SQLException e) { e.printStackTrace(); }
-		finally
-		{
-			System.out.println("\nThe program is finished running");
-		}
-		
 	}        
 
 	/**

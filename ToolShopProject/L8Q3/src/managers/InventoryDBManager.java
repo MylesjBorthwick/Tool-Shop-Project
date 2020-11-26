@@ -22,7 +22,7 @@ public class InventoryDBManager {
 	
 	public Connection jdbc_connection;
 	public Statement statement;
-	public String databaseName = "toolshop", tableName = "Tools", dataFile = "items.txt";
+	public String databaseName = "toolshop", tableName = "tools", dataFile = "items.txt";
 	// Students should configure these variables for their own MySQL environment
 	// If you have not created your first database in mySQL yet, you can leave the 
 	// "[DATABASE NAME]" blank to get a connection and create one with the createDB() method.
@@ -66,13 +66,13 @@ public class InventoryDBManager {
 	public void createTable()
 	{
 		String sql = "CREATE TABLE " + tableName + "(" +
-					 "ID INT(4) NOT NULL, " +
+					 "TOOLID INT(4) NOT NULL, " +
 					 "TYPE VARCHAR(20) NOT NULL, "+
 				     "TOOLNAME VARCHAR(20) NOT NULL, " + 
 				     "QUANTITY INT(4) NOT NULL, " + 
 				     "PRICE DOUBLE(5,2) NOT NULL, " + 
 				     "SUPPLIERID INT(4) NOT NULL, " + 
-				     "PRIMARY KEY ( id ))";
+				     "PRIMARY KEY ( TOOLID ))";
 		try{
 			statement = jdbc_connection.createStatement();
 			statement.executeUpdate(sql);
@@ -133,7 +133,7 @@ public class InventoryDBManager {
 		
 		if(foundTool.getToolQuant()-1 >= 0){
 			String sql = "UPDATE " + tableName + " SET QUANTITY = "+ 
-			Integer.toString(foundTool.getToolQuant()-1) + " WHERE ID = " 
+			Integer.toString(foundTool.getToolQuant()-1) + " WHERE ToolId = " 
 			+ Integer.toString(toolId);
 			System.out.println(sql);
 			try{
@@ -172,7 +172,7 @@ public class InventoryDBManager {
 	// It should return null if no tools matching that ID are found.
 	public Tool searchTool(int toolID)
 	{
-		String sql = "SELECT * FROM " + tableName + " WHERE ID=" + toolID;
+		String sql = "SELECT * FROM " + tableName + " WHERE ToolId=" + toolID;
 		ResultSet tool;
 		try {
 			statement = jdbc_connection.createStatement();
@@ -281,8 +281,6 @@ public class InventoryDBManager {
 
 		ElectricalManager electricalAddOns = new ElectricalManager();
 	
-		// You should comment this line out once the first database is created (either here or in MySQL workbench)
-		//inventory.createDB();
 
 		electricalAddOns.createTable();
 		
@@ -293,8 +291,8 @@ public class InventoryDBManager {
 		electricalAddOns.printTable();
 
 
-		//System.out.println("\nTrying to remove the table");
-		//electricalAddOns.removeTable();
+		// System.out.println("\nTrying to remove the table");
+		// electricalAddOns.removeTable();
 		
 		try {
 			electricalAddOns.statement.close();

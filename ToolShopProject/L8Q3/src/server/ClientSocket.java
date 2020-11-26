@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import controller.CustomerGUIController;
 import controller.CustomerModel;
+import controller.InventoryModel;
 import view.CustomerGUI;
 /**
  * @author Myles Borthwick
@@ -44,7 +45,7 @@ public class ClientSocket {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return sendRequest;
 	}
 	
 	/**
@@ -66,10 +67,10 @@ public class ClientSocket {
 	 */
 	public static void main(String[] args)  {
 		ClientSocket aClient = new ClientSocket("localhost", 8099);
+		aClient.pipelineRequest(new InventoryModel());
         CustomerGUI cust = new CustomerGUI();
         CustomerModel cm = new CustomerModel();
 		CustomerGUIController cont = new CustomerGUIController(cust, cm, aClient);
-		aClient.disconnect();
 	}
 
 

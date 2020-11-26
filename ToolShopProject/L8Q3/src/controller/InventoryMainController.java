@@ -20,7 +20,7 @@ public class InventoryMainController
 
     public InventoryMainController(){
 		inventoryDBManager = new InventoryDBManager();
-
+		supplierDBManager = new SupplierDBManager();
         shop = new Shop(new Inventory(inventoryDBManager.getAllTools()),new SupplierList(supplierDBManager.getAllSuppliers()));
 
 	}        

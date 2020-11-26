@@ -64,7 +64,7 @@ public class ElectricalManager {
 		String sql = "CREATE TABLE " + tableName + "(" +
 					 "ID INT(4) NOT NULL, " +
 					 "POWERTYPE VARCHAR(20) NOT NULL, "+
-				     "PRIMARY KEY ( id ), FOREIGN KEY ( id ) REFERENCES TOOLS(id))";
+				     "PRIMARY KEY ( id ), FOREIGN KEY ( ID ) REFERENCES TOOLS(TOOLID))";
 		try{
 			statement = jdbc_connection.createStatement();
 			statement.executeUpdate(sql);
