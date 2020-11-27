@@ -108,8 +108,15 @@ public class CustomerGUIController {
                     String addy = gui.getAddressField();
                     String phone = gui.getPhoneNumberField();
                     String type = gui.getClientType();
+                    if(firstName.length()>20 || firstName.length() == 0){
+                        gui.displayMessage("First Name must be between 1 and 20 characters");}
+                    else if(lastName.length()>20 || lastName.length() == 0){
+                        gui.displayMessage("Last Name must be between 1 and 20 characters");
+                    } else if(addy.length()>50 || addy.length() == 0){
+                        gui.displayMessage("Address must be between 1 and 20 characters");
+                    }
                     //Get confirmation
-                    if(verifyAddNew()){
+                    else if(verifyAddNew()){
                         //Set model to input
                         custModel.setClientId(clientId);
                         custModel.setFirstName(firstName);
@@ -173,7 +180,14 @@ public class CustomerGUIController {
                     String addy = gui.getAddressField();
                     String phone = gui.getPhoneNumberField();
                     String type = gui.getClientType();
-                    if(verifyUpdate()){
+                    if(firstName.length()>20){
+                        gui.displayMessage("First Name must be between 1 and 20 characters");}
+                    else if(lastName.length()>20){
+                        gui.displayMessage("Last Name must be between 1 and 20 characters");
+                    } else if(addy.length()>50 ){
+                        gui.displayMessage("Address must be between 1 and 20 characters");
+                    }
+                    else if(verifyUpdate()){
                         custModel.setClientId(clientId);
                         custModel.setQueryId(2);
                         custModel.setClientId(clientId);
@@ -234,7 +248,7 @@ public class CustomerGUIController {
     {
         // Ask for user confirmation
         int action = JOptionPane.showConfirmDialog(null, 
-        "Do You Want to Update This Client? "+" \nAll Empty Fields Will Be Saved As NUll", 
+        "Do You Want to Update This Client? "+" \nAll Empty Fields Will Not Be Changed", 
         "Update Confirmation", 
         JOptionPane.OK_CANCEL_OPTION);
         // Return true if user confirms
