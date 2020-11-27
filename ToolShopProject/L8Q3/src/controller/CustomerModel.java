@@ -101,10 +101,15 @@ public class CustomerModel implements Serializable
     }
 
     /**
+     * sets the first name, if a blank or empty string is passed, sets to null
      * @param firstName the firstName to set
      */
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if(firstName.equals("") || firstName.equals(" ")){
+            firstName= null;
+        }else{
+            this.firstName = firstName;
+        }
     }
 
     /**
@@ -115,10 +120,15 @@ public class CustomerModel implements Serializable
     }
 
     /**
+     * sets the first name, if a blank or empty string is passed, sets to null
      * @param lastName the lastName to set
      */
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if(lastName.equals("") || lastName.equals(" ")){
+            this.lastName= null;
+        }else{
+            this.lastName = lastName;
+        }
     }
 
     /**
@@ -129,10 +139,15 @@ public class CustomerModel implements Serializable
     }
 
     /**
+     * sets the first name, if a blank or empty string is passed, sets to null
      * @param address the address to set
      */
     public void setAddress(String address) {
-        this.address = address;
+        if(address.equals("") || address.equals(" ")){
+            this.address= null;
+        }else{
+            this.address = address;
+        }
     }
 
     /**
@@ -143,10 +158,15 @@ public class CustomerModel implements Serializable
     }
 
     /**
+     * sets the first name, if a blank or empty string is passed, sets to null
      * @param postalCode the postalCode to set
      */
     public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+        if(postalCode.equals("") || postalCode.equals(" ")){
+            this.postalCode= null;
+        }else{
+            this.postalCode = postalCode;
+        }
     }
 
     /**
@@ -171,10 +191,15 @@ public class CustomerModel implements Serializable
     }
 
     /**
+     * sets the first name, if a blank or empty string is passed, sets to null
      * @param phoneNumber the phoneNumber to set
      */
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        if(phoneNumber.equals("") || phoneNumber.equals(" ")){
+            this.phoneNumber= null;
+        }else{
+            this.phoneNumber = phoneNumber;
+        }
     }
 
     /**
@@ -185,10 +210,15 @@ public class CustomerModel implements Serializable
     }
 
     /**
+     * sets the first name, if a blank or empty string is passed, sets to null
      * @param clientType the clientType to set
      */
     public void setClientType(String clientType) {
-        this.clientType = clientType;
+        if(clientType.equals("") || clientType.equals(" ")){
+            this.clientType= null;
+        }else{
+            this.clientType = clientType;
+        }
     }
 
 }
